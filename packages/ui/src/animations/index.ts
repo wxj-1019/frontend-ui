@@ -1,6 +1,7 @@
 export * from './magnet';
 export * from './fade-content';
 export * from './draggable';
+export * from './click-spark';
 export * from './flip-card';
 export * from './accordion';
 export * from './tabs';

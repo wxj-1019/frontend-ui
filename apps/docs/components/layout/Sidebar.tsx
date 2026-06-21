@@ -63,6 +63,7 @@ const componentNavigation: NavItem[] = [
       { label: 'Tabs', href: '/animations/tabs' },
       { label: 'Modal', href: '/animations/modal' },
       { label: 'Toast', href: '/animations/toast' },
+      { label: 'ClickSpark', href: '/animations/click-spark' },
     ],
   },
   {
@@ -74,6 +75,7 @@ const componentNavigation: NavItem[] = [
       { label: 'Masonry', href: '/components/masonry' },
       { label: 'Carousel', href: '/components/carousel' },
       { label: 'StackCards', href: '/components/stack-cards' },
+      { label: 'TiltCard', href: '/components/tilt-card' },
     ],
   },
   {

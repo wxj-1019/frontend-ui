@@ -1,0 +1,50 @@
+# ── Dependencies ──
+**/node_modules
+
+# ── Build outputs ──
+**/.next
+**/dist
+**/.turbo
+*.tsbuildinfo
+
+# ── IDE & Editor ──
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# ── Git ──
+.git
+.gitignore
+.gitattributes
+
+# ── Documentation (docs/ 目录是设计规范，非代码) ──
+docs/
+skills/
+
+# ── Test & Stories ──
+**/*.test.ts
+**/*.test.tsx
+**/*.stories.tsx
+**/.storybook
+**/storybook-static
+
+# ── Config files not needed at runtime ──
+.eslintrc*
+.prettierrc*
+.husky/
+.changeset/
+turbo.json
+
+# ── OS junk ──
+.DS_Store
+Thumbs.db
+*.log
+**/coverage
+**/.cache
+
+# ── Docker files (avoid recursive copy) ──
+Dockerfile*
+docker-compose*
+.dockerignore

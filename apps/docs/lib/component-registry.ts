@@ -1,5 +1,5 @@
 /**
- * 组件注册表 — 集中管理所有 37+ 个组件和区块的元数据
+ * 组件注册表 — 集中管理所有 39+ 个组件和区块的元数据
  *
  * 用于导航、分类页面、搜索、侧边栏等场景。
  * 与 category pages 中的硬编码数据同步，避免多处维护。
@@ -52,14 +52,14 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '交互动画',
     description: '为用户交互添加流畅的动画反馈',
     href: '/animations',
-    count: 9,
+    count: 10,
   },
   {
     id: 'components',
     label: '复合组件',
     description: '可直接使用的高级交互组件',
     href: '/components',
-    count: 5,
+    count: 6,
   },
   {
     id: 'backgrounds',
@@ -165,7 +165,7 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     importStatement: 'import { CountUp } from "@frontend-ui/ui";',
   },
 
-  // ── 交互动画 (9) ────────────────────────────────────────
+  // ── 交互动画 (10) ───────────────────────────────────────
   {
     name: 'Magnet',
     description: '磁吸效果组件，元素跟随鼠标产生弹簧式位移',
@@ -247,8 +247,17 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'toast',
     importStatement: 'import { Toast } from "@frontend-ui/ui";',
   },
+  {
+    name: 'ClickSpark',
+    description: '点击粒子爆炸特效，点击时在鼠标位置产生扩散粒子',
+    href: '/animations/click-spark',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'click-spark',
+    importStatement: 'import { ClickSpark } from "@frontend-ui/ui";',
+  },
 
-  // ── 复合组件 (5) ────────────────────────────────────────
+  // ── 复合组件 (6) ────────────────────────────────────────
   {
     name: 'Dock',
     description: 'macOS 风格的停靠栏',
@@ -293,6 +302,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'stack-cards',
     importStatement: 'import { StackCards } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'TiltCard',
+    description: '3D 倾斜卡片，鼠标追踪透视倾斜效果',
+    href: '/components/tilt-card',
+    category: CATEGORIES[2],
+    engine: 'Motion',
+    installName: 'tilt-card',
+    importStatement: 'import { TiltCard } from "@frontend-ui/ui";',
   },
 
   // ── 背景特效 (6) ────────────────────────────────────────

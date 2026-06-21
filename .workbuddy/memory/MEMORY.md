@@ -29,11 +29,11 @@
 - `NODE_OPTIONS` 含 `--use-system-ca` 会导致 tsup 失败，需 `unset NODE_OPTIONS` 后执行
 - 构建命令: `cd packages/ui && unset NODE_OPTIONS && npx tsup`
 
-## 组件分类 (37+ 组件，截至 2026-06-22)
+## 组件分类 (39+ 组件，截至 2026-06-22)
 
 - 文字动画 (8): BlurText, GradientText, SplitText, Typewriter, ScrambleText, WaveText, GlitchText, CountUp
-- 交互动画 (9): Magnet, FadeContent, ScrollReveal, Draggable, FlipCard, Accordion, Tabs, Modal, Toast
-- 复合组件 (5): Dock, SpotlightCard, Masonry, Carousel, StackCards
+- 交互动画 (10): Magnet, FadeContent, ScrollReveal, Draggable, FlipCard, Accordion, Tabs, Modal, Toast, **ClickSpark**
+- 复合组件 (6): Dock, SpotlightCard, Masonry, Carousel, StackCards, **TiltCard**
 - 背景特效 (6): Aurora, Particles, Starfield, MeshGradient, NoiseBackground, Hyperspeed
 - GSAP 动画 (7): ScrollReveal, TextReveal, Parallax, TimelineSequence, ScrollProgress, PinSection, HorizontalScroll
 - 页面区块 (3): HeroWithGradient, HeroWithParticles, BentoGrid, BentoCard, FeatureSection
