@@ -5,8 +5,8 @@ import { HeroWithGradient, HeroWithParticles } from './index';
 describe('HeroWithGradient', () => {
   it('renders title and subtitle', () => {
     render(<HeroWithGradient title="Test Title" subtitle="Test Subtitle" />);
-    expect(screen.getByText('Test Title')).toBeDefined();
-    expect(screen.getByText('Test Subtitle')).toBeDefined();
+    expect(screen.getByText('Test Title')).toBeInTheDocument();
+    expect(screen.getByText('Test Subtitle')).toBeInTheDocument();
   });
 
   it('renders action buttons', () => {
@@ -19,13 +19,13 @@ describe('HeroWithGradient', () => {
         ]}
       />
     );
-    expect(screen.getByText('Primary')).toBeDefined();
-    expect(screen.getByText('Secondary')).toBeDefined();
+    expect(screen.getByText('Primary')).toBeInTheDocument();
+    expect(screen.getByText('Secondary')).toBeInTheDocument();
   });
 
   it('renders with reduced motion', () => {
     render(<HeroWithGradient title="Test" prefersReducedMotion />);
-    expect(screen.getByText('Test')).toBeDefined();
+    expect(screen.getByText('Test')).toBeInTheDocument();
   });
 });
 
@@ -38,14 +38,14 @@ describe('HeroWithParticles', () => {
         prefersReducedMotion
       />
     );
-    expect(screen.getByText('Particle Hero')).toBeDefined();
-    expect(screen.getByText('With particles')).toBeDefined();
+    expect(screen.getByText('Particle Hero')).toBeInTheDocument();
+    expect(screen.getByText('With particles')).toBeInTheDocument();
   });
 
   it('renders canvas element', () => {
     const { container } = render(
       <HeroWithParticles title="Test" prefersReducedMotion />
     );
-    expect(container.querySelector('canvas')).toBeDefined();
+    expect(container.querySelector('canvas')).toBeInTheDocument();
   });
 });

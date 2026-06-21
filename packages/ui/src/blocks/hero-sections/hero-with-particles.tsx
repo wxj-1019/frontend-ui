@@ -40,9 +40,8 @@ export function HeroWithParticles({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const animFrameRef = useRef<number>(0);
+  const animFrameRef = useRef<number | null>(null);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
-  const accentColor = particleColor || 'var(--color-accent)';
 
   // Initialize particles
   const initParticles = useCallback(
@@ -90,6 +89,27 @@ export function HeroWithParticles({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Resolve CSS variable to actual color (Canvas cannot use var() directly)
+    const container = containerRef.current;
+    let resolvedAccent = '#00f5ff';
+    if (particleColor) {
+      resolvedAccent = particleColor;
+    } else if (container) {
+      const computed = getComputedStyle(container)
+        .getPropertyValue('--color-accent')
+        .trim();
+      if (computed) resolvedAccent = computed;
+    }
+
+    // Build rgba template for opacity blending
+    const hex = resolvedAccent.replace('#', '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    const colorTemplate = isNaN(r)
+      ? resolvedAccent
+      : `rgba(${r}, ${g}, ${b}, VAR_OPACITY)`;
+
     let running = true;
 
     const animate = () => {
@@ -115,9 +135,7 @@ export function HeroWithParticles({
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = accentColor.startsWith('var')
-          ? `rgba(0, 245, 255, ${p.opacity})`
-          : accentColor;
+        ctx.fillStyle = colorTemplate.replace('VAR_OPACITY', String(p.opacity));
         ctx.fill();
       }
 
@@ -132,9 +150,10 @@ export function HeroWithParticles({
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = accentColor.startsWith('var')
-              ? `rgba(0, 245, 255, ${0.15 * (1 - dist / connectionDistance)})`
-              : accentColor;
+            ctx.strokeStyle = colorTemplate.replace(
+              'VAR_OPACITY',
+              String(0.15 * (1 - dist / connectionDistance))
+            );
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -148,9 +167,11 @@ export function HeroWithParticles({
 
     return () => {
       running = false;
-      cancelAnimationFrame(animFrameRef.current);
+      if (animFrameRef.current !== null) {
+        cancelAnimationFrame(animFrameRef.current);
+      }
     };
-  }, [canvasSize, connectionDistance, accentColor, prefersReducedMotion]);
+  }, [canvasSize, connectionDistance, particleColor, prefersReducedMotion]);
 
   return (
     <div

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface NavItem {
   label: string;
@@ -159,12 +159,15 @@ function NavGroup({
     item.items?.some((i) => isActive(i.href));
 
   // 自动展开当前激活的分类
-  useMemo(() => {
+  const prevPathname = useRef<string | null>(null);
+  useEffect(() => {
+    if (prevPathname.current === pathname) return;
+    prevPathname.current = pathname || null;
     const active = items.find(isSectionActive);
     if (active && !expanded.includes(active.label)) {
       setExpanded((prev) => [...prev, active.label]);
     }
-  }, [pathname]);
+  }, [pathname, items, expanded, isSectionActive]);
 
   return (
     <div>

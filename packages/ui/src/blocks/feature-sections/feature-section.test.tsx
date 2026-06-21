@@ -18,8 +18,8 @@ describe('FeatureSection', () => {
         prefersReducedMotion
       />
     );
-    expect(screen.getByText('Features')).toBeDefined();
-    expect(screen.getByText('Our features')).toBeDefined();
+    expect(screen.getByText('Features')).toBeInTheDocument();
+    expect(screen.getByText('Our features')).toBeInTheDocument();
   });
 
   it('renders all features in center layout', () => {
@@ -31,9 +31,9 @@ describe('FeatureSection', () => {
         prefersReducedMotion
       />
     );
-    expect(screen.getByText('Feature A')).toBeDefined();
-    expect(screen.getByText('Feature B')).toBeDefined();
-    expect(screen.getByText('Feature C')).toBeDefined();
+    expect(screen.getByText('Feature A')).toBeInTheDocument();
+    expect(screen.getByText('Feature B')).toBeInTheDocument();
+    expect(screen.getByText('Feature C')).toBeInTheDocument();
   });
 
   it('renders all features in alternating layout', () => {
@@ -45,9 +45,9 @@ describe('FeatureSection', () => {
         prefersReducedMotion
       />
     );
-    expect(screen.getByText('Feature A')).toBeDefined();
-    expect(screen.getByText('Feature B')).toBeDefined();
-    expect(screen.getByText('Feature C')).toBeDefined();
+    expect(screen.getByText('Feature A')).toBeInTheDocument();
+    expect(screen.getByText('Feature B')).toBeInTheDocument();
+    expect(screen.getByText('Feature C')).toBeInTheDocument();
   });
 
   it('renders feature descriptions', () => {
@@ -58,8 +58,8 @@ describe('FeatureSection', () => {
         prefersReducedMotion
       />
     );
-    expect(screen.getByText('Description A')).toBeDefined();
-    expect(screen.getByText('Description B')).toBeDefined();
-    expect(screen.getByText('Description C')).toBeDefined();
+    expect(screen.getByText('Description A')).toBeInTheDocument();
+    expect(screen.getByText('Description B')).toBeInTheDocument();
+    expect(screen.getByText('Description C')).toBeInTheDocument();
   });
 });

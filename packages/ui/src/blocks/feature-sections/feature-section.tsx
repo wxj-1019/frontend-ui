@@ -19,7 +19,7 @@ export interface FeatureSectionProps {
   /** Feature items to display */
   features: FeatureItem[];
   /** Layout alternation direction */
-  layout?: 'alternating' | 'left' | 'center';
+  layout?: 'alternating' | 'center';
   /** Number of columns in grid layout (for 'center' layout) */
   columns?: 2 | 3 | 4;
   className?: string;

@@ -10,10 +10,10 @@ describe('BentoGrid', () => {
         <BentoCard title="Card 2" description="Second card" />
       </BentoGrid>
     );
-    expect(screen.getByText('Card 1')).toBeDefined();
-    expect(screen.getByText('Card 2')).toBeDefined();
-    expect(screen.getByText('First card')).toBeDefined();
-    expect(screen.getByText('Second card')).toBeDefined();
+    expect(screen.getByText('Card 1')).toBeInTheDocument();
+    expect(screen.getByText('Card 2')).toBeInTheDocument();
+    expect(screen.getByText('First card')).toBeInTheDocument();
+    expect(screen.getByText('Second card')).toBeInTheDocument();
   });
 
   it('renders wide card', () => {
@@ -23,8 +23,8 @@ describe('BentoGrid', () => {
         <BentoCard title="Normal Card" />
       </BentoGrid>
     );
-    expect(screen.getByText('Wide Card')).toBeDefined();
-    expect(screen.getByText('Normal Card')).toBeDefined();
+    expect(screen.getByText('Wide Card')).toBeInTheDocument();
+    expect(screen.getByText('Normal Card')).toBeInTheDocument();
   });
 
   it('renders with different variants', () => {
@@ -34,7 +34,7 @@ describe('BentoGrid', () => {
         <BentoCard title="Subtle" variant="subtle" />
       </BentoGrid>
     );
-    expect(screen.getByText('Accent')).toBeDefined();
-    expect(screen.getByText('Subtle')).toBeDefined();
+    expect(screen.getByText('Accent')).toBeInTheDocument();
+    expect(screen.getByText('Subtle')).toBeInTheDocument();
   });
 });
