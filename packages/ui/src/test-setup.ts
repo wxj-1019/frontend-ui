@@ -28,3 +28,16 @@ if (typeof globalThis.requestAnimationFrame !== 'function') {
     setTimeout(() => cb(Date.now()), 16) as unknown as number;
   globalThis.cancelAnimationFrame = (id: number) => clearTimeout(id);
 }
+
+// jsdom 不提供 ResizeObserver，Canvas/粒子组件需要
+if (typeof globalThis.ResizeObserver === 'undefined') {
+  globalThis.ResizeObserver = class {
+    private callback: ResizeObserverCallback;
+    constructor(callback: ResizeObserverCallback) {
+      this.callback = callback;
+    }
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as unknown as typeof ResizeObserver;
+}

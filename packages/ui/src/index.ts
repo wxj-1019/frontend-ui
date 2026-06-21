@@ -3,5 +3,6 @@ export * from './animations';
 export * from './gsap-animations';
 export * from './components';
 export * from './backgrounds';
+export * from './blocks';
 export * from './hooks';
 export * from './lib/utils';

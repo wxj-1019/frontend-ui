@@ -76,12 +76,19 @@ export const CATEGORIES: ComponentCategory[] = [
     href: '/gsap-animations',
     count: 7,
   },
+  {
+    id: 'blocks',
+    label: '页面区块',
+    description: '开箱即用的完整页面组件，复制粘贴即可使用',
+    href: '/blocks',
+    count: 3,
+  },
 ];
 
 // ─── 组件注册表 ───────────────────────────────────────────────
 
 /**
- * 所有 34 个组件的完整注册表
+ * 所有 37 个组件的完整注册表
  */
 export const COMPONENT_REGISTRY: ComponentEntry[] = [
   // ── 文字动画 (8) ────────────────────────────────────────
@@ -407,6 +414,53 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'GSAP',
     installName: 'horizontal-scroll',
     importStatement: 'import { HorizontalScroll } from "@frontend-ui/ui";',
+  },
+
+  // ── 页面区块 (3) ─────────────────────────────────────────
+  {
+    name: 'HeroWithGradient',
+    description: '赛博英雄区，渐变背景 + 入场动画',
+    href: '/blocks/hero-section',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'hero-section',
+    importStatement: 'import { HeroWithGradient } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'HeroWithParticles',
+    description: '赛博英雄区，粒子背景 + 入场动画',
+    href: '/blocks/hero-section',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'hero-section',
+    importStatement: 'import { HeroWithParticles } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'BentoGrid',
+    description: 'Bento 网格布局，自适应卡片布局 + 悬浮交互',
+    href: '/blocks/bento-grid',
+    category: CATEGORIES[5],
+    engine: 'CSS',
+    installName: 'bento-grid',
+    importStatement: 'import { BentoGrid } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'BentoCard',
+    description: 'Bento 网格中的单个卡片组件',
+    href: '/blocks/bento-grid',
+    category: CATEGORIES[5],
+    engine: 'CSS',
+    installName: 'bento-grid',
+    importStatement: 'import { BentoCard } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'FeatureSection',
+    description: '功能展示区块，支持左右交替布局与网格排列',
+    href: '/blocks/feature-section',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'feature-section',
+    importStatement: 'import { FeatureSection } from "@frontend-ui/ui";',
   },
 ];
 

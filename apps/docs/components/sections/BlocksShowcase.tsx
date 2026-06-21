@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import Link from "next/link";
-import { useReducedMotion } from "motion/react";
-import { Rocket, LayoutGrid, Diamond, Sparkles, BarChart3, Compass } from "lucide-react";
+import { useRef } from 'react';
+import Link from 'next/link';
+import { useReducedMotion } from 'motion/react';
+import { Rocket, LayoutGrid, Sparkles } from 'lucide-react';
 
 interface BlockItem {
   title: string;
@@ -16,52 +16,28 @@ interface BlockItem {
 
 const blocks: BlockItem[] = [
   {
-    title: "赛博英雄区",
-    description: "大标题 + 粒子背景 + 入场动画",
-    href: "/blocks/hero-section",
-    tag: "Hero",
-    gradient: "from-[var(--color-accent)]/20 to-[var(--color-accent)]/5",
+    title: '赛博英雄区',
+    description: '大标题 + 入场动画，支持渐变与粒子两种变体',
+    href: '/blocks/hero-section',
+    tag: 'Hero',
+    gradient: 'from-[var(--color-accent)]/20 to-[var(--color-accent)]/5',
     icon: <Rocket className="h-10 w-10" />,
   },
   {
-    title: "Bento 网格",
-    description: "自适应卡片布局 + 悬浮交互",
-    href: "/blocks/bento-grid",
-    tag: "Layout",
-    gradient: "from-[var(--color-accent)]/20 to-[var(--color-accent)]/5",
+    title: 'Bento 网格',
+    description: '自适应卡片布局 + 悬浮交互',
+    href: '/blocks/bento-grid',
+    tag: 'Layout',
+    gradient: 'from-[var(--color-accent)]/20 to-[var(--color-accent)]/5',
     icon: <LayoutGrid className="h-10 w-10" />,
   },
   {
-    title: "定价卡片",
-    description: "三栏对比 + 高亮推荐方案",
-    href: "/blocks/pricing",
-    tag: "Commerce",
-    gradient: "from-[var(--color-accent)]/20 to-[var(--color-accent)]/5",
-    icon: <Diamond className="h-10 w-10" />,
-  },
-  {
-    title: "功能展示",
-    description: "左右交替 + 滚动揭示动画",
-    href: "/blocks/feature-showcase",
-    tag: "Marketing",
-    gradient: "from-[var(--color-accent)]/20 to-[var(--color-accent)]/5",
+    title: '功能展示',
+    description: '左右交替 + 网格排列 + 滚动揭示动画',
+    href: '/blocks/feature-section',
+    tag: 'Marketing',
+    gradient: 'from-[var(--color-accent)]/20 to-[var(--color-accent)]/5',
     icon: <Sparkles className="h-10 w-10" />,
-  },
-  {
-    title: "数据仪表盘",
-    description: "实时图表 + 动态数据卡片",
-    href: "/blocks/dashboard",
-    tag: "Dashboard",
-    gradient: "from-[var(--color-accent)]/20 to-[var(--color-accent)]/5",
-    icon: <BarChart3 className="h-10 w-10" />,
-  },
-  {
-    title: "全屏导航",
-    description: "覆盖层菜单 + 转场动画",
-    href: "/blocks/fullscreen-nav",
-    tag: "Navigation",
-    gradient: "from-[var(--color-accent)]/20 to-[var(--color-accent)]/5",
-    icon: <Compass className="h-10 w-10" />,
   },
 ];
 
@@ -69,12 +45,12 @@ export function BlocksShowcase() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const shouldReduce = useReducedMotion();
 
-  const scroll = (dir: "left" | "right") => {
+  const scroll = (dir: 'left' | 'right') => {
     if (!scrollRef.current) return;
     const amount = 320;
     scrollRef.current.scrollBy({
-      left: dir === "left" ? -amount : amount,
-      behavior: shouldReduce ? "instant" : "smooth",
+      left: dir === 'left' ? -amount : amount,
+      behavior: shouldReduce ? 'instant' : 'smooth',
     });
   };
 
@@ -98,21 +74,41 @@ export function BlocksShowcase() {
           {/* Scroll Controls (desktop) */}
           <div className="hidden gap-2 sm:flex">
             <button
-              onClick={() => scroll("left")}
+              onClick={() => scroll('left')}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-muted)] transition-all hover:border-[var(--color-accent)]/50 hover:text-[var(--color-accent)]"
               aria-label="向左滚动"
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
             </button>
             <button
-              onClick={() => scroll("right")}
+              onClick={() => scroll('right')}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-muted)] transition-all hover:border-[var(--color-accent)]/50 hover:text-[var(--color-accent)]"
               aria-label="向右滚动"
             >
-              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </button>
           </div>
@@ -123,7 +119,7 @@ export function BlocksShowcase() {
       <div
         ref={scrollRef}
         className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4 [scrollbar-width:thin] lg:px-[max(1.5rem,calc((100vw-80rem)/2))]"
-        style={{ scrollbarWidth: "thin" }}
+        style={{ scrollbarWidth: 'thin' }}
       >
         {blocks.map((block) => (
           <Link
@@ -132,7 +128,9 @@ export function BlocksShowcase() {
             className="group relative w-[300px] flex-none snap-start overflow-hidden rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] transition-all hover:border-[var(--color-accent)]/40 hover:shadow-xl hover:shadow-[var(--color-accent)]/5"
           >
             {/* Preview Area */}
-            <div className={`relative h-40 overflow-hidden bg-gradient-to-br ${block.gradient}`}>
+            <div
+              className={`relative h-40 overflow-hidden bg-gradient-to-br ${block.gradient}`}
+            >
               {/* Grid pattern overlay */}
               <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px]" />
               {/* Big icon */}
@@ -155,8 +153,18 @@ export function BlocksShowcase() {
               </p>
               <div className="mt-3 flex items-center gap-1 text-xs font-medium text-[var(--color-accent)] opacity-0 transition-opacity group-hover:opacity-100">
                 查看详情
-                <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg
+                  className="h-3.5 w-3.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
                 </svg>
               </div>
             </div>

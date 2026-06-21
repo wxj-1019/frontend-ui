@@ -36,6 +36,11 @@
       "import": "./dist/gsap-animations/*.mjs",
       "require": "./dist/gsap-animations/*.js"
     },
+    "./blocks/*": {
+      "types": "./dist/blocks/*.d.ts",
+      "import": "./dist/blocks/*.mjs",
+      "require": "./dist/blocks/*.js"
+    },
     "./hooks/*": {
       "types": "./dist/hooks/*.d.ts",
       "import": "./dist/hooks/*.mjs",
