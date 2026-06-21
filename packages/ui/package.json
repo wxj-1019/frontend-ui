@@ -1,0 +1,84 @@
+{
+  "name": "@frontend-ui/ui",
+  "version": "0.0.1",
+  "description": "动画/特效组件库",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./text-animations/*": {
+      "types": "./dist/text-animations/*.d.ts",
+      "import": "./dist/text-animations/*.mjs",
+      "require": "./dist/text-animations/*.js"
+    },
+    "./animations/*": {
+      "types": "./dist/animations/*.d.ts",
+      "import": "./dist/animations/*.mjs",
+      "require": "./dist/animations/*.js"
+    },
+    "./components/*": {
+      "types": "./dist/components/*.d.ts",
+      "import": "./dist/components/*.mjs",
+      "require": "./dist/components/*.js"
+    },
+    "./backgrounds/*": {
+      "types": "./dist/backgrounds/*.d.ts",
+      "import": "./dist/backgrounds/*.mjs",
+      "require": "./dist/backgrounds/*.js"
+    },
+    "./gsap-animations/*": {
+      "types": "./dist/gsap-animations/*.d.ts",
+      "import": "./dist/gsap-animations/*.mjs",
+      "require": "./dist/gsap-animations/*.js"
+    },
+    "./hooks/*": {
+      "types": "./dist/hooks/*.d.ts",
+      "import": "./dist/hooks/*.mjs",
+      "require": "./dist/hooks/*.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "tailwindcss": ">=4.0.0"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.1.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "gsap": "^3.15.0",
+    "motion": "^12.40.0",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.5.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "jsdom": "^29.1.1",
+    "lucide-react": "^0.400.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.61.1",
+    "vitest": "^2.0.0"
+  }
+}

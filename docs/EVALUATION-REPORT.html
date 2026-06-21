@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frontend UI — 项目质量评估报告</title>
+<style>
+  :root {
+    --bg: #faf9f5;
+    --surface: #fff;
+    --text: #141413;
+    --text-muted: #6b6b65;
+    --border: #e8e6dc;
+    --pass: #3b6d11;
+    --pass-bg: #eaf3de;
+    --warn: #b45309;
+    --warn-bg: #fffbeb;
+    --fail: #b91c1c;
+    --fail-bg: #fef2f2;
+    --accent: #6a9bcc;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 24px;
+  }
+  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 4px; }
+  h2 { font-size: 20px; font-weight: 600; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 15px; font-weight: 600; margin: 24px 0 8px; }
+  .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 32px; }
+  .score-ring {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: conic-gradient(var(--accent) 0deg 252deg, var(--border) 252deg 360deg);
+    display: flex; align-items: center; justify-content: center; margin: 24px auto;
+  }
+  .score-value { font-size: 28px; font-weight: 700; color: var(--text); }
+  .score-label { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: -8px; margin-bottom: 24px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  .card {
+    background: var(--surface); border: 0.5px solid var(--border);
+    border-radius: var(--radius); padding: 20px;
+  }
+  .card h3 { margin-top: 0; font-size: 15px; }
+  .card .score { font-size: 32px; font-weight: 700; }
+  .card .label { font-size: 12px; color: var(--text-muted); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 0.5px solid var(--border); }
+  th { font-weight: 600; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .tag-pass { background: var(--pass-bg); color: var(--pass); }
+  .tag-warn { background: var(--warn-bg); color: var(--warn); }
+  .tag-fail { background: var(--fail-bg); color: var(--fail); }
+  .issue { padding: 12px; margin: 8px 0; border-radius: 8px; font-size: 13px; }
+  .issue-warn { background: var(--warn-bg); border-left: 3px solid var(--warn); }
+  .issue-fail { background: var(--fail-bg); border-left: 3px solid var(--fail); }
+  .issue-pass { background: var(--pass-bg); border-left: 3px solid var(--pass); }
+  .issue strong { display: block; margin-bottom: 2px; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 6px 0; font-size: 13px; display: flex; align-items: flex-start; gap: 8px; }
+  .check-icon { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
+  .summary-box { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 24px; margin: 16px 0; }
+</style>
+</head>
+<body>
+
+<h1>Frontend UI 项目质量评估</h1>
+<p class="subtitle">基于 Frontend Studio 工程标准 · 评估日期: 2026-06-21</p>
+
+<div class="score-ring"><span class="score-value">70</span></div>
+<div class="score-label">综合评分 / 100</div>
+
+<div class="grid">
+  <div class="card">
+    <h3>设计工程</h3>
+    <div class="score">62</div>
+    <div class="label">/ 100 — 存在多处违反规范</div>
+  </div>
+  <div class="card">
+    <h3>动画引擎</h3>
+    <div class="score">85</div>
+    <div class="label">/ 100 — 整体优秀，少量改进空间</div>
+  </div>
+  <div class="card">
+    <h3>架构质量</h3>
+    <div class="score">78</div>
+    <div class="label">/ 100 — Monorepo 结构清晰</div>
+  </div>
+</div>
+
+<h2>1. 设计工程评估 (62/100)</h2>
+
+<h3>1.1 基线配置推测</h3>
+<table>
+  <tr><th>参数</th><th>推测值</th><th>范围</th><th>评价</th></tr>
+  <tr><td>DESIGN_VARIANCE</td><td>7</td><td>1-10</td><td>偏向非对称，Hero 区域有多层效果叠加</td></tr>
+  <tr><td>MOTION_INTENSITY</td><td>8</td><td>1-10</td><td>Cinematic 级别 — GSAP Hero Timeline + 视差 + 自定义光标</td></tr>
+  <tr><td>VISUAL_DENSITY</td><td>5</td><td>1-10</td><td>适中 — 深色背景为页面提供了呼吸感</td></tr>
+</table>
+
+<h3>1.2 违规项目</h3>
+
+<div class="issue issue-fail">
+  <strong>🔴 F-01: 禁止使用 Emoji</strong>
+  首页 <code>page.tsx</code> 第 19-42 行的 <code>categories</code> 数组使用了 ✦、⚡、◆、◎ 作为图标。根据 ANTI-EMOJI POLICY，应使用 Phosphor 或 Radix 图标库替代。
+</div>
+
+<div class="issue issue-fail">
+  <strong>🔴 F-02: 使用 Inter 字体</strong>
+  <code>globals.css</code> 将 Inter 设为 <code>--font-sans</code>。规范明确禁止使用 Inter，应替换为 Geist、Outfit 或 Satoshi。
+</div>
+
+<div class="issue issue-fail">
+  <strong>🔴 F-03: 自定义光标</strong>
+  <code>CursorEffect.tsx</code> 实现了全站自定义光标效果（GSAP 驱动）。规范明确禁止自定义光标（Forbidden Patterns > Visual）。
+</div>
+
+<div class="issue issue-fail">
+  <strong>🔴 F-04: 多 accent 色 (5 个)</strong>
+  项目使用 5 个强调色: Cyan、Magenta、Violet、Success、Warning。规范要求 ≤1 accent。可保留 Cyan 作为唯一 accent，其他收归为语义色（Success/Error）。
+</div>
+
+<div class="issue issue-warn">
+  <strong>🟡 W-01: 霓虹发光效果</strong>
+  Hero 区域使用 <code>blur-[150px]</code>、<code>bg-[var(--color-accent-cyan)]/15</code> 等模糊发光。规范禁止 Neon glows（Forbidden Patterns）。
+</div>
+
+<div class="issue issue-warn">
+  <strong>🟡 W-02: 首页统计数据不准确</strong>
+  <code>stats</code> 数组声称 "130+ 动画组件"、"5 组件分类"，实际只有 34 个组件。数字虚高有损信任。
+</div>
+
+<div class="issue issue-warn">
+  <strong>🟡 W-03: 纯黑背景</strong>
+  <code>--color-bg-primary: #0A0A0F</code> 接近纯黑。规范禁止纯黑 (#000) 作为背景色。
+</div>
+
+<div class="issue issue-warn">
+  <strong>🟡 W-04: 过度饱和的 accent 颜色</strong>
+  <code>--color-accent-cyan: #00F5FF</code> 饱和度过高。规范要求 saturation < 80%。
+</div>
+
+<h3>1.3 通过项</h3>
+<div class="issue issue-pass">
+  <strong>✅ 设计 Token 体系完整</strong> — 语义化 CSS 变量，暗色/亮色双主题，命名规范清晰。
+</div>
+<div class="issue issue-pass">
+  <strong>✅ Layout 规范</strong> — <code>max-w-7xl mx-auto</code> 正确使用，无 <code>h-screen</code>。
+</div>
+<div class="issue issue-pass">
+  <strong>✅ 字体选择合理</strong> — Space Grotesk 标题 + JetBrains Mono 代码，除 Inter 外均合规。
+</div>
+<div class="issue issue-pass">
+  <strong>✅ 交互状态完整</strong> — <code>active:scale-[0.98]</code> 触觉反馈、hover 过渡均实现。
+</div>
+
+<h2>2. 动画引擎评估 (85/100)</h2>
+
+<h3>2.1 Tool Selection 合规检查</h3>
+<table>
+  <tr><th>使用场景</th><th>当前工具</th><th>规范推荐</th><th>状态</th></tr>
+  <tr><td>UI enter/exit/layout</td><td>Framer Motion (via motion/react)</td><td>Framer Motion</td><td><span class="tag tag-pass">PASS</span></td></tr>
+  <tr><td>Scroll storytelling</td><td>GSAP + ScrollTrigger</td><td>GSAP + ScrollTrigger</td><td><span class="tag tag-pass">PASS</span></td></tr>
+  <tr><td>Hover/focus states</td><td>Tailwind transitions</td><td>CSS only</td><td><span class="tag tag-pass">PASS</span></td></tr>
+  <tr><td>3D/WebGL</td><td>计划中 (Hyperspeed)</td><td>Three.js / R3F</td><td><span class="tag tag-pass">PASS</span></td></tr>
+  <tr><td>GSAP + Framer 混合使用</td><td>同一页面同时使用（如首页）</td><td>禁止同一组件内混合</td><td><span class="tag tag-pass">PASS*</span></td></tr>
+</table>
+<p style="font-size:12px;color:var(--text-muted)">* 首页在页面级别混合使用，但单个组件内部没有混合，属于合规的"页面级编排"。</p>
+
+<h3>2.2 Performance 合规检查</h3>
+<table>
+  <tr><th>规范</th><th>合规</th><th>说明</th></tr>
+  <tr><td>仅动画 GPU 属性 (transform, opacity)</td><td><span class="tag tag-pass">PASS</span></td><td>GSAP 组件正确使用 x/y/autoAlpha</td></tr>
+  <tr><td><code>prefers-reduced-motion</code></td><td><span class="tag tag-pass">PASS</span></td><td>所有 GSAP 组件通过 gsap.matchMedia() 实现</td></tr>
+  <tr><td><code>pointer: coarse</code> 禁用</td><td><span class="tag tag-pass">PASS</span></td><td>CursorEffect 正确检测触摸设备</td></tr>
+  <tr><td><code>useEffect</code> 清理</td><td><span class="tag tag-pass">PASS</span></td><td>所有动画 Hook 有正确的 return cleanup</td></tr>
+  <tr><td>Perpetual 动画 React.memo 隔离</td><td><span class="tag tag-warn">N/A</span></td><td>WaveText 等循环动画未用 React.memo 包裹</td></tr>
+  <tr><td><code>will-change</code> 仅在动画期间</td><td><span class="tag tag-pass">PASS</span></td><td>GSAP TextReveal 在 onComplete 中 clearProps</td></tr>
+</table>
+
+<h3>2.3 动画强度评分</h3>
+<div class="issue issue-pass">
+  <strong>✅ 首页 Hero 动画质量高</strong> — HeroTimeline + IntroAnimation + PageTransition + 视差 + BlurText 的多层编排流畅。对应 MOTION_INTENSITY 7-8 的 Cinematic 级别。
+</div>
+<div class="issue issue-warn">
+  <strong>🟡 无限循环动画缺少暂停控制</strong> — WaveText、GlitchText 等组件使用了 <code>repeat: Infinity</code> 动画，但没有提供暂停按钮。WCAG 要求自动播放动画需可暂停。
+</div>
+
+<h2>3. 架构质量评估 (78/100)</h2>
+
+<h3>3.1 Monorepo 结构</h3>
+<table>
+  <tr><th>评估维度</th><th>评分</th><th>说明</th></tr>
+  <tr><td>包边界</td><td><span class="tag tag-pass">优秀</span></td><td>apps/docs ↔ packages/ui 清晰分离</td></tr>
+  <tr><td>构建配置</td><td><span class="tag tag-pass">优秀</span></td><td>tsup + Turborepo 构建流水线完整</td></tr>
+  <tr><td>类型安全</td><td><span class="tag tag-pass">优秀</span></td><td>严格 TypeScript + 完整 Props 类型导出</td></tr>
+  <tr><td>组件规范</td><td><span class="tag tag-pass">优秀</span></td><td>统一的 5 文件结构 + 文档页模板</td></tr>
+  <tr><td>测试覆盖</td><td><span class="tag tag-warn">不足</span></td><td>62 tests / 34 组件 ≈ 1.8 tests/component</td></tr>
+  <tr><td>CLI 工具</td><td><span class="tag tag-fail">缺失</span></td><td>Phase 2 计划中，首页展示了 CLI 但未实现</td></tr>
+</table>
+
+<h3>3.2 组件蓝图对比</h3>
+<p style="font-size:13px;color:var(--text-muted);margin:8px 0">
+首页的 categories 卡片显示的数字 vs 实际实现情况:
+</p>
+<table>
+  <tr><th>分类</th><th>声称数量</th><th>实际实现</th><th>差距</th></tr>
+  <tr><td>文字动画</td><td>20+</td><td>8</td><td>-12</td></tr>
+  <tr><td>交互动画</td><td>30+</td><td>9</td><td>-21</td></tr>
+  <tr><td>复合组件</td><td>30+</td><td>5</td><td>-25</td></tr>
+  <tr><td>背景特效</td><td>50+</td><td>6</td><td>-44</td></tr>
+</table>
+<p style="font-size:13px;color:var(--text-muted)">这可能是蓝图目标，但当前页面上作为已实现数量展示，有误导用户的风险。</p>
+
+<h2>4. Quality Gates 逐项检查</h2>
+
+<h3>Design Gates</h3>
+<ul class="checklist">
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Mobile layout collapse — 已通过 responsive grid 实现</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> <code>min-h-[100dvh]</code> 已使用（首页除外，使用 min-h-screen）</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/><line x1="9" y1="5" x2="9" y2="10" stroke="#b45309" stroke-width="1.5"/><circle cx="9" cy="13" r="0.8" fill="#b45309"/></svg> Empty/Loading/Error states — 未在文档站中体现</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Cards 适当使用 — SpotlightCard 等有明确场景</li>
+</ul>
+
+<h3>Motion Gates</h3>
+<ul class="checklist">
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 工具选择正确 — GSAP/Motion/CSS 分工明确</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 无 GSAP + Framer 同组件混合</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> useEffect cleanup 全部实现</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> prefers-reduced-motion 尊重</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> GPU-only 属性动画</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#fffbeb" stroke="#b45309" stroke-width="1.5"/><line x1="9" y1="5" x2="9" y2="10" stroke="#b45309" stroke-width="1.5"/><circle cx="9" cy="13" r="0.8" fill="#b45309"/></svg> Perpetual 动画未 React.memo 隔离（低优先级）</li>
+</ul>
+
+<h3>General Gates</h3>
+<ul class="checklist">
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 依赖在 package.json 中已验证</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 无 placeholder URL（全部使用 CSS 变量）</li>
+  <li><svg class="check-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="8" fill="#eaf3de" stroke="#3b6d11" stroke-width="1.5"/><path d="M5 9l3 3 5-6" stroke="#3b6d11" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg> 无 AI 生成的占位图（项目为组件库，不适用）</li>
+</ul>
+
+<h2>5. 改进路线图</h2>
+
+<div class="summary-box">
+  <h3 style="margin-top:0">P0 — 立即修复 (违反规范)</h3>
+  <table>
+    <tr><th style="width:50px">#</th><th>问题</th><th>影响文件</th><th>修复方式</th></tr>
+    <tr><td>1</td><td>Emoji 图标</td><td><code>apps/docs/app/page.tsx</code></td><td>替换为 lucide-react 图标 (Star, Zap, Diamond, Circle)</td></tr>
+    <tr><td>2</td><td>Inter 字体</td><td><code>apps/docs/app/globals.css</code></td><td>替换为 Geist/Satoshi，更新 <code>--font-sans</code></td></tr>
+    <tr><td>3</td><td>自定义光标</td><td><code>CursorEffect.tsx</code></td><td>移除或作为可选功能默认关闭</td></tr>
+    <tr><td>4</td><td>多 accent 色</td><td><code>globals.css</code></td><td>Token 重命名：Cyan 保留为 accent，Magenta→danger，Violet→info</td></tr>
+    <tr><td>5</td><td>不实统计数据</td><td><code>page.tsx</code></td><td>更新为真实数字 (34 组件, 5 分类)</td></tr>
+  </table>
+</div>
+
+<div class="summary-box">
+  <h3>P1 — 本周修复</h3>
+  <table>
+    <tr><th style="width:50px">#</th><th>问题</th><th>修复方式</th></tr>
+    <tr><td>6</td><td>霓虹发光效果</td><td>Hero 区域降低 blur 值和 opacity 至 subtle 级别</td></tr>
+    <tr><td>7</td><td>接近纯黑背景</td><td>bg-primary 从 #0A0A0F 调亮至 #111118</td></tr>
+    <tr><td>8</td><td>无限动画无暂停</td><td>WaveText/GlitchText 添加 pause 属性或 aria-live</td></tr>
+    <tr><td>9</td><td>首页使用 min-h-screen</td><td>替换为 min-h-[100dvh]</td></tr>
+  </table>
+</div>
+
+<div class="summary-box">
+  <h3>P2 — 下个 Phase 关注</h3>
+  <table>
+    <tr><th style="width:50px">#</th><th>项目</th><th>说明</th></tr>
+    <tr><td>10</td><td>测试覆盖率提升</td><td>当前 1.8 tests/component，目标 3+ tests/component</td></tr>
+    <tr><td>11</td><td>CLI 工具实现</td><td>首页展示了 CLI 但未实现，是用户入口的核心要素</td></tr>
+    <tr><td>12</td><td>组件数量蓝图对齐</td><td>继续扩充至 100+，优先交互动画和背景特效</td></tr>
+  </table>
+</div>
+
+<p style="font-size:12px; color:var(--text-muted); margin-top:48px; text-align:center;">
+  评估依据: Frontend Studio Skill v3.0 · Design Engineering §1 · Motion Engine §2 · Quality Gates §6
+</p>
+
+</body>
+</html>

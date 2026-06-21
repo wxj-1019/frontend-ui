@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tech-Spec 合规性审计报告 — Frontend UI</title>
+<style>
+  :root {
+    --bg: #0A0A0F;
+    --surface: #12121A;
+    --surface2: #1A1A2E;
+    --border: #2A2A3E;
+    --text: #FFFFFF;
+    --muted: #A8A8BC;
+    --accent: #00F5FF;
+    --success: #00FF88;
+    --warning: #FFB800;
+    --error: #FF4466;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 2rem;
+    line-height: 1.6;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 2rem; font-weight: 700; margin-bottom: .5rem; }
+  .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 1rem; }
+  .score-card {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .score-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem; text-align: center;
+  }
+  .score-item .num { font-size: 2rem; font-weight: 700; }
+  .score-item .label { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
+  .score-item.high .num { color: var(--success); }
+  .score-item.mid .num { color: var(--warning); }
+  .score-item.low .num { color: var(--error); }
+
+  .section { margin-bottom: 2rem; }
+  h2 {
+    font-size: 1.3rem; font-weight: 600;
+    padding-bottom: .5rem; border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    text-align: left; padding: .7rem .8rem;
+    border-bottom: 1px solid var(--border);
+    font-size: .9rem;
+  }
+  th { color: var(--muted); font-weight: 500; font-size: .8rem; text-transform: uppercase; letter-spacing: .04em; }
+  .status-badge {
+    display: inline-block; padding: .15rem .6rem; border-radius: 999px;
+    font-size: .75rem; font-weight: 600;
+  }
+  .match { background: rgba(0,255,136,.15); color: var(--success); }
+  .partial { background: rgba(255,184,0,.15); color: var(--warning); }
+  .missing { background: rgba(255,68,102,.15); color: var(--error); }
+  .note { color: var(--muted); font-size: .8rem; }
+
+  .category-block {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem; margin-bottom: 1rem;
+  }
+  .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: .8rem; }
+  .category-header h3 { font-size: 1rem; }
+  .category-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+  .component-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: .4rem .6rem; border-radius: 6px; background: var(--bg);
+    font-size: .85rem;
+  }
+  .component-item .name { font-weight: 500; }
+  .component-icons span { margin-left: .25rem; cursor: help; }
+
+  .progress-chart { display: flex; height: 28px; border-radius: 999px; overflow: hidden; margin: 1rem 0; }
+  .progress-chart .seg { display: flex; align-items: center; justify-content: center; font-size: .7rem; font-weight: 600; transition: width .5s; }
+  .seg-match { background: var(--success); color: #000; }
+  .seg-partial { background: var(--warning); color: #000; }
+  .seg-missing { background: var(--error); color: #fff; }
+  .legend { display: flex; gap: 1.5rem; font-size: .8rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .legend span { display: flex; align-items: center; gap: .4rem; }
+  .legend .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot-match { background: var(--success); }
+  .dot-partial { background: var(--warning); }
+  .dot-missing { background: var(--error); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🧾 Tech-Spec 合规性审计报告</h1>
+  <p class="subtitle">
+    对比 <code>docs/tech-spec.md</code> 技术方案与项目实际实现状态<br>
+    审计时间：2026-06-22 00:30
+  </p>
+
+  <!-- 综合评分 -->
+  <div class="score-card">
+    <div class="score-item mid">
+      <div class="num">42%</div>
+      <div class="label">综合符合率</div>
+    </div>
+    <div class="score-item high">
+      <div class="num">26</div>
+      <div class="label">完全符合项</div>
+    </div>
+    <div class="score-item mid">
+      <div class="num">10</div>
+      <div class="label">部分符合项</div>
+    </div>
+    <div class="score-item low">
+      <div class="num">20</div>
+      <div class="label">未实现项</div>
+    </div>
+  </div>
+
+  <!-- 总体进度条 -->
+  <div class="progress-chart">
+    <div class="seg seg-match" style="width:46%">46% ✅</div>
+    <div class="seg seg-partial" style="width:18%">18% ⚠️</div>
+    <div class="seg seg-missing" style="width:36%">36% ❌</div>
+  </div>
+  <div class="legend">
+    <span><span class="dot dot-match"></span> 完全符合</span>
+    <span><span class="dot dot-partial"></span> 部分符合</span>
+    <span><span class="dot dot-missing"></span> 未实现</span>
+  </div>
+
+  <!-- 1. 架构与工程 -->
+  <div class="section">
+    <h2>一、架构与工程基建</h2>
+    <table>
+      <tr><th style="width:30%">规格要求</th><th style="width:15%">状态</th><th>说明</th></tr>
+      <tr>
+        <td>pnpm + Turborepo Monorepo</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">pnpm-workspace.yaml + turbo.json 配置完整</td>
+      </tr>
+      <tr>
+        <td>Next.js 15 App Router</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">apps/docs 基于 Next.js 15，App Router 路由</td>
+      </tr>
+      <tr>
+        <td>Tailwind CSS 4</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">globals.css 使用 @import "tailwindcss"</td>
+      </tr>
+      <tr>
+        <td>TypeScript 5 严格模式</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">tsconfig.json strict: true</td>
+      </tr>
+      <tr>
+        <td>Storybook 配置</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">.storybook/main.ts + preview.ts，nextjs 框架</td>
+      </tr>
+      <tr>
+        <td>Changesets 版本管理</td>
+        <td><span class="status-badge partial">⚠️ 部分</span></td>
+        <td class="note">已安装 @changesets/cli 和 config.json（缺少 baseBranch/access 等配置）</td>
+      </tr>
+      <tr>
+        <td>ESLint + Prettier</td>
+        <td><span class="status-badge partial">⚠️ 部分</span></td>
+        <td class="note">Prettier 已配置，ESLint 在 package.json 中内联而非独立 .eslintrc</td>
+      </tr>
+      <tr>
+        <td>Husky + lint-staged</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">.husky/ 目录不存在，package.json 未引用 husky</td>
+      </tr>
+      <tr>
+        <td>Vitest + Testing Library</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">vitest.config.ts 配置完整，jsdom 环境</td>
+      </tr>
+      <tr>
+        <td>packages/cli/ CLI 工具</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">Phase 3 计划，尚未创建；文档页 apps/docs/app/(docs)/docs/cli/page.tsx 已存在</td>
+      </tr>
+      <tr>
+        <td>组件注册表 registry</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">apps/docs/lib/component-registry.ts 不存在</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 2. 组件库源码 -->
+  <div class="section">
+    <h2>二、组件库源码结构</h2>
+    <table>
+      <tr><th style="width:30%">规格要求</th><th style="width:15%">状态</th><th>说明</th></tr>
+      <tr>
+        <td>5 个组件分类</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">text-animations, animations, components, backgrounds, gsap-animations</td>
+      </tr>
+      <tr>
+        <td>blocks/ 源码目录</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">packages/ui/src/blocks/ 不存在；规格要求 hero-sections, bento-grids, feature-sections, pricing-sections, cta-sections</td>
+      </tr>
+      <tr>
+        <td>hooks/ 源码目录</td>
+        <td><span class="status-badge partial">⚠️ 部分</span></td>
+        <td class="note">仅 useMousePosition 1 个 hook，规格预期较多动画相关 hooks</td>
+      </tr>
+      <tr>
+        <td>组件目录结构（5 文件）</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">index.ts + component.tsx + test.tsx + stories.tsx + doc page.tsx</td>
+      </tr>
+      <tr>
+        <td>cn() 工具函数</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">@/lib/utils 中导出 cn()，使用 clsx + tailwind-merge</td>
+      </tr>
+      <tr>
+        <td>class-variance-authority</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装，规格明确要求用于组件变体管理</td>
+      </tr>
+      <tr>
+        <td>"use client" 规范</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">所有组件 .tsx 文件顶部有 "use client"</td>
+      </tr>
+      <tr>
+        <td>GSAP useGSAP Hook 规范</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">所有 GSAP 组件使用 useGSAP + gsap.matchMedia() + ref scope</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 3. 动画引擎 -->
+  <div class="section">
+    <h2>三、动画引擎（多引擎架构）</h2>
+    <table>
+      <tr><th style="width:25%">引擎</th><th style="width:12%">状态</th><th>说明</th></tr>
+      <tr>
+        <td>GSAP + @gsap/react ✅</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">已安装 ^3.15.0 + ^2.1.2，7 个 GSAP 组件使用中</td>
+      </tr>
+      <tr>
+        <td>Motion ✅</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">已安装 ^12.40.0，11 个 Motion 组件使用中</td>
+      </tr>
+      <tr>
+        <td>react-spring ❌</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装，规格明确列为 peerDependencies</td>
+      </tr>
+      <tr>
+        <td>Anime.js ❌</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装，规格明确列为 peerDependencies（SVG 动画路径）</td>
+      </tr>
+      <tr>
+        <td>AutoAnimate ❌</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装，规格列为 dependencies</td>
+      </tr>
+      <tr>
+        <td>tailwindcss-animate ❌</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装</td>
+      </tr>
+      <tr>
+        <td>Lenis ❌</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装，规格列为 peerDependencies（平滑滚动）</td>
+      </tr>
+      <tr>
+        <td>Three.js + R3F ❌</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装，规格列为 optionalDependencies（3D 背景）</td>
+      </tr>
+      <tr>
+        <td>@use-gesture/react ❌</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">未安装，规格列为 dependencies（手势支持）</td>
+      </tr>
+      <tr>
+        <td><strong>规格承诺：6+ 动画引擎</strong></td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note"><strong>实际仅 2 个</strong>（GSAP + Motion），差距较大</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 4. 文档站前端结构 -->
+  <div class="section">
+    <h2>四、文档站（apps/docs）</h2>
+    <table>
+      <tr><th style="width:30%">规格要求</th><th style="width:15%">状态</th><th>说明</th></tr>
+      <tr>
+        <td>PropsPanel 属性调节面板</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">components/ui/PropsPanel.tsx 实时滑块/开关调节</td>
+      </tr>
+      <tr>
+        <td>CodeBlock 代码展示</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">components/ui/CodeBlock.tsx 带复制按钮</td>
+      </tr>
+      <tr>
+        <td>ComponentPreview 组件</td>
+        <td><span class="status-badge partial">⚠️ 部分</span></td>
+        <td class="note">规格要求同名 ComponentPreview 组件，实际为 ComponentPreviewGrid</td>
+      </tr>
+      <tr>
+        <td>BlockPreview 组件</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">不存在，规格要求支持响应式切换</td>
+      </tr>
+      <tr>
+        <td>分类索引页（5 个）</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">每个分类均有 grid 索引页，列出所有组件</td>
+      </tr>
+      <tr>
+        <td>Showcase 页面</td>
+        <td><span class="status-badge partial">⚠️ 部分</span></td>
+        <td class="note">/showcase 存在但为单体页，规格要求 portfolio/saas/landing-page/submit 子页</td>
+      </tr>
+      <tr>
+        <td>Blocks 文档页</td>
+        <td><span class="status-badge partial">⚠️ 部分</span></td>
+        <td class="note">仅 hero-section 和 bento-grid 2 页，缺 feature-sections/pricing-sections/cta-sections</td>
+      </tr>
+      <tr>
+        <td>搜索与筛选</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">Cmd+K SearchDialog 全局搜索</td>
+      </tr>
+      <tr>
+        <td>暗色模式切换</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">next-themes 集成，暗色/亮色双主题</td>
+      </tr>
+      <tr>
+        <td>i18n 国际化</td>
+        <td><span class="status-badge missing">❌ 缺失</span></td>
+        <td class="note">Phase 3 计划，规格要求默认中文 + 英文切换</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 5. 组件实现进度 -->
+  <div class="section">
+    <h2>五、组件实现进度 vs 规格承诺</h2>
+
+    <div class="category-block">
+      <div class="category-header">
+        <h3>📝 文字动画</h3>
+        <span><span class="status-badge match">已实现 8/8</span></span>
+      </div>
+      <div class="category-grid">
+        <div class="component-item">
+          <span class="name">BlurText</span>
+          <span><span class="status-badge match">✅</span></span>
+        </div>
+        <div class="component-item">
+          <span class="name">SplitText</span>
+          <span><span class="status-badge partial">⚠️ 缺 story + test</span></span>
+        </div>
+        <div class="component-item">
+          <span class="name">GradientText</span>
+          <span><span class="status-badge match">✅</span></span>
+        </div>
+        <div class="component-item">
+          <span class="name">Typewriter</span>
+          <span><span class="status-badge match">✅</span></span>
+        </div>
+        <div class="component-item">
+          <span class="name">ScrambleText</span>
+          <span><span class="status-badge match">✅</span></span>
+        </div>
+        <div class="component-item">
+          <span class="name">WaveText</span>
+          <span><span class="status-badge match">✅</span></span>
+        </div>
+        <div class="component-item">
+          <span class="name">GlitchText</span>
+          <span><span class="status-badge partial">⚠️ 缺 story + test</span></span>
+        </div>
+        <div class="component-item">
+          <span class="name">CountUp</span>
+          <span><span class="status-badge partial">⚠️ 缺 story + test</span></span>
+        </div>
+      </div>
+      <div style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">
+        规格要求额外组件：DecryptedText ≠ ScrambleText（名称不合），ShinyText（未实现），NeonText（未实现）
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-header">
+        <h3>⚡ 交互动画</h3>
+        <span><span class="status-badge match">已实现 9/8（超额）</span></span>
+      </div>
+      <div class="category-grid">
+        <div class="component-item"><span class="name">Magnet</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">FadeContent</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">ScrollReveal（交互）</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Draggable</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">FlipCard</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Accordion</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Tabs</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Modal</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Toast</span><span class="status-badge match">✅</span></div>
+      </div>
+      <div style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">
+        规格要求额外组件：ClickSpark, BlobCursor, Crosshair, MagneticButton, HoverScale, RotateOnHover（未实现）
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-header">
+        <h3>🧩 复合组件</h3>
+        <span><span class="status-badge match">已实现 5/7</span></span>
+      </div>
+      <div class="category-grid">
+        <div class="component-item"><span class="name">Dock</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Carousel</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">SpotlightCard</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Masonry</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">StackCards</span><span class="status-badge match">✅</span></div>
+        <div class="component-item">
+          <span class="name" style="color:var(--error)">BounceCards</span>
+          <span class="status-badge missing">❌ 缺失</span>
+        </div>
+        <div class="component-item">
+          <span class="name" style="color:var(--error)">InfiniteMenu</span>
+          <span class="status-badge missing">❌ 缺失</span>
+        </div>
+      </div>
+      <div style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">
+        规格要求额外组件：TiltCard（未实现）
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-header">
+        <h3>🌌 背景特效</h3>
+        <span><span class="status-badge match">已实现 6/4（超额）</span></span>
+      </div>
+      <div class="category-grid">
+        <div class="component-item"><span class="name">Aurora</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Particles</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Starfield</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">MeshGradient</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">NoiseBackground</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">Hyperspeed</span><span class="status-badge match">✅</span></div>
+      </div>
+      <div style="margin-top:.8rem;font-size:.8rem;color:var(--muted)">
+        规格要求额外组件：Ballpit, GridMotion（未实现）
+      </div>
+    </div>
+
+    <div class="category-block">
+      <div class="category-header">
+        <h3>🔄 GSAP 动画</h3>
+        <span><span class="status-badge match">已实现 7/4（超额）</span></span>
+      </div>
+      <div class="category-grid">
+        <div class="component-item"><span class="name">ScrollReveal</span><span class="status-badge partial">⚠️ 缺 test</span></div>
+        <div class="component-item"><span class="name">TextReveal</span><span class="status-badge partial">⚠️ 缺 test</span></div>
+        <div class="component-item"><span class="name">Parallax</span><span class="status-badge partial">⚠️ 缺 test</span></div>
+        <div class="component-item"><span class="name">TimelineSequence</span><span class="status-badge partial">⚠️ 缺 test</span></div>
+        <div class="component-item"><span class="name">ScrollProgress</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">PinSection</span><span class="status-badge match">✅</span></div>
+        <div class="component-item"><span class="name">HorizontalScroll</span><span class="status-badge match">✅</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Storybook 测试覆盖率 -->
+  <div class="section">
+    <h2>六、Storybook 与测试覆盖率</h2>
+    <table>
+      <tr><th>维度</th><th style="width:15%">数值</th><th>说明</th></tr>
+      <tr>
+        <td>Storybook 故事文件</td>
+        <td><span class="status-badge match">31 个</span></td>
+        <td class="note">覆盖 31/34 组件（count-up, glitch-text, split-text 缺 story）</td>
+      </tr>
+      <tr>
+        <td>Vitest 测试文件</td>
+        <td><span class="status-badge match">27 个</span></td>
+        <td class="note">覆盖 27/34 组件（7 个无测试的 GSAP 组件中 scroll-reveal, text-reveal, parallax, timeline-sequence 缺 test）</td>
+      </tr>
+      <tr>
+        <td>Storybook 构建配置</td>
+        <td><span class="status-badge match">✅ 符合</span></td>
+        <td class="note">.storybook/ 配置完整，nextjs 框架</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 7. 规格与实际的名称差异 -->
+  <div class="section">
+    <h2>七、关键差异清单（需要决策）</h2>
+    <table>
+      <tr><th>#</th><th>类别</th><th>规格要求</th><th>实际状态</th><th>优先级</th></tr>
+      <tr>
+        <td>1</td><td>动画引擎</td>
+        <td>6+ 引擎（GSAP/Motion/react-spring/Anime.js/AutoAnimate/Lenis/Three.js）</td>
+        <td>仅 2 个（GSAP + Motion）</td>
+        <td><span class="status-badge missing">P0</span></td>
+      </tr>
+      <tr>
+        <td>2</td><td>BLocks</td>
+        <td>packages/ui/src/blocks/ 含 5 种区块</td>
+        <td>完全不存在</td>
+        <td><span class="status-badge missing">P0</span></td>
+      </tr>
+      <tr>
+        <td>3</td><td>CLI 工具</td>
+        <td>packages/cli/ 含 add/init/list 命令</td>
+        <td>完全不存在</td>
+        <td><span class="status-badge missing">P1</span></td>
+      </tr>
+      <tr>
+        <td>4</td><td>CVA</td>
+        <td>class-variance-authority 组件变体管理</td>
+        <td>未安装</td>
+        <td><span class="status-badge missing">P1</span></td>
+      </tr>
+      <tr>
+        <td>5</td><td>组件注册表</td>
+        <td>apps/docs/lib/component-registry.ts</td>
+        <td>不存在</td>
+        <td><span class="status-badge missing">P1</span></td>
+      </tr>
+      <tr>
+        <td>6</td><td>Story 缺失</td>
+        <td>count-up, glitch-text, split-text</td>
+        <td>缺 3 个 story 文件</td>
+        <td><span class="status-badge partial">P2</span></td>
+      </tr>
+      <tr>
+        <td>7</td><td>测试缺失</td>
+        <td>7 个组件缺测试（含 4 个旧 GSAP 组件）</td>
+        <td>缺 7 个 test 文件</td>
+        <td><span class="status-badge partial">P2</span></td>
+      </tr>
+      <tr>
+        <td>8</td><td>Husky</td>
+        <td>提交前 lint + 测试</td>
+        <td>未配置</td>
+        <td><span class="status-badge partial">P2</span></td>
+      </tr>
+      <tr>
+        <td>9</td><td>Blocks 文档页</td>
+        <td>5 个区块文档页</td>
+        <td>仅 2 个（hero-section, bento-grid）</td>
+        <td><span class="status-badge partial">P2</span></td>
+      </tr>
+      <tr>
+        <td>10</td><td>术语对齐</td>
+        <td>DecryptedText, ShinyText, NeonText, ClickSpark, BounceCards 等</td>
+        <td>名称不同或未实现</td>
+        <td><span class="status-badge missing">P3</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 总结 -->
+  <div class="section">
+    <h2>八、总结评估</h2>
+    <div class="category-block">
+      <p style="margin-bottom:.8rem;">
+        项目整体处于 <strong>Phase 1→2 过渡阶段</strong>。组件库的主体框架（Monorepo、文档站、GSAP + Motion 组件）已经完成，
+        但与 <code>docs/tech-spec.md</code> 技术方案中承诺的能力差距较大。
+      </p>
+      <p style="margin-bottom:.8rem;"><strong>评分：42/100 分</strong></p>
+      <table>
+        <tr><th>维度</th><th>评分</th><th>解读</th></tr>
+        <tr>
+          <td>架构基建</td>
+          <td><span class="status-badge partial">65%</span></td>
+          <td class="note">Monorepo/Next.js/Tailwind/TypeScript/Storybook 就绪；缺 Husky/CLI/registry</td>
+        </tr>
+        <tr>
+          <td>组件实现</td>
+          <td><span class="status-badge match">70%</span></td>
+          <td class="note">34 个组件（超额完成 Phase 2 目标 30）；缺 blocks 源码/缺 story+test 覆盖</td>
+        </tr>
+        <tr>
+          <td>动画引擎</td>
+          <td><span class="status-badge missing">25%</span></td>
+          <td class="note">承诺 6+ 引擎，实际仅 2；最大差距项</td>
+        </tr>
+        <tr>
+          <td>文档站</td>
+          <td><span class="status-badge match">75%</span></td>
+          <td class="note">PropsPanel/CodeBlock/搜索/暗色模式完整；缺 BlockPreview/i18n/Showcase 子页</td>
+        </tr>
+        <tr>
+          <td>质量保障</td>
+          <td><span class="status-badge partial">55%</span></td>
+          <td class="note">Storybook 31 个/Test 27 个文件；7 个组件缺测试，3 个缺 story</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <hr style="border-color:var(--border);margin:2rem 0;">
+  <p style="color:var(--muted);font-size:.8rem;text-align:center;">
+    审计报告自动生成 · 基于 docs/tech-spec.md v2026-06-20 比对 2026-06-22 项目源码
+  </p>
+</div>
+</body>
+</html>

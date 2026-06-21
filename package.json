@@ -1,0 +1,35 @@
+{
+  "name": "frontend-ui",
+  "private": true,
+  "version": "0.0.0",
+  "description": "企业级前端动画组件库 — 对标 React Bits",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.1",
+    "@storybook/addon-essentials": "8",
+    "@storybook/addon-interactions": "8",
+    "@storybook/nextjs": "8",
+    "@storybook/react": "8",
+    "prettier": "^3.2.5",
+    "storybook": "8",
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.5"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
