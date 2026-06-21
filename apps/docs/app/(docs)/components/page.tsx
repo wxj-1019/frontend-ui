@@ -1,32 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { getComponentsByCategory } from '@/lib/component-registry';
 
-const components = [
-  {
-    name: "Dock",
-    description: "macOS 风格的停靠栏",
-    href: "/components/dock",
-  },
-  {
-    name: "SpotlightCard",
-    description: "聚光灯追踪卡片",
-    href: "/components/spotlight-card",
-  },
-  {
-    name: "Masonry",
-    description: "瀑布流布局，CSS columns 实现",
-    href: "/components/masonry",
-  },
-  {
-    name: "Carousel",
-    description: "轮播图组件，支持自动播放和拖拽",
-    href: "/components/carousel",
-  },
-  {
-    name: "StackCards",
-    description: "堆叠卡片，滚动时依次覆盖",
-    href: "/components/stack-cards",
-  },
-];
+const components = getComponentsByCategory('components');
 
 export default function ComponentsPage() {
   return (

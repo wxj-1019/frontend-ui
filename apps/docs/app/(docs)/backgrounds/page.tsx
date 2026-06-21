@@ -1,37 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { getComponentsByCategory } from '@/lib/component-registry';
 
-const backgrounds = [
-  {
-    name: "Aurora",
-    description: "极光背景效果",
-    href: "/backgrounds/aurora",
-  },
-  {
-    name: "Particles",
-    description: "粒子背景效果",
-    href: "/backgrounds/particles",
-  },
-  {
-    name: "Starfield",
-    description: "3D 星空背景，星点向观察者飞来",
-    href: "/backgrounds/starfield",
-  },
-  {
-    name: "MeshGradient",
-    description: "动态网格渐变背景",
-    href: "/backgrounds/mesh-gradient",
-  },
-  {
-    name: "NoiseBackground",
-    description: "噪点纹理背景，胶片颗粒感",
-    href: "/backgrounds/noise-background",
-  },
-  {
-    name: "Hyperspeed",
-    description: "超光速效果，星轨辐射",
-    href: "/backgrounds/hyperspeed",
-  },
-];
+const backgrounds = getComponentsByCategory('backgrounds');
 
 export default function BackgroundsPage() {
   return (

@@ -1,47 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { getComponentsByCategory } from '@/lib/component-registry';
 
-const textAnimations = [
-  {
-    name: "BlurText",
-    description: "模糊渐入的文字动画效果",
-    href: "/text-animations/blur-text",
-  },
-  {
-    name: "GradientText",
-    description: "渐变色彩的文字效果",
-    href: "/text-animations/gradient-text",
-  },
-  {
-    name: "SplitText",
-    description: "文字分割动画效果",
-    href: "/text-animations/split-text",
-  },
-  {
-    name: "Typewriter",
-    description: "打字机效果，逐字符显示文本",
-    href: "/text-animations/typewriter",
-  },
-  {
-    name: "ScrambleText",
-    description: "乱码解密文字效果",
-    href: "/text-animations/scramble-text",
-  },
-  {
-    name: "WaveText",
-    description: "波浪文字，字符依次浮动",
-    href: "/text-animations/wave-text",
-  },
-  {
-    name: "GlitchText",
-    description: "故障艺术文字，RGB 通道错位",
-    href: "/text-animations/glitch-text",
-  },
-  {
-    name: "CountUp",
-    description: "数字递增动画",
-    href: "/text-animations/count-up",
-  },
-];
+const textAnimations = getComponentsByCategory('text-animations');
 
 export default function TextAnimationsPage() {
   return (

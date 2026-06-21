@@ -1,49 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { getComponentsByCategory } from '@/lib/component-registry';
 
-const gsapAnimations = [
-  {
-    name: "ScrollReveal",
-    description: "基于 ScrollTrigger 的滚动触发动画",
-    href: "/gsap-animations/scroll-reveal",
-    engine: "GSAP",
-  },
-  {
-    name: "TextReveal",
-    description: "基于 ScrollTrigger 的文字逐字显现",
-    href: "/gsap-animations/text-reveal",
-    engine: "GSAP",
-  },
-  {
-    name: "Parallax",
-    description: "基于 ScrollTrigger 的视差滚动",
-    href: "/gsap-animations/parallax",
-    engine: "GSAP",
-  },
-  {
-    name: "TimelineSequence",
-    description: "基于 Timeline 的序列动画编排",
-    href: "/gsap-animations/timeline-sequence",
-    engine: "GSAP",
-  },
-  {
-    name: "ScrollProgress",
-    description: "滚动进度条，固定在页面顶部/底部",
-    href: "/gsap-animations/scroll-progress",
-    engine: "GSAP",
-  },
-  {
-    name: "PinSection",
-    description: "固定区域，滚动时内容保持锁定",
-    href: "/gsap-animations/pin-section",
-    engine: "GSAP",
-  },
-  {
-    name: "HorizontalScroll",
-    description: "水平滚动，垂直滚动转横向位移",
-    href: "/gsap-animations/horizontal-scroll",
-    engine: "GSAP",
-  },
-];
+const gsapAnimations = getComponentsByCategory('gsap-animations');
 
 export default function GsapAnimationsPage() {
   return (
@@ -73,7 +31,7 @@ export default function GsapAnimationsPage() {
                 {animation.name}
               </h2>
               <span className="rounded bg-[#88ce02]/10 px-2 py-0.5 text-xs text-[#88ce02]">
-                {animation.engine}
+                GSAP
               </span>
             </div>
             <p className="mt-2 text-sm text-[var(--color-text-muted)]">

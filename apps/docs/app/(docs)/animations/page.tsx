@@ -1,52 +1,7 @@
-import Link from "next/link";
+import Link from 'next/link';
+import { getComponentsByCategory } from '@/lib/component-registry';
 
-const animations = [
-  {
-    name: "Magnet",
-    description: "磁性跟随效果",
-    href: "/animations/magnet",
-  },
-  {
-    name: "FadeContent",
-    description: "渐入内容动画",
-    href: "/animations/fade-content",
-  },
-  {
-    name: "ScrollReveal",
-    description: "滚动触发动画",
-    href: "/animations/scroll-reveal",
-  },
-  {
-    name: "Draggable",
-    description: "可拖拽元素，支持边界约束",
-    href: "/animations/draggable",
-  },
-  {
-    name: "FlipCard",
-    description: "翻转卡片，悬停或点击触发",
-    href: "/animations/flip-card",
-  },
-  {
-    name: "Accordion",
-    description: "手风琴展开折叠面板",
-    href: "/animations/accordion",
-  },
-  {
-    name: "Tabs",
-    description: "标签页切换，带滑动指示器",
-    href: "/animations/tabs",
-  },
-  {
-    name: "Modal",
-    description: "模态框动画，背景模糊+缩放",
-    href: "/animations/modal",
-  },
-  {
-    name: "Toast",
-    description: "通知提示，自动消失",
-    href: "/animations/toast",
-  },
-];
+const animations = getComponentsByCategory('animations');
 
 export default function AnimationsPage() {
   return (
