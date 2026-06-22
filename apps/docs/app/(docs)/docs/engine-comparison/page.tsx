@@ -52,7 +52,7 @@ export default function EngineComparisonPage() {
           </div>
           <div>
             <h3 className="font-display font-medium text-[var(--color-text-primary)]">
-              react-spring (即将推出)
+              react-spring
             </h3>
             <p className="text-sm">
               基于物理的弹簧动画。动画更自然流畅，适合需要物理感的交互。
@@ -60,7 +60,7 @@ export default function EngineComparisonPage() {
           </div>
           <div>
             <h3 className="font-display font-medium text-[var(--color-text-primary)]">
-              Anime.js (即将推出)
+              Anime.js
             </h3>
             <p className="text-sm">
               轻量级 SVG 动画库。适合 SVG 路径动画、形状变形、简单时间轴。

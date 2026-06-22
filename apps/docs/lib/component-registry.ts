@@ -1,5 +1,5 @@
 /**
- * 组件注册表 — 集中管理所有 44+ 个组件和区块的元数据
+ * 组件注册表 — 集中管理所有 56 个组件和区块的元数据
  *
  * 用于导航、分类页面、搜索、侧边栏等场景。
  * 与 category pages 中的硬编码数据同步，避免多处维护。
@@ -15,9 +15,9 @@ export interface ComponentEntry {
   /** 文档路径（相对于 /docs） */
   href: string;
   /** 组件分类 */
-  category: ComponentCategory;
+  category: Omit<ComponentCategory, "count">;
   /** 动画引擎标识 */
-  engine?: 'GSAP' | 'Motion' | 'CSS';
+  engine?: "GSAP" | "Motion" | "CSS" | "react-spring" | "Anime.js" | "Lenis";
   /** npm 安装包子路径（用于 CLI 安装） */
   installName: string;
   /** 组件导入语句 */
@@ -81,17 +81,17 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '页面区块',
     description: '开箱即用的完整页面组件，复制粘贴即可使用',
     href: '/blocks',
-    count: 5,
+    count: 7,
   },
 ];
 
 // ─── 组件注册表 ───────────────────────────────────────────────
 
 /**
- * 所有 44 个组件的完整注册表
+ * 所有 56 个组件的完整注册表
  */
 export const COMPONENT_REGISTRY: ComponentEntry[] = [
-  // ── 文字动画 (8) ────────────────────────────────────────
+  // ── 文字动画 (10) ────────────────────────────────────────
   {
     name: 'BlurText',
     description: '模糊渐入的文字动画效果，逐字符从模糊到清晰',
@@ -173,8 +173,17 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'decrypted-text',
     importStatement: 'import { DecryptedText } from "@frontend-ui/ui";',
   },
+  {
+    name: 'SpringNumber',
+    description: '弹簧物理数字动画，流畅的数字过渡效果 (react-spring)',
+    href: '/text-animations/spring-number',
+    category: CATEGORIES[0],
+    engine: 'react-spring',
+    installName: 'spring-number',
+    importStatement: 'import { SpringNumber } from "@frontend-ui/ui";',
+  },
 
-  // ── 交互动画 (10) ───────────────────────────────────────
+  // ── 交互动画 (17) ──────────────────────────────────────
   {
     name: 'Magnet',
     description: '磁吸效果组件，元素跟随鼠标产生弹簧式位移',
@@ -195,10 +204,10 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
   },
   {
     name: 'ScrollReveal',
-    description: '滚动触发动画',
+    description: '基于 GSAP ScrollTrigger 的滚动触发动画',
     href: '/animations/scroll-reveal',
     category: CATEGORIES[1],
-    engine: 'Motion',
+    engine: 'GSAP',
     installName: 'scroll-reveal',
     importStatement: 'import { ScrollReveal } from "@frontend-ui/ui";',
   },
@@ -285,10 +294,10 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
   },
   {
     name: 'FloatAnimation',
-    description: '浮动动画，元素上下/左右/环形浮动',
+    description: '浮动动画，元素上下/左右/环形浮动 (react-spring)',
     href: '/animations/float-animation',
     category: CATEGORIES[1],
-    engine: 'Motion',
+    engine: 'react-spring',
     installName: 'float-animation',
     importStatement: 'import { FloatAnimation } from "@frontend-ui/ui";',
   },
@@ -302,25 +311,34 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     importStatement: 'import { StaggerAnimation } from "@frontend-ui/ui";',
   },
   {
-    name: 'FloatAnimation',
-    description: '浮动动画，元素上下/左右/环形浮动 (react-spring)',
-    href: '/animations/float-animation',
+    name: 'SpringMorph',
+    description: '弹簧物理内容过渡动画，切换视图时的流畅形变效果 (react-spring)',
+    href: '/animations/spring-morph',
     category: CATEGORIES[1],
-    engine: 'Motion',
-    installName: 'float-animation',
-    importStatement: 'import { FloatAnimation } from "@frontend-ui/ui";',
+    engine: 'react-spring',
+    installName: 'spring-morph',
+    importStatement: 'import { SpringMorph } from "@frontend-ui/ui";',
   },
   {
-    name: 'StaggerAnimation',
-    description: '交错动画，元素依次出现支持多种动画类型 (animejs)',
-    href: '/animations/stagger-animation',
+    name: 'SvgPathDraw',
+    description: 'SVG 路径描边动画，支持循环绘制、反向绘制等效果 (Anime.js)',
+    href: '/animations/svg-path-draw',
     category: CATEGORIES[1],
-    engine: 'Motion',
-    installName: 'stagger-animation',
-    importStatement: 'import { StaggerAnimation } from "@frontend-ui/ui";',
+    engine: 'Anime.js',
+    installName: 'svg-path-draw',
+    importStatement: 'import { SvgPathDraw } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'MorphingSVG',
+    description: 'SVG 路径平滑变形动画，自动轮播多种形状 (Anime.js)',
+    href: '/animations/morphing-svg',
+    category: CATEGORIES[1],
+    engine: 'Anime.js',
+    installName: 'morphing-svg',
+    importStatement: 'import { MorphingSVG } from "@frontend-ui/ui";',
   },
 
-  // ── 复合组件 (6) ────────────────────────────────────────
+  // ── 复合组件 (9) ────────────────────────────────────────
   {
     name: 'Dock',
     description: 'macOS 风格的停靠栏',
@@ -392,6 +410,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'glow-card',
     importStatement: 'import { GlowCard } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'SmoothScrollProvider',
+    description: '基于 Lenis 的平滑滚动提供者（Lenis）',
+    href: '/components/smooth-scroll',
+    category: CATEGORIES[2],
+    engine: 'Lenis',
+    installName: 'smooth-scroll',
+    importStatement: 'import { SmoothScrollProvider } from "@frontend-ui/ui";',
   },
 
   // ── 背景特效 (6) ────────────────────────────────────────
@@ -515,7 +542,7 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     importStatement: 'import { HorizontalScroll } from "@frontend-ui/ui";',
   },
 
-  // ── 页面区块 (3) ─────────────────────────────────────────
+  // ── 页面区块 (7) ─────────────────────────────────────────
   {
     name: 'HeroWithGradient',
     description: '赛博英雄区，渐变背景 + 入场动画',

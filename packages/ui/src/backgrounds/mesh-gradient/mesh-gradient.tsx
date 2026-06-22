@@ -11,24 +11,23 @@ export interface MeshGradientProps {
   duration?: number;
 }
 
+const POSITIONS = [
+  { x: 0, y: 0 },
+  { x: 100, y: 0 },
+  { x: 100, y: 100 },
+  { x: 0, y: 100 },
+  { x: 50, y: 50 },
+];
+
 export function MeshGradient({
   className,
   colors = ['#ff006e', '#8338ec', '#3a86ff'],
   animated = true,
   duration = 10,
 }: MeshGradientProps) {
-  // 根据颜色数量生成多个径向渐变层，分布在不同位置
-  const positions = [
-    { x: 0, y: 0 },
-    { x: 100, y: 0 },
-    { x: 100, y: 100 },
-    { x: 0, y: 100 },
-    { x: 50, y: 50 },
-  ];
-
   const background = useMemo(() => {
     const layers = colors.map((color, i) => {
-      const pos = positions[i % positions.length];
+      const pos = POSITIONS[i % POSITIONS.length];
       return `radial-gradient(at ${pos.x}% ${pos.y}%, ${color} 0px, transparent 50%)`;
     });
     // 底色取第一个颜色，避免空白

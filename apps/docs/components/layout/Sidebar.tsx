@@ -49,6 +49,7 @@ const componentNavigation: NavItem[] = [
       { label: 'GlitchText', href: '/text-animations/glitch-text' },
       { label: 'CountUp', href: '/text-animations/count-up' },
       { label: 'DecryptedText', href: '/text-animations/decrypted-text' },
+      { label: 'SpringNumber', href: '/text-animations/spring-number' },
     ],
   },
   {
@@ -67,6 +68,11 @@ const componentNavigation: NavItem[] = [
       { label: 'ClickSpark', href: '/animations/click-spark' },
       { label: 'BlobCursor', href: '/animations/blob-cursor' },
       { label: 'CrosshairCursor', href: '/animations/crosshair-cursor' },
+      { label: 'FloatAnimation', href: '/animations/float-animation' },
+      { label: 'StaggerAnimation', href: '/animations/stagger-animation' },
+      { label: 'SvgPathDraw', href: '/animations/svg-path-draw' },
+      { label: 'SpringMorph', href: '/animations/spring-morph' },
+      { label: 'MorphingSVG', href: '/animations/morphing-svg' },
     ],
   },
   {
@@ -81,6 +87,7 @@ const componentNavigation: NavItem[] = [
       { label: 'TiltCard', href: '/components/tilt-card' },
       { label: 'GlowCard', href: '/components/glow-card' },
       { label: 'BounceCards', href: '/components/bounce-cards' },
+      { label: 'SmoothScroll', href: '/components/smooth-scroll' },
     ],
   },
   {

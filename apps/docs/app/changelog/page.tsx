@@ -6,6 +6,33 @@ import { ScrollReveal } from "@frontend-ui/ui";
 
 const changelog = [
   {
+    version: "0.2.0",
+    date: "2026-06-23",
+    title: "多引擎集成 · Phase A",
+    changes: [
+      "新增 5 个组件：SpringNumber、SpringMorph (react-spring)、SvgPathDraw、MorphingSVG (Anime.js)、SmoothScrollProvider (Lenis)",
+      "4 引擎架构就绪：GSAP + Motion + react-spring + Anime.js",
+      "组件总数：44 → 56",
+      "Design Tokens 文档页上线",
+      "注册表去重，引擎标签与 CLl 注册表对齐",
+      "Sidebar 导航完整覆盖 56 个组件",
+      "首页/SEO/Footer 数据同步更新",
+    ],
+  },
+  {
+    version: "0.1.0",
+    date: "2026-06-22",
+    title: "基建完善 · Blocks + CLI",
+    changes: [
+      "Husky + lint-staged 配置，pre-commit 自动 ESLint/Prettier",
+      "组件注册表 (component-registry) 统一管理所有元数据",
+      "Blocks 页面区块子系统 (Hero/Bento/Feature/Pricing/CTA)",
+      "组件超 40+，测试覆盖 100+",
+      "CLI 工具骨架 (init/add/list)",
+      "TiltCard + ClickSpark 新组件",
+    ],
+  },
+  {
     version: "0.0.1",
     date: "2026-06-20",
     title: "初始发布",
@@ -16,7 +43,6 @@ const changelog = [
       "首页：Hero Timeline + 引擎展示 + 实时预览 + Blocks 横向滚动",
       "Cmd+K 全局搜索",
       "组件宇宙：Canvas 2D 节点图可视化",
-      "CursorEffect：GSAP quickTo GPU 加速（已移除）",
       "WCAG 2.2 AA 可访问性：focus-visible、skip-link、matchMedia",
       "GSAP 全站动画优化：ScrollReveal、Parallax、Timeline、TextReveal",
     ],

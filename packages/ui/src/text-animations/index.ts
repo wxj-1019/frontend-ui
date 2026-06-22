@@ -7,3 +7,4 @@ export * from './wave-text';
 export * from './glitch-text';
 export * from './count-up';
 export * from './decrypted-text';
+export * from './spring-number';

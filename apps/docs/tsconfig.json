@@ -24,6 +24,12 @@
     "paths": {
       "@/*": [
         "./*"
+      ],
+      "@frontend-ui/ui": [
+        "../packages/ui/src"
+      ],
+      "@frontend-ui/ui/*": [
+        "../packages/ui/src/*"
       ]
     },
     "target": "ES2017"

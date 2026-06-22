@@ -21,21 +21,21 @@ const categories = [
     title: '文字动画',
     description: 'BlurText, GradientText, SplitText 等',
     href: '/text-animations',
-    count: 8,
+    count: 10,
     icon: <Type className="h-6 w-6" />,
   },
   {
     title: '交互动画',
     description: 'Magnet, FadeContent, ScrollReveal 等',
     href: '/animations',
-    count: 10,
+    count: 17,
     icon: <Zap className="h-6 w-6" />,
   },
   {
     title: '复合组件',
     description: 'Dock, SpotlightCard, Masonry 等',
     href: '/components',
-    count: 6,
+    count: 9,
     icon: <Layers className="h-6 w-6" />,
   },
   {
@@ -108,9 +108,9 @@ const engines = [
 ];
 
 const stats = [
-  { value: '48', label: '动画组件' },
-  { value: '2', label: '动画引擎' },
-  { value: '7', label: '组件分类' },
+  { value: '56', label: '动画组件' },
+  { value: '4', label: '动画引擎' },
+  { value: '6', label: '组件分类' },
   { value: '100%', label: 'TypeScript' },
 ];
 

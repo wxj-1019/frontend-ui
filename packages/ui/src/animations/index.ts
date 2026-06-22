@@ -11,3 +11,6 @@ export * from './blob-cursor';
 export * from './crosshair-cursor';
 export * from './float-animation';
 export * from './stagger-animation';
+export * from './svg-path-draw';
+export * from './spring-morph';
+export * from './morphing-svg';
