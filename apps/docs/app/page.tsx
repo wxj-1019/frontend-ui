@@ -86,7 +86,7 @@ const engines = [
   },
   {
     name: 'react-spring',
-    description: '弹簧物理',
+    description: '弹簧物理 (即将推出)',
     color: '#00ffaa',
     icon: (
       <svg
@@ -103,33 +103,14 @@ const engines = [
         />
       </svg>
     ),
-  },
-  {
-    name: 'Anime.js',
-    description: 'SVG 动画',
-    color: '#ff6b6b',
-    icon: (
-      <svg
-        className="h-8 w-8"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-        />
-      </svg>
-    ),
+    planned: true,
   },
 ];
 
 const stats = [
-  { value: '39', label: '动画组件' },
-  { value: '3', label: '动画引擎' },
-  { value: '6', label: '组件分类' },
+  { value: '48', label: '动画组件' },
+  { value: '2', label: '动画引擎' },
+  { value: '7', label: '组件分类' },
   { value: '100%', label: 'TypeScript' },
 ];
 
@@ -176,8 +157,7 @@ export default function HomePage() {
 
               {/* Subtitle */}
               <p className="hero-item mx-auto mt-6 max-w-2xl text-lg text-[var(--color-text-muted)]">
-                企业级前端动画组件库，集成 GSAP、Motion、react-spring 等 6+
-                动画引擎，
+                企业级前端动画组件库，集成 GSAP、Motion 等动画引擎，
                 <br className="hidden sm:inline" />
                 构建令人印象深刻的用户界面
               </p>

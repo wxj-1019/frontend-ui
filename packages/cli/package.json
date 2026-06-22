@@ -1,0 +1,40 @@
+{
+  "name": "@frontend-ui/cli",
+  "version": "0.1.0",
+  "description": "CLI tool for frontend-ui component library",
+  "type": "module",
+  "bin": {
+    "frontend-ui": "./bin/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "frontend-ui",
+    "components",
+    "cli",
+    "react"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.0.0",
+    "chalk": "^5.3.0",
+    "fs-extra": "^11.2.0",
+    "prompts": "^2.4.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9",
+    "tsup": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

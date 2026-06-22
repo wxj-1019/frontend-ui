@@ -9,7 +9,7 @@
 
 ## 技术栈
 
-- 动画引擎: GSAP 3 + Motion 12 (计划: react-spring, Anime.js)
+- 动画引擎: GSAP 3 + Motion 12 + react-spring + animejs v4
 - 构建: tsup (库) + Next.js (站点)
 - 测试: Vitest 2 + Testing Library + jsdom
 - 版本管理: Changesets
@@ -29,14 +29,14 @@
 - `NODE_OPTIONS` 含 `--use-system-ca` 会导致 tsup 失败，需 `unset NODE_OPTIONS` 后执行
 - 构建命令: `cd packages/ui && unset NODE_OPTIONS && npx tsup`
 
-## 组件分类 (39+ 组件，截至 2026-06-22)
+## 组件分类 (46 组件，截至 2026-06-22)
 
-- 文字动画 (8): BlurText, GradientText, SplitText, Typewriter, ScrambleText, WaveText, GlitchText, CountUp
-- 交互动画 (10): Magnet, FadeContent, ScrollReveal, Draggable, FlipCard, Accordion, Tabs, Modal, Toast, **ClickSpark**
-- 复合组件 (6): Dock, SpotlightCard, Masonry, Carousel, StackCards, **TiltCard**
+- 文字动画 (9): BlurText, GradientText, SplitText, Typewriter, ScrambleText, WaveText, GlitchText, CountUp, **DecryptedText**
+- 交互动画 (14): Magnet, FadeContent, ScrollReveal, Draggable, FlipCard, Accordion, Tabs, Modal, Toast, ClickSpark, **BlobCursor**, **CrosshairCursor**, **FloatAnimation** (react-spring), **StaggerAnimation** (animejs)
+- 复合组件 (8): Dock, SpotlightCard, Masonry, Carousel, StackCards, TiltCard, **BounceCards**, **GlowCard**
 - 背景特效 (6): Aurora, Particles, Starfield, MeshGradient, NoiseBackground, Hyperspeed
 - GSAP 动画 (7): ScrollReveal, TextReveal, Parallax, TimelineSequence, ScrollProgress, PinSection, HorizontalScroll
-- 页面区块 (3): HeroWithGradient, HeroWithParticles, BentoGrid, BentoCard, FeatureSection
+- 页面区块 (5): HeroWithGradient, HeroWithParticles, BentoGrid, BentoCard, FeatureSection, PricingSection, CTASection
 
 ## Block 规范
 
@@ -45,6 +45,13 @@
 - 3 类已实现: hero-sections（双变体）, bento-grids（网格+卡片）, feature-sections（双布局）
 - Block 使用 Motion 引擎入场动画 + Canvas（粒子类）+ CSS（布局类）
 - 测试需注意 ResizeObserver polyfill（已在 test-setup.ts 中添加）
+
+## CLI 工具
+
+- 路径: `packages/cli/`
+- 命令: `frontend-ui init`, `frontend-ui add <component>`, `frontend-ui list`
+- 技术栈: TypeScript + Commander.js + chalk + fs-extra + prompts
+- 构建: `cd packages/cli && unset NODE_OPTIONS && npx tsup`
 
 ## CSS / 设计约定
 
@@ -60,6 +67,6 @@
 ## Roadmap
 
 - Phase 1 (已完成): 组件扩充 13→34
-- Phase 2 (计划): CLI 工具 + 设计资源
+- Phase 2 (已完成): CLI 工具 + 多引擎集成
 - Phase 3 (计划): 国际化 + SVG 动画
 - Phase 4 (计划): 社区建设

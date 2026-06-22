@@ -53,6 +53,7 @@ gsap.from(".box", {
     features: ["物理弹簧", "性能优化", "原生支持", "自动缓动"],
     bestFor: ["自然流畅的动画", "物理感交互", "拖拽效果", "弹性元素"],
     install: "npm install @react-spring/web",
+    planned: true,
     code: `import { useSpring, animated } from "@react-spring/web";
 
 const styles = useSpring({
@@ -72,6 +73,7 @@ const styles = useSpring({
     features: ["轻量级", "SVG 动画", "时间轴", "简单易用"],
     bestFor: ["SVG 动画", "形状变形", "简单序列", "入门学习"],
     install: "npm install animejs",
+    planned: true,
     code: `import { animate } from "animejs";
 
 animate(".box", {
@@ -145,7 +147,7 @@ export default function EnginesPage() {
                   className="rounded-full px-3 py-1 text-xs font-medium"
                   style={{ backgroundColor: engine.color + "20", color: engine.color }}
                 >
-                  内置引擎
+                  {engine.planned ? '即将推出' : '内置引擎'}
                 </span>
               </div>
 

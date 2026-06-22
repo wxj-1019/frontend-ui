@@ -1,5 +1,5 @@
 /**
- * 组件注册表 — 集中管理所有 39+ 个组件和区块的元数据
+ * 组件注册表 — 集中管理所有 44+ 个组件和区块的元数据
  *
  * 用于导航、分类页面、搜索、侧边栏等场景。
  * 与 category pages 中的硬编码数据同步，避免多处维护。
@@ -45,21 +45,21 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '文字动画',
     description: '为文字添加各种动态效果，提升视觉表现力',
     href: '/text-animations',
-    count: 8,
+    count: 9,
   },
   {
     id: 'animations',
     label: '交互动画',
     description: '为用户交互添加流畅的动画反馈',
     href: '/animations',
-    count: 10,
+    count: 14,
   },
   {
     id: 'components',
     label: '复合组件',
     description: '可直接使用的高级交互组件',
     href: '/components',
-    count: 6,
+    count: 8,
   },
   {
     id: 'backgrounds',
@@ -81,14 +81,14 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '页面区块',
     description: '开箱即用的完整页面组件，复制粘贴即可使用',
     href: '/blocks',
-    count: 3,
+    count: 5,
   },
 ];
 
 // ─── 组件注册表 ───────────────────────────────────────────────
 
 /**
- * 所有 37 个组件的完整注册表
+ * 所有 44 个组件的完整注册表
  */
 export const COMPONENT_REGISTRY: ComponentEntry[] = [
   // ── 文字动画 (8) ────────────────────────────────────────
@@ -163,6 +163,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'count-up',
     importStatement: 'import { CountUp } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'DecryptedText',
+    description: '文字解密动画效果，字符在解密过程中随机变换',
+    href: '/text-animations/decrypted-text',
+    category: CATEGORIES[0],
+    engine: 'CSS',
+    installName: 'decrypted-text',
+    importStatement: 'import { DecryptedText } from "@frontend-ui/ui";',
   },
 
   // ── 交互动画 (10) ───────────────────────────────────────
@@ -256,6 +265,60 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'click-spark',
     importStatement: 'import { ClickSpark } from "@frontend-ui/ui";',
   },
+  {
+    name: 'BlobCursor',
+    description: '液态光标跟随效果，Blob 元素跟随鼠标移动',
+    href: '/animations/blob-cursor',
+    category: CATEGORIES[1],
+    engine: 'CSS',
+    installName: 'blob-cursor',
+    importStatement: 'import { BlobCursor } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'CrosshairCursor',
+    description: '十字准星光标效果，显示坐标和跟随延迟',
+    href: '/animations/crosshair-cursor',
+    category: CATEGORIES[1],
+    engine: 'CSS',
+    installName: 'crosshair-cursor',
+    importStatement: 'import { CrosshairCursor } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'FloatAnimation',
+    description: '浮动动画，元素上下/左右/环形浮动',
+    href: '/animations/float-animation',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'float-animation',
+    importStatement: 'import { FloatAnimation } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'StaggerAnimation',
+    description: '交错动画，元素依次出现支持多种动画类型',
+    href: '/animations/stagger-animation',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'stagger-animation',
+    importStatement: 'import { StaggerAnimation } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'FloatAnimation',
+    description: '浮动动画，元素上下/左右/环形浮动 (react-spring)',
+    href: '/animations/float-animation',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'float-animation',
+    importStatement: 'import { FloatAnimation } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'StaggerAnimation',
+    description: '交错动画，元素依次出现支持多种动画类型 (animejs)',
+    href: '/animations/stagger-animation',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'stagger-animation',
+    importStatement: 'import { StaggerAnimation } from "@frontend-ui/ui";',
+  },
 
   // ── 复合组件 (6) ────────────────────────────────────────
   {
@@ -311,6 +374,24 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'tilt-card',
     importStatement: 'import { TiltCard } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'BounceCards',
+    description: '弹跳卡片堆叠组件，支持拖拽和循环',
+    href: '/components/bounce-cards',
+    category: CATEGORIES[2],
+    engine: 'Motion',
+    installName: 'bounce-cards',
+    importStatement: 'import { BounceCards } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'GlowCard',
+    description: '发光卡片组件，鼠标追踪光晕效果',
+    href: '/components/glow-card',
+    category: CATEGORIES[2],
+    engine: 'Motion',
+    installName: 'glow-card',
+    importStatement: 'import { GlowCard } from "@frontend-ui/ui";',
   },
 
   // ── 背景特效 (6) ────────────────────────────────────────
@@ -479,6 +560,24 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'feature-section',
     importStatement: 'import { FeatureSection } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'PricingSection',
+    description: '定价展示区块，支持多列卡片布局与高亮推荐',
+    href: '/blocks/pricing-section',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'pricing-section',
+    importStatement: 'import { PricingSection } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'CTASection',
+    description: '行动号召区块，支持多种视觉风格变体',
+    href: '/blocks/cta-section',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'cta-section',
+    importStatement: 'import { CTASection } from "@frontend-ui/ui";',
   },
 ];
 

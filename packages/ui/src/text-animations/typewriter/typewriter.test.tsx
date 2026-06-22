@@ -1,4 +1,4 @@
-import { render, screen, act } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { Typewriter } from './typewriter';
 

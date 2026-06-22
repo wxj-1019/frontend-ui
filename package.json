@@ -15,7 +15,8 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "changeset publish",
-    "prepare": "husky"
+    "prepare": "husky",
+    "cli": "pnpm --filter @frontend-ui/cli"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",

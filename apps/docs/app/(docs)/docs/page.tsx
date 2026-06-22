@@ -8,7 +8,7 @@ const sections = [
   },
   {
     title: "多引擎架构",
-    description: "GSAP、Motion、react-spring 等 6+ 动画引擎",
+    description: "GSAP、Motion 动画引擎",
     href: "/docs/engines",
   },
   {

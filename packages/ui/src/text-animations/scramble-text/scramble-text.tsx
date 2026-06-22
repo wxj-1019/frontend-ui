@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { cn } from '@/lib/utils';
 
@@ -9,7 +8,6 @@ export interface ScrambleTextProps {
   text: string;
   className?: string;
   chars?: string;
-  duration?: number;
   delay?: number;
   trigger?: 'auto' | 'scroll' | 'hover';
   onComplete?: () => void;
@@ -19,7 +17,6 @@ export function ScrambleText({
   text,
   className,
   chars = '!@#$%^&*()_+-=[]{}|;:,.<>?',
-  duration = 1,
   delay = 0,
   trigger = 'auto',
   onComplete,

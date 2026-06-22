@@ -48,6 +48,7 @@ const componentNavigation: NavItem[] = [
       { label: 'WaveText', href: '/text-animations/wave-text' },
       { label: 'GlitchText', href: '/text-animations/glitch-text' },
       { label: 'CountUp', href: '/text-animations/count-up' },
+      { label: 'DecryptedText', href: '/text-animations/decrypted-text' },
     ],
   },
   {
@@ -64,6 +65,8 @@ const componentNavigation: NavItem[] = [
       { label: 'Modal', href: '/animations/modal' },
       { label: 'Toast', href: '/animations/toast' },
       { label: 'ClickSpark', href: '/animations/click-spark' },
+      { label: 'BlobCursor', href: '/animations/blob-cursor' },
+      { label: 'CrosshairCursor', href: '/animations/crosshair-cursor' },
     ],
   },
   {
@@ -76,6 +79,8 @@ const componentNavigation: NavItem[] = [
       { label: 'Carousel', href: '/components/carousel' },
       { label: 'StackCards', href: '/components/stack-cards' },
       { label: 'TiltCard', href: '/components/tilt-card' },
+      { label: 'GlowCard', href: '/components/glow-card' },
+      { label: 'BounceCards', href: '/components/bounce-cards' },
     ],
   },
   {
@@ -110,6 +115,8 @@ const componentNavigation: NavItem[] = [
       { label: 'HeroSection', href: '/blocks/hero-section' },
       { label: 'BentoGrid', href: '/blocks/bento-grid' },
       { label: 'FeatureSection', href: '/blocks/feature-section' },
+      { label: 'PricingSection', href: '/blocks/pricing-section' },
+      { label: 'CTASection', href: '/blocks/cta-section' },
     ],
   },
 ];

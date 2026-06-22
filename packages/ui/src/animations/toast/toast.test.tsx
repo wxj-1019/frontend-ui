@@ -53,6 +53,19 @@ describe('Toast', () => {
     expect(onClose).toHaveBeenCalled();
   });
 
+  it('does not auto-dismiss when duration is 0', () => {
+    const onClose = vi.fn();
+    render(
+      <Toast open onClose={onClose} duration={0}>
+        <span>Persistent</span>
+      </Toast>,
+    );
+    act(() => {
+      vi.advanceTimersByTime(5000);
+    });
+    expect(onClose).not.toHaveBeenCalled();
+  });
+
   it('has status role', () => {
     render(
       <Toast open onClose={() => {}}>

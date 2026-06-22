@@ -19,6 +19,18 @@ const blocks = [
     href: '/blocks/feature-section',
     variants: 'Alternating / Center',
   },
+  {
+    name: 'PricingSection',
+    description: '定价展示区，多列卡片 + 高亮推荐方案',
+    href: '/blocks/pricing-section',
+    variants: '2 / 3 / 4 Columns',
+  },
+  {
+    name: 'CTASection',
+    description: '行动号召区，多种视觉风格变体 + 按钮操作',
+    href: '/blocks/cta-section',
+    variants: 'Gradient / Minimal / Accent',
+  },
 ];
 
 export default function BlocksPage() {
