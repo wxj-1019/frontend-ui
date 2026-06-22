@@ -1,5 +1,6 @@
 "use client";
 
+import { ScrollProgress } from "@frontend-ui/ui";
 import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
 
 export default function ScrollProgressPage() {
@@ -58,13 +59,8 @@ export default function ScrollProgressPage() {
                   smooth: {String(v.smooth)}
                 </div>
               </div>
-              <div
-                className="absolute bottom-4 left-4 right-4 h-1 rounded-full bg-[var(--color-border-subtle)]"
-              >
-                <div
-                  className="h-full rounded-full"
-                  style={{ width: '62%', background: colors[0] }}
-                />
+              <div className="absolute bottom-4 left-4 right-4 h-1 rounded-full bg-[var(--color-border-subtle)]">
+                <div className="h-full rounded-full" style={{ width: '62%', background: colors[0] }} />
               </div>
             </div>
             <p className="mt-3 text-center text-xs text-[var(--color-text-subtle)]">
@@ -73,6 +69,54 @@ export default function ScrollProgressPage() {
           </div>
         );
       }}
+      examples={[
+        {
+          title: "顶部进度条",
+          description: "默认固定在页面顶部的进度条",
+          code: `<ScrollProgress position="top" height={3} />`,
+          render: () => (
+            <div className="w-full max-w-md">
+              <div className="relative h-32 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500" />
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-xs text-[var(--color-text-subtle)]">顶部进度条</p>
+                </div>
+              </div>
+            </div>
+          ),
+        },
+        {
+          title: "底部进度条",
+          description: "固定在页面底部的进度条",
+          code: `<ScrollProgress position="bottom" height={4} color="#f43f5e" />`,
+          render: () => (
+            <div className="w-full max-w-md">
+              <div className="relative h-32 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-rose-500 to-pink-500" />
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-xs text-[var(--color-text-subtle)]">底部进度条</p>
+                </div>
+              </div>
+            </div>
+          ),
+        },
+        {
+          title: "粗进度条",
+          description: "增加高度的进度条",
+          code: `<ScrollProgress height={8} color="#22c55e" />`,
+          render: () => (
+            <div className="w-full max-w-md">
+              <div className="relative h-32 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+                <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-green-400 to-emerald-500" />
+                <div className="flex h-full items-center justify-center">
+                  <p className="text-xs text-[var(--color-text-subtle)]">粗进度条 height=8px</p>
+                </div>
+              </div>
+            </div>
+          ),
+        },
+      ]}
+      accessibility="ScrollProgress 使用 role='progressbar' 和 aria-label='页面滚动进度' 标记为进度条。对于设置了 prefers-reduced-motion 的用户，进度条被隐藏。进度条使用 fixed 定位且 pointer-events: none，不会拦截用户交互。"
     />
   );
 }

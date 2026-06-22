@@ -27,7 +27,7 @@ export default function WaveTextPage() {
         { name: "className", type: "string", default: "-", description: "自定义类名" },
       ]}
       codeGenerator={(v) =>
-        `<WaveText\n  text="${v.text}"\n  amplitude={${v.amplitude}}\n  stagger={${v.stagger}}\n  duration={${v.duration}}\n/>`
+        `<WaveText text="${v.text}" amplitude={${v.amplitude}} stagger={${v.stagger}} duration={${v.duration}} />`
       }
       renderPreview={(v) => (
         <WaveText
@@ -38,6 +38,45 @@ export default function WaveTextPage() {
           className="font-display text-3xl font-bold text-[var(--color-text-primary)]"
         />
       )}
+      examples={[
+        {
+          title: "基本波浪",
+          description: "默认幅度的波浪文字效果",
+          code: `<WaveText text="Hello Wave" />`,
+          render: () => (
+            <WaveText
+              text="Hello Wave"
+              className="font-display text-2xl font-bold text-[var(--color-text-primary)]"
+            />
+          ),
+        },
+        {
+          title: "大幅波浪",
+          description: "增大幅度产生更明显的波浪效果",
+          code: `<WaveText text="Big Wave" amplitude={40} />`,
+          render: () => (
+            <WaveText
+              text="Big Wave"
+              amplitude={40}
+              className="font-display text-2xl font-bold text-[var(--color-accent)]"
+            />
+          ),
+        },
+        {
+          title: "快速波浪",
+          description: "减小 stagger 使波浪更紧凑",
+          code: `<WaveText text="Fast Wave" stagger={0.02} duration={0.3} />`,
+          render: () => (
+            <WaveText
+              text="Fast Wave"
+              stagger={0.02}
+              duration={0.3}
+              className="font-display text-2xl font-bold text-[var(--color-text-primary)]"
+            />
+          ),
+        },
+      ]}
+      accessibility="WaveText 使用 motion/react 将文本拆分为独立 span 元素。文本内容始终完整存在于 DOM 中，动画仅影响 Y 轴位移（transform: translateY）。屏幕阅读器可正常读取完整文本内容，不受动画影响。对于设置了 prefers-reduced-motion 的用户，建议在全局层面尊重 prefers-reduced-motion 媒体查询来控制动画播放。"
     />
   );
 }

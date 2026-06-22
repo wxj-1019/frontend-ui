@@ -42,7 +42,7 @@ export function SmoothScrollProvider({
 
   return (
     <ReactLenis
-      root={root as string | undefined}
+      root={root as any}
       options={lenisOptions}
       className={cn(className)}
     >

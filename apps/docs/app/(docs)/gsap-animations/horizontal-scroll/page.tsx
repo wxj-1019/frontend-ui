@@ -1,5 +1,6 @@
 "use client";
 
+import { HorizontalScroll } from "@frontend-ui/ui";
 import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
 
 export default function HorizontalScrollPage() {
@@ -18,12 +19,7 @@ export default function HorizontalScrollPage() {
       propDocs={[
         { name: "children", type: "ReactNode[]", required: true, description: "横向滚动的内容段落数组" },
         { name: "className", type: "string", default: "-", description: "自定义类名" },
-        {
-          name: "sectionWidth",
-          type: "number",
-          default: "window.innerWidth",
-          description: "每段宽度（px），默认为视口宽度",
-        },
+        { name: "sectionWidth", type: "number", default: "window.innerWidth", description: "每段宽度（px），默认为视口宽度" },
         { name: "speed", type: "number", default: "1", description: "滚动速度倍率，值越大滚动越快" },
       ]}
       codeGenerator={(v) => `<HorizontalScroll sectionWidth={${v.sectionWidth}} speed={${v.speed}}>
@@ -66,6 +62,64 @@ export default function HorizontalScrollPage() {
           </div>
         );
       }}
+      examples={[
+        {
+          title: "基本横向滚动",
+          description: "默认配置的三面板横向滚动",
+          code: `<HorizontalScroll>
+  <div>面板 1</div>
+  <div>面板 2</div>
+  <div>面板 3</div>
+</HorizontalScroll>`,
+          render: () => (
+            <div className="w-full">
+              <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+                <div className="flex">
+                  {["#667eea", "#11998e", "#ee0979"].map((color, i) => (
+                    <div
+                      key={i}
+                      className="flex h-32 flex-1 items-center justify-center text-lg font-bold text-white"
+                      style={{ background: color }}
+                    >
+                      面板 {i + 1}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <p className="mt-2 text-center text-xs text-[var(--color-text-subtle)]">向下滚动触发横向位移</p>
+            </div>
+          ),
+        },
+        {
+          title: "自定义宽度和速度",
+          description: "使用较小的面板宽度和更快的滚动速度",
+          code: `<HorizontalScroll sectionWidth={400} speed={1.5}>
+  <div>面板 1</div>
+  <div>面板 2</div>
+</HorizontalScroll>`,
+          render: () => (
+            <div className="w-full">
+              <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+                <div className="flex">
+                  {["#f093fb", "#f5576c"].map((color, i) => (
+                    <div
+                      key={i}
+                      className="flex h-32 w-48 items-center justify-center text-lg font-bold text-white"
+                      style={{ background: color, flex: '0 0 auto' }}
+                    >
+                      面板 {i + 1}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <p className="mt-2 text-center text-xs text-[var(--color-text-subtle)]">
+                sectionWidth: 400px · speed: 1.5x
+              </p>
+            </div>
+          ),
+        },
+      ]}
+      accessibility="HorizontalScroll 使用 GSAP ScrollTrigger 将垂直滚动转为水平位移。内容始终存在于 DOM 中，仅通过 CSS transform 产生位移。对于设置了 prefers-reduced-motion 的用户，横向滚动被禁用，内容按正常文档流垂直排列。"
     />
   );
 }

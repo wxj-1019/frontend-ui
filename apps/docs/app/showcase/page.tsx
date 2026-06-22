@@ -7,9 +7,9 @@ import { ScrollReveal } from "@frontend-ui/ui";
 import Link from "next/link";
 
 const stats = [
-  { value: "130+", label: "动画组件", color: "#00F5FF" },
-  { value: "5", label: "组件分类", color: "#FF006E" },
-  { value: "6+", label: "动画引擎", color: "#8B5CF6" },
+  { value: "56", label: "动画组件", color: "#00F5FF" },
+  { value: "6", label: "组件分类", color: "#FF006E" },
+  { value: "6", label: "动画引擎", color: "#8B5CF6" },
   { value: "100%", label: "TypeScript", color: "#88CE02" },
 ];
 
@@ -25,7 +25,7 @@ export default function ShowcasePage() {
               组件宇宙
             </h1>
             <p className="mt-3 text-lg text-[var(--color-text-muted)]">
-              可视化探索 130+ 动画组件的关系网络
+              可视化探索 56 个动画组件的关系网络
             </p>
           </div>
         </ScrollReveal>

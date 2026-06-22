@@ -32,6 +32,18 @@ const docsNavigation: NavItem[] = [
     label: '主题定制',
     href: '/docs/theming',
   },
+  {
+    label: '设计令牌',
+    href: '/docs/design-tokens',
+  },
+  {
+    label: '贡献指南',
+    href: '/docs/contributing',
+  },
+  {
+    label: '常见问题',
+    href: '/docs/faq',
+  },
 ];
 
 /* ── 组件导航（按分类） ── */

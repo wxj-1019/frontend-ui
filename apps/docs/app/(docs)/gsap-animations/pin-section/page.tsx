@@ -1,5 +1,6 @@
 "use client";
 
+import { PinSection } from "@frontend-ui/ui";
 import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
 
 export default function PinSectionPage() {
@@ -11,6 +12,7 @@ export default function PinSectionPage() {
       installName="pin-section"
       importStatement={'import { PinSection } from "@frontend-ui/ui";'}
       defaultValues={{
+        duration: "100%",
         pinSpacing: true,
         scrub: true,
       }}
@@ -27,7 +29,7 @@ export default function PinSectionPage() {
         { name: "pinSpacing", type: "boolean", default: "true", description: "是否保留 pin 占位空间" },
         { name: "scrub", type: "boolean | number", default: "true", description: "是否跟随滚动" },
       ]}
-      codeGenerator={(v) => `<PinSection pinSpacing={${v.pinSpacing}} scrub={${v.scrub}}>
+      codeGenerator={(v) => `<PinSection duration="${v.duration}" pinSpacing={${v.pinSpacing}} scrub={${v.scrub}}>
   <div>固定内容</div>
 </PinSection>`}
       renderPreview={(v) => (
@@ -53,6 +55,56 @@ export default function PinSectionPage() {
           </p>
         </div>
       )}
+      examples={[
+        {
+          title: "基本固定",
+          description: "默认配置的固定区域",
+          code: `<PinSection>
+  <div className="h-screen flex items-center justify-center">
+    <h1>固定内容</h1>
+  </div>
+</PinSection>`,
+          render: () => (
+            <div className="w-full max-w-md">
+              <div className="relative h-48 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+                <div className="absolute left-0 right-0 top-0 bg-[var(--color-bg-elevated)] px-3 py-1.5 text-xs text-[var(--color-text-subtle)]">
+                  上方
+                </div>
+                <div className="flex h-full items-center justify-center">
+                  <div className="flex h-28 w-3/4 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-lg font-bold text-white">
+                    固定区域
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-[var(--color-bg-elevated)] px-3 py-1.5 text-xs text-[var(--color-text-subtle)]">
+                  下方
+                </div>
+              </div>
+            </div>
+          ),
+        },
+        {
+          title: "无占位空间",
+          description: "禁用 pinSpacing，固定时不保留占位空间",
+          code: `<PinSection pinSpacing={false} duration="50%">
+  <div>无占位固定</div>
+</PinSection>`,
+          render: () => (
+            <div className="w-full max-w-md">
+              <div className="relative h-48 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+                <div className="flex h-full items-center justify-center">
+                  <div className="flex h-28 w-3/4 items-center justify-center rounded-lg bg-gradient-to-r from-rose-500 to-orange-400 text-lg font-bold text-white">
+                    无占位固定
+                  </div>
+                </div>
+              </div>
+              <p className="mt-2 text-center text-xs text-[var(--color-text-subtle)]">
+                pinSpacing=false, duration="50%"
+              </p>
+            </div>
+          ),
+        },
+      ]}
+      accessibility="PinSection 使用 GSAP ScrollTrigger 的 pin 功能固定内容。内容始终存在于 DOM 中，仅通过 CSS position: fixed 改变视觉定位。对于设置了 prefers-reduced-motion 的用户，固定行为被禁用，内容按正常文档流显示。"
     />
   );
 }

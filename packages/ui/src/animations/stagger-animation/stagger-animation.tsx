@@ -98,7 +98,7 @@ export function StaggerAnimation({
 
     const anim = animate(
       targets,
-      getAnimationParams() as Record<string, unknown>
+      getAnimationParams() as any
     );
 
     return () => {

@@ -62,6 +62,7 @@ export default function ScrollRevealPage() {
           </GsapScrollReveal>
         </div>
       )}
+      accessibility="ScrollReveal 使用 GSAP ScrollTrigger 驱动滚动触发动画。内容始终存在于 DOM 中，仅通过 CSS transform 和 opacity 产生视觉位移。对于设置了 prefers-reduced-motion 的用户，动画被跳过，内容直接显示。组件不包含交互元素，无需键盘导航或焦点管理支持，对屏幕阅读器无影响。"
     />
   );
 }

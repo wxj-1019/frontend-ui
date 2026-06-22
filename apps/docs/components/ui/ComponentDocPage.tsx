@@ -29,6 +29,14 @@ export interface BreadcrumbItem {
   href: string;
 }
 
+export interface ExampleItem {
+  title: string;
+  description?: string;
+  code: string;
+  language?: string;
+  render?: () => React.ReactNode;
+}
+
 export interface ComponentDocPageProps {
   /** 面包屑路径（如 [{ label: "文字动画", href: "/text-animations" }]） */
   category: BreadcrumbItem;
@@ -50,6 +58,10 @@ export interface ComponentDocPageProps {
   codeGenerator: (values: Record<string, unknown>) => string;
   /** 渲染实时预览内容 */
   renderPreview: (values: Record<string, unknown>) => React.ReactNode;
+  /** 使用示例列表 */
+  examples?: ExampleItem[];
+  /** 无障碍说明 */
+  accessibility?: string;
 }
 
 export function ComponentDocPage({
@@ -63,6 +75,8 @@ export function ComponentDocPage({
   propDocs,
   codeGenerator,
   renderPreview,
+  examples = [],
+  accessibility,
 }: ComponentDocPageProps) {
   const [props, setProps] = useState<Record<string, unknown>>(defaultValues);
 
@@ -149,6 +163,57 @@ export function ComponentDocPage({
         </h2>
         <PropsTable props={propDocs} />
       </div>
+
+      {/* Examples */}
+      {examples.length > 0 && (
+        <div>
+          <h2 className="font-display mb-4 text-xl font-semibold text-[var(--color-text-primary)]">
+            使用示例
+          </h2>
+          <div className="space-y-6">
+            {examples.map((example) => (
+              <div
+                key={example.title}
+                className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] overflow-hidden"
+              >
+                <div className="border-b border-[var(--color-border-subtle)] px-4 py-3">
+                  <h3 className="font-display text-sm font-semibold text-[var(--color-text-primary)]">
+                    {example.title}
+                  </h3>
+                  {example.description && (
+                    <p className="mt-1 text-xs text-[var(--color-text-muted)]">
+                      {example.description}
+                    </p>
+                  )}
+                </div>
+                {example.render && (
+                  <div className="flex min-h-[120px] items-center justify-center border-b border-[var(--color-border-subtle)] bg-[var(--color-bg-primary)] py-8">
+                    {example.render()}
+                  </div>
+                )}
+                <div className="p-0">
+                  <CodeBlock
+                    code={example.code}
+                    language={example.language || 'tsx'}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Accessibility */}
+      {accessibility && (
+        <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-6">
+          <h2 className="font-display mb-3 text-xl font-semibold text-[var(--color-text-primary)]">
+            无障碍
+          </h2>
+          <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
+            {accessibility}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
