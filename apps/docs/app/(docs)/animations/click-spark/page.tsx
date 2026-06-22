@@ -74,7 +74,9 @@ export default function ClickSparkPage() {
 </ClickSpark>`}
       renderPreview={(v) => (
         <ClickSpark
+          className="inline-block"
           particleCount={Number(v.particleCount)}
+          colors={['var(--color-accent)']}
           radius={Number(v.radius)}
           duration={Number(v.duration)}
         >

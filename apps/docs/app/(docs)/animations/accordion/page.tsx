@@ -35,6 +35,7 @@ export default function AccordionPage() {
       renderPreview={(v) => (
         <div className="w-full max-w-md">
           <Accordion
+            className="w-full"
             allowMultiple={Boolean(v.allowMultiple)}
             duration={Number(v.duration)}
             defaultOpen={0}

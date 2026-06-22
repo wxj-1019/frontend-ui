@@ -30,6 +30,7 @@ export default function DraggablePage() {
       renderPreview={(v) => (
         <div className="relative w-full max-w-md rounded-xl border border-dashed border-[var(--color-border-strong)] p-4">
           <Draggable
+            className="inline-block"
             bounds={typeof v.bounds === "string" ? undefined : (v.bounds as { top: number; left: number; right: number; bottom: number })}
             edgeResistance={Number(v.edgeResistance)}
           >

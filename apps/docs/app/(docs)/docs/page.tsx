@@ -7,6 +7,11 @@ const sections = [
     href: "/docs/getting-started",
   },
   {
+    title: "Design Tokens",
+    description: "设计令牌系统、CSS 变量、三层架构",
+    href: "/docs/design-tokens",
+  },
+  {
     title: "多引擎架构",
     description: "GSAP、Motion 动画引擎",
     href: "/docs/engines",
@@ -18,7 +23,7 @@ const sections = [
   },
   {
     title: "主题定制",
-    description: "Design Token、暗色模式、自定义颜色",
+    description: "暗色模式、亮色模式、自定义颜色",
     href: "/docs/theming",
   },
 ];

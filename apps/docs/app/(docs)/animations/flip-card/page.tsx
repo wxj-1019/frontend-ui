@@ -31,6 +31,7 @@ export default function FlipCardPage() {
 />`}
       renderPreview={(v) => (
         <FlipCard
+          className="w-full"
           trigger={v.trigger as "hover" | "click"}
           flipDirection={v.flipDirection as "horizontal" | "vertical"}
           frontContent={

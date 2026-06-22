@@ -1,5 +1,7 @@
 import { defineConfig } from 'tsup';
 
+const skipDts = process.env.SKIP_DTS === '1';
+
 export default defineConfig({
   entry: {
     index: 'src/index.ts',
@@ -64,7 +66,7 @@ export default defineConfig({
     'hooks/use-mouse-position': 'src/hooks/use-mouse-position.ts',
   },
   format: ['cjs', 'esm'],
-  dts: true,
+  dts: !skipDts,
   splitting: true,
   sourcemap: true,
   clean: true,
