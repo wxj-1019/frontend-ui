@@ -16,7 +16,7 @@ export default function FloatAnimationPage() {
         { name: "amplitude", type: "number", min: 2, max: 50, step: 2 },
         { name: "duration", type: "number", min: 0.5, max: 10, step: 0.5 },
         { name: "autoPlay", type: "boolean" },
-        { name: "direction", type: "select", options: ["vertical", "horizontal", "both"] },
+        { name: "direction", type: "string", options: ["vertical", "horizontal", "both"] },
         { name: "pauseOnHover", type: "boolean" },
       ]}
       propDocs={[

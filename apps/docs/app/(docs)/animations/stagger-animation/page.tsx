@@ -15,7 +15,7 @@ export default function StaggerAnimationPage() {
       propConfig={[
         { name: "staggerDelay", type: "number", min: 50, max: 500, step: 50 },
         { name: "duration", type: "number", min: 200, max: 2000, step: 100 },
-        { name: "animationType", type: "select", options: ["fadeIn", "slideUp", "slideLeft", "scaleUp", "rotateIn"] },
+        { name: "animationType", type: "string", options: ["fadeIn", "slideUp", "slideLeft", "scaleUp", "rotateIn"] },
         { name: "autoPlay", type: "boolean" },
       ]}
       propDocs={[

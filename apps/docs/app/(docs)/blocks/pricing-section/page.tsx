@@ -13,7 +13,7 @@ export default function PricingSectionPage() {
       importStatement={'import { PricingSection } from "@frontend-ui/ui";'}
       defaultValues={{ columns: 3 }}
       propConfig={[
-        { name: 'columns', type: 'number', options: [2, 3, 4] },
+        { name: 'columns', type: 'number', min: 2, max: 4, step: 1 },
       ]}
       propDocs={[
         {
