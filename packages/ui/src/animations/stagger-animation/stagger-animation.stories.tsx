@@ -13,7 +13,6 @@ const meta: Meta<typeof StaggerAnimation> = {
       options: ['fadeIn', 'slideUp', 'slideLeft', 'scaleUp', 'rotateIn'],
     },
     autoPlay: { control: 'boolean' },
-    direction: { control: 'select', options: ['normal', 'reverse'] },
   },
 };
 
@@ -92,15 +91,6 @@ export const SlowStagger: Story = {
     children: <SampleItems />,
     staggerDelay: 300,
     duration: 1000,
-    className: 'gap-4',
-  },
-};
-
-export const Reversed: Story = {
-  args: {
-    children: <SampleItems />,
-    direction: 'reverse',
-    animationType: 'slideUp',
     className: 'gap-4',
   },
 };

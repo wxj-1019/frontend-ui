@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useState, useCallback } from "react";
-import Link from "next/link";
-import { CodeBlock } from "@/components/ui/CodeBlock";
-import { InstallTabs } from "@/components/ui/InstallTabs";
-import { PropsTable } from "@/components/ui/PropsTable";
-import { PropsPanel } from "@/components/ui/PropsPanel";
+import { useState, useCallback } from 'react';
+import Link from 'next/link';
+import { CodeBlock } from '@/components/ui/CodeBlock';
+import { InstallTabs } from '@/components/ui/InstallTabs';
+import { PropsTable } from '@/components/ui/PropsTable';
+import { PropsPanel } from '@/components/ui/PropsPanel';
 
 export interface PropConfig {
   name: string;
-  type: "number" | "string" | "boolean";
+  type: 'number' | 'string' | 'boolean' | 'color';
   min?: number;
   max?: number;
   step?: number;
@@ -80,7 +80,10 @@ export function ComponentDocPage({
     <div className="space-y-8">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-[var(--color-text-subtle)]">
-        <Link href={category.href} className="transition-colors hover:text-[var(--color-text-primary)]">
+        <Link
+          href={category.href}
+          className="transition-colors hover:text-[var(--color-text-primary)]"
+        >
           {category.label}
         </Link>
         <span>/</span>
@@ -92,7 +95,9 @@ export function ComponentDocPage({
         <h1 className="font-display text-3xl font-bold text-[var(--color-text-primary)]">
           {name}
         </h1>
-        <p className="mt-2 text-lg text-[var(--color-text-muted)]">{description}</p>
+        <p className="mt-2 text-lg text-[var(--color-text-muted)]">
+          {description}
+        </p>
       </div>
 
       {/* Preview + Props Panel */}
@@ -100,7 +105,9 @@ export function ComponentDocPage({
         {/* Live Preview */}
         <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
           <div className="border-b border-[var(--color-border-subtle)] px-4 py-2">
-            <span className="text-xs text-[var(--color-text-subtle)]">实时预览</span>
+            <span className="text-xs text-[var(--color-text-subtle)]">
+              实时预览
+            </span>
           </div>
           <div className="flex min-h-[200px] items-center justify-center py-16">
             {renderPreview(props)}
