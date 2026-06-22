@@ -38,7 +38,7 @@ describe('BounceCards', () => {
     render(<BounceCards cards={mockCards} maxStack={3} />);
     const nextBtn = screen.getByLabelText('Next card');
     const prevBtn = screen.getByLabelText('Previous card');
-    
+
     fireEvent.click(nextBtn);
     fireEvent.click(prevBtn);
     expect(screen.getByText('Card 1')).toBeInTheDocument();
@@ -67,8 +67,9 @@ describe('BounceCards', () => {
     const cardsWithImages = [
       { id: '1', content: <div>Card 1</div>, image: 'test.jpg' },
     ];
-    render(<BounceCards cards={cardsWithImages} />);
-    const img = screen.getByRole('img', { hidden: true });
+    const { container } = render(<BounceCards cards={cardsWithImages} />);
+    const img = container.querySelector('img');
+    expect(img).not.toBeNull();
     expect(img).toHaveAttribute('src', 'test.jpg');
   });
 
@@ -81,12 +82,13 @@ describe('BounceCards', () => {
   it('allows looping when enabled', () => {
     render(<BounceCards cards={mockCards} loop={true} maxStack={3} />);
     const nextBtn = screen.getByLabelText('Next card');
-    
-    // Navigate to end
-    fireEvent.click(nextBtn);
-    fireEvent.click(nextBtn);
-    
-    // Should loop back
+
+    // Navigate to end (index 0 → 1 → 2 → 3 → 4)
+    for (let i = 0; i < 4; i++) {
+      fireEvent.click(nextBtn);
+    }
+
+    // Next click should loop back to start
     fireEvent.click(nextBtn);
     expect(screen.getByText('Card 1')).toBeInTheDocument();
   });

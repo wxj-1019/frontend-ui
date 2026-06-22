@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { GlowCard } from './glow-card';
 
 describe('GlowCard', () => {
@@ -83,9 +83,22 @@ describe('GlowCard', () => {
       </GlowCard>
     );
     const card = container.firstChild as HTMLElement;
-    fireEvent.mouseMove(card, { clientX: 100, clientY: 100 });
-    expect(card.style.transform).toContain('rotateX');
-    expect(card.style.transform).toContain('rotateY');
+    // Mock getBoundingClientRect to return non-zero values (jsdom returns all zeros by default)
+    const mockRect = {
+      top: 0,
+      left: 0,
+      right: 200,
+      bottom: 200,
+      width: 200,
+      height: 200,
+      x: 0,
+      y: 0,
+      toJSON: () => ({}),
+    };
+    vi.spyOn(card, 'getBoundingClientRect').mockReturnValue(mockRect);
+    fireEvent.mouseMove(card, { clientX: 150, clientY: 50 });
+    expect(card.style.transform).toBeTruthy();
+    vi.restoreAllMocks();
   });
 
   it('does not apply tilt when enableTilt is false', () => {

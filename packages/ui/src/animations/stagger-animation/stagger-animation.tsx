@@ -96,7 +96,10 @@ export function StaggerAnimation({
     const targets = containerRef.current.children;
     if (!targets.length) return;
 
-    const anim = animate(targets, getAnimationParams());
+    const anim = animate(
+      targets,
+      getAnimationParams() as Record<string, unknown>
+    );
 
     return () => {
       anim.cancel();
@@ -109,30 +112,24 @@ export function StaggerAnimation({
       className={cn('flex flex-wrap', className)}
       role="list"
     >
-      {Array.isArray(children)
-        ? children.map((child, index) => (
-            <div
-              key={index}
-              className={cn(
-                autoPlay ? 'opacity-0' : '',
-                itemClassName
-              )}
-              role="listitem"
-            >
-              {child}
-            </div>
-          ))
-        : (
-            <div
-              className={cn(
-                autoPlay ? 'opacity-0' : '',
-                itemClassName
-              )}
-              role="listitem"
-            >
-              {children}
-            </div>
-          )}
+      {Array.isArray(children) ? (
+        children.map((child, index) => (
+          <div
+            key={index}
+            className={cn(autoPlay ? 'opacity-0' : '', itemClassName)}
+            role="listitem"
+          >
+            {child}
+          </div>
+        ))
+      ) : (
+        <div
+          className={cn(autoPlay ? 'opacity-0' : '', itemClassName)}
+          role="listitem"
+        >
+          {children}
+        </div>
+      )}
     </div>
   );
 }

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { type ReactNode } from "react";
-import { ReactLenis, useLenis } from "lenis/react";
+import { cn } from '@/lib/utils';
+import { type ReactNode } from 'react';
+import { ReactLenis, useLenis } from 'lenis/react';
 
 export interface SmoothScrollProviderProps {
   /** 子元素 */
@@ -14,7 +14,7 @@ export interface SmoothScrollProviderProps {
     /** 滚动惯性 (0~1)，默认 0.1 */
     lerp?: number;
     /** 滚动方向，默认 'vertical' */
-    orientation?: "vertical" | "horizontal";
+    orientation?: 'vertical' | 'horizontal';
     /** 是否平滑滚轮 */
     smoothWheel?: boolean;
     /** 动画持续时间 (秒) */
@@ -34,18 +34,22 @@ export function SmoothScrollProvider({
 }: SmoothScrollProviderProps) {
   const lenisOptions = {
     lerp: options.lerp ?? 0.1,
-    orientation: options.orientation ?? "vertical",
+    orientation: options.orientation ?? 'vertical',
     smoothWheel: options.smoothWheel ?? true,
     duration: options.duration ?? 1.2,
     infinite: options.infinite ?? false,
   };
 
   return (
-    <ReactLenis root={root} options={lenisOptions} className={cn(className)}>
+    <ReactLenis
+      root={root as string | undefined}
+      options={lenisOptions}
+      className={cn(className)}
+    >
       {children}
     </ReactLenis>
   );
 }
 
 export { useLenis };
-export type { LenisRef } from "lenis/react";
+export type { LenisRef } from 'lenis/react';

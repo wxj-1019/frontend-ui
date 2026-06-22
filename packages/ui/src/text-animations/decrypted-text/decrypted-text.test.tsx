@@ -4,7 +4,7 @@ import { DecryptedText } from './decrypted-text';
 
 describe('DecryptedText', () => {
   beforeEach(() => {
-    vi.useFakeTimers();
+    vi.useFakeTimers({ shouldAdvanceTime: true });
   });
 
   afterEach(() => {
@@ -22,9 +22,11 @@ describe('DecryptedText', () => {
   });
 
   it('starts animation automatically when autoPlay is true', () => {
-    render(<DecryptedText text="Hello" autoPlay={true} duration={500} speed={50} />);
+    render(
+      <DecryptedText text="Hello" autoPlay={true} duration={500} speed={50} />
+    );
     const element = screen.getByRole('text');
-    
+
     // Initially should show some random characters
     expect(element.textContent?.length).toBe(5);
   });
@@ -65,13 +67,13 @@ describe('DecryptedText', () => {
         characters={customChars}
       />
     );
-    
+
     const element = screen.getByRole('text');
     const text = element.textContent || '';
-    
+
     // All characters should be either from custom set or target text
     for (const char of text) {
-      expect('01Hel'.includes(char)).toBe(true);
+      expect('01Helo'.includes(char)).toBe(true);
     }
   });
 
