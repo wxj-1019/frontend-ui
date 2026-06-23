@@ -1,12 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { GlassNavbar, GlassModal } from "@frontend-ui/ui";
+import { GlassNavbar } from "@frontend-ui/ui";
 import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
 
 export default function GlassNavbarPage() {
-  const [scrolled] = useState(true);
-
   return (
     <ComponentDocPage
       category={{ label: "复合组件", href: "/components" }}
