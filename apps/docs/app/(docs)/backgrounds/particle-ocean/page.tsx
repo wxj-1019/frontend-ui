@@ -25,7 +25,7 @@ export default function ParticleOceanPage() {
         { name: "sizeRange", type: "[number, number]", default: "[1, 3]", description: "粒子大小范围" },
       ]}
       codeGenerator={(values) => `<ParticleOcean\n  count={${values.count}}\n  color="${values.color}"\n  speed={${values.speed}}\n  ${values.interactive ? "" : "interactive={false} "}\n/>`}
-      renderPreview={(values) => (
+      renderPreview={(_values) => (
         <div className="relative h-40 w-full rounded-lg bg-[var(--color-bg-primary)] overflow-hidden">
           <p className="absolute inset-0 flex items-center justify-center text-sm text-[var(--color-text-muted)]">
             移动鼠标查看粒子排斥效果

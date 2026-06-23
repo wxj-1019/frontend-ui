@@ -27,7 +27,7 @@ export default function GlassCardPage() {
         { name: "tiltDegree", type: "number", default: "10", description: "最大倾斜角度" },
       ]}
       codeGenerator={(values) => `<GlassCard\n  borderRadius={${values.borderRadius}}\n  glowIntensity={${values.glowIntensity}}\n  blur={${values.blur}}\n  ${values.tilt ? "" : "tilt={false} "}\n>\n  <div>Your content</div>\n</GlassCard>`}
-      renderPreview={(values) => (
+      renderPreview={(_values) => (
         <div className="p-6">
           <div className="text-center">
             <h3 className="font-display text-lg font-semibold text-[var(--color-text-primary)]">玻璃态卡片</h3>

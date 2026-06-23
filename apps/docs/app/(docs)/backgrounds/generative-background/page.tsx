@@ -25,7 +25,7 @@ export default function GenerativeBackgroundPage() {
         { name: "density", type: "number", default: "0.5", description: "噪声密度 (0-1)" },
       ]}
       codeGenerator={(values) => `<GenerativeBackground\n  baseHue={${values.baseHue}}\n  saturation={${values.saturation}}\n  lightness={${values.lightness}}\n  speed={${values.speed}}\n/>`}
-      renderPreview={(values) => (
+      renderPreview={(_values) => (
         <div className="relative h-40 w-full rounded-lg bg-[var(--color-bg-primary)] overflow-hidden">
           <p className="absolute inset-0 flex items-center justify-center text-sm text-[var(--color-text-muted)] z-10">
             实时生成的抽象艺术背景

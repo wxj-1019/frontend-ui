@@ -23,7 +23,7 @@ export default function ScrollParallaxPage() {
         { name: "blur", type: "boolean", default: "false", description: "是否启用模糊" },
       ]}
       codeGenerator={(values) => `<ScrollParallax\n  speed={${values.speed}}\n  scale={[0.8, 1.2]}\n  ${values.blur ? "blur" : ""}\n>\n  <div>Your content</div>\n</ScrollParallax>`}
-      renderPreview={(values) => (
+      renderPreview={(_values) => (
         <div className="h-40 w-full rounded-lg bg-[var(--color-bg-surface)] flex items-center justify-center">
           <div className="text-center">
             <span className="text-3xl">🌊</span>

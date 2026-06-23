@@ -25,7 +25,7 @@ export default function FluidCursorPage() {
         { name: "blendMode", type: "string", default: "'screen'", description: "Canvas 混合模式" },
       ]}
       codeGenerator={(values) => `<FluidCursor\n  color="${values.color}"\n  particleCount={${values.particleCount}}\n  viscosity={${values.viscosity}}\n  glowIntensity={${values.glowIntensity}}\n/>`}
-      renderPreview={(values) => (
+      renderPreview={(_values) => (
         <div className="relative h-40 w-full rounded-lg bg-[var(--color-bg-primary)] overflow-hidden">
           <p className="absolute inset-0 flex items-center justify-center text-sm text-[var(--color-text-muted)]">
             在此区域移动鼠标查看效果
