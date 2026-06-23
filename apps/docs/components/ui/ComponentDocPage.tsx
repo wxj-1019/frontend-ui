@@ -79,13 +79,16 @@ export function ComponentDocPage({
   accessibility,
 }: ComponentDocPageProps) {
   const [props, setProps] = useState<Record<string, unknown>>(defaultValues);
+  const [previewKey, setPreviewKey] = useState(0);
 
   const handlePropsChange = useCallback((propName: string, value: unknown) => {
     setProps((prev) => ({ ...prev, [propName]: value }));
+    setPreviewKey((k) => k + 1);
   }, []);
 
   const handleReset = useCallback(() => {
     setProps(defaultValues);
+    setPreviewKey((k) => k + 1);
   }, [defaultValues]);
 
   const code = codeGenerator(props);
@@ -118,13 +121,23 @@ export function ComponentDocPage({
       <div className="grid gap-6 lg:grid-cols-[1fr,300px]">
         {/* Live Preview */}
         <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
-          <div className="border-b border-[var(--color-border-subtle)] px-4 py-2">
+          <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] px-4 py-2">
             <span className="text-xs text-[var(--color-text-subtle)]">
               实时预览
             </span>
+            <button
+              onClick={() => setPreviewKey((k) => k + 1)}
+              className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-[var(--color-text-subtle)] transition-colors hover:bg-[var(--color-hover)] hover:text-[var(--color-accent)]"
+              aria-label="重播动画"
+            >
+              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              重播
+            </button>
           </div>
           <div className="flex min-h-[200px] items-center justify-center py-16">
-            {renderPreview(props)}
+            <div key={previewKey}>{renderPreview(props)}</div>
           </div>
         </div>
 
