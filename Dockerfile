@@ -23,7 +23,10 @@ COPY packages/ui/ packages/ui/
 COPY apps/docs/ apps/docs/
 COPY tsconfig.base.json ./
 
-ENV NODE_OPTIONS="--max-old-space-size=6144"
+ENV NODE_OPTIONS="--max-old-space-size=8192"
+ENV SKIP_DTS="1"
+RUN pnpm --filter @frontend-ui/ui build
+
 ENV NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter docs build
 
@@ -44,6 +47,8 @@ RUN apk add --no-cache curl \
 COPY --from=builder /app/apps/docs/.next/standalone ./
 COPY --from=builder /app/apps/docs/.next/static ./apps/docs/.next/static
 COPY --from=builder /app/apps/docs/public ./apps/docs/public
+COPY --from=builder /app/packages/ui/dist ./packages/ui/dist
+COPY --from=builder /app/packages/ui/package.json ./packages/ui/package.json
 
 RUN chown -R nextjs:nodejs /app
 
