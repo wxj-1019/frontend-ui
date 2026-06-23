@@ -15,37 +15,7 @@ import { PageTransition } from '@/components/effects/PageTransition';
 import { HeroTimeline } from '@/components/effects/HeroTimeline';
 import { ComponentPreviewGrid } from '@/components/sections/ComponentPreviewGrid';
 import { BlocksShowcase } from '@/components/sections/BlocksShowcase';
-
-const categories = [
-  {
-    title: '文字动画',
-    description: 'BlurText, GradientText, SplitText 等',
-    href: '/text-animations',
-    count: 13,
-    icon: <Type className="h-6 w-6" />,
-  },
-  {
-    title: '交互动画',
-    description: 'Magnet, FadeContent, ScrollReveal 等',
-    href: '/animations',
-    count: 19,
-    icon: <Zap className="h-6 w-6" />,
-  },
-  {
-    title: '复合组件',
-    description: 'Dock, SpotlightCard, GlassNavbar 等',
-    href: '/components',
-    count: 13,
-    icon: <Layers className="h-6 w-6" />,
-  },
-  {
-    title: '背景特效',
-    description: 'Aurora, HighPerfParticles, ThreeScene 等',
-    href: '/backgrounds',
-    count: 11,
-    icon: <Sparkles className="h-6 w-6" />,
-  },
-];
+import { getTotalComponentCount, getComponentsByCategory } from '@/lib/component-registry';
 
 const engines = [
   {
@@ -126,14 +96,47 @@ const engines = [
   },
 ];
 
-const stats = [
-  { value: '73', label: '动画组件' },
-  { value: '5', label: '动画引擎' },
-  { value: '6', label: '组件分类' },
-  { value: '100%', label: 'TypeScript' },
-];
-
 export default function HomePage() {
+  const totalComponents = getTotalComponentCount();
+
+  const categories = [
+    {
+      title: '文字动画',
+      description: 'BlurText, GradientText, SplitText 等',
+      href: '/text-animations',
+      count: getComponentsByCategory('text-animations').length,
+      icon: <Type className="h-6 w-6" />,
+    },
+    {
+      title: '交互动画',
+      description: 'Magnet, FadeContent, ScrollReveal 等',
+      href: '/animations',
+      count: getComponentsByCategory('animations').length,
+      icon: <Zap className="h-6 w-6" />,
+    },
+    {
+      title: '复合组件',
+      description: 'Dock, SpotlightCard, GlassNavbar 等',
+      href: '/components',
+      count: getComponentsByCategory('components').length,
+      icon: <Layers className="h-6 w-6" />,
+    },
+    {
+      title: '背景特效',
+      description: 'Aurora, HighPerfParticles, ThreeScene 等',
+      href: '/backgrounds',
+      count: getComponentsByCategory('backgrounds').length,
+      icon: <Sparkles className="h-6 w-6" />,
+    },
+  ];
+
+  const stats = [
+    { value: String(totalComponents), label: '动画组件' },
+    { value: '5', label: '动画引擎' },
+    { value: '6', label: '组件分类' },
+    { value: '100%', label: 'TypeScript' },
+  ];
+
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <IntroAnimation />

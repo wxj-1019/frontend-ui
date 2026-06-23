@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Outfit, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { getTotalComponentCount } from "@/lib/component-registry";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -22,6 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = "https://frontend-ui.dev";
+const TOTAL_COMPONENTS = getTotalComponentCount();
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
     default: "Frontend UI — 企业级前端动画组件库",
     template: "%s | Frontend UI",
   },
-  description: "企业级前端动画组件库，集成 GSAP、Motion 动画引擎，73+ 组件，开箱即用。",
+  description: `企业级前端动画组件库，集成 GSAP、Motion 动画引擎，${TOTAL_COMPONENTS}+ 组件，开箱即用。`,
   keywords: ["动画组件库", "React", "GSAP", "Motion", "UI组件", "前端", "TypeScript", "Tailwind CSS"],
   authors: [{ name: "Frontend UI" }],
   creator: "Frontend UI",
@@ -39,12 +41,12 @@ export const metadata: Metadata = {
     url: SITE_URL,
     siteName: "Frontend UI",
     title: "Frontend UI — 企业级前端动画组件库",
-    description: "集成 GSAP、Motion 动画引擎，73+ 组件，开箱即用。",
+    description: `集成 GSAP、Motion 动画引擎，${TOTAL_COMPONENTS}+ 组件，开箱即用。`,
   },
   twitter: {
     card: "summary_large_image",
     title: "Frontend UI — 企业级前端动画组件库",
-    description: "集成 GSAP、Motion 动画引擎，73+ 组件，开箱即用。",
+    description: `集成 GSAP、Motion 动画引擎，${TOTAL_COMPONENTS}+ 组件，开箱即用。`,
     creator: "@frontend_ui",
   },
   robots: {

@@ -800,10 +800,9 @@ export function searchComponents(query: string): ComponentEntry[] {
 }
 
 /**
- * 获取指定分类 ID 的分类信息
+ * 获取所有组件的总数
  */
-export function getCategoryById(
-  categoryId: string
-): ComponentCategory | undefined {
-  return CATEGORIES.find((cat) => cat.id === categoryId);
+export function getTotalComponentCount(): number {
+  return COMPONENT_REGISTRY.length;
 }
+
