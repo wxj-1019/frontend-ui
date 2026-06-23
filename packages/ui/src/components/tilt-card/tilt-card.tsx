@@ -14,6 +14,14 @@ export interface TiltCardProps {
   glareOpacity?: number;
   speed?: number;
   ref?: Ref<HTMLDivElement>;
+  /** 3D 深度层次，每层 translateZ 的距离 */
+  depthLayers?: number;
+  /** 是否启用浮动效果 */
+  floating?: boolean;
+  /** 边框发光强度 */
+  borderGlow?: boolean;
+  /** 内部阴影层 */
+  innerShadow?: boolean;
 }
 
 export function TiltCard({
@@ -26,6 +34,10 @@ export function TiltCard({
   glareOpacity = 0.25,
   speed = 0.4,
   ref,
+  depthLayers = 3,
+  floating = false,
+  borderGlow = false,
+  innerShadow = false,
 }: TiltCardProps) {
   const internalRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
@@ -75,16 +87,37 @@ export function TiltCard({
           rotateX: tilt.rotateX,
           rotateY: tilt.rotateY,
           scale: isHovered ? scale : 1,
+          y: floating ? [0, -6, 0] : 0,
         }}
         transition={{
-          type: 'spring',
-          stiffness: 300,
-          damping: 20,
-          mass: 0.5,
-          duration: speed,
+          rotateX: { type: 'spring', stiffness: 300, damping: 20, mass: 0.5, duration: speed },
+          rotateY: { type: 'spring', stiffness: 300, damping: 20, mass: 0.5, duration: speed },
+          scale: { type: 'spring', stiffness: 300, damping: 20, mass: 0.5, duration: speed },
+          y: floating ? { duration: 4, repeat: Infinity, ease: 'easeInOut' } : { duration: speed },
         }}
       >
+        {/* 3D Depth Layers */}
+        {Array.from({ length: depthLayers }).map((_, i) => (
+          <div
+            key={i}
+            className="pointer-events-none absolute inset-0 rounded-xl"
+            aria-hidden="true"
+            style={{
+              transform: `translateZ(${(i + 1) * 20}px)`,
+              border: i === depthLayers - 1 && borderGlow
+                ? '1px solid rgba(255, 255, 255, 0.15)'
+                : undefined,
+              boxShadow: i === 0 && innerShadow
+                ? 'inset 0 0 40px rgba(0, 0, 0, 0.2)'
+                : undefined,
+              opacity: isHovered ? 0.5 - i * 0.1 : 0,
+              transition: `opacity ${speed}s ease`,
+            }}
+          />
+        ))}
+
         {children}
+
         {glare && (
           <motion.div
             className="pointer-events-none absolute inset-0 rounded-xl"
@@ -95,6 +128,21 @@ export function TiltCard({
               background: isHovered
                 ? `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0) 60%)`
                 : undefined,
+              transform: 'translateZ(40px)',
+            }}
+          />
+        )}
+
+        {/* Border glow on hover */}
+        {borderGlow && (
+          <motion.div
+            className="pointer-events-none absolute inset-0 rounded-xl"
+            aria-hidden="true"
+            animate={{ opacity: isHovered ? 1 : 0 }}
+            transition={{ duration: speed }}
+            style={{
+              boxShadow: `0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.05)`,
+              transform: 'translateZ(60px)',
             }}
           />
         )}

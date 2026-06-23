@@ -61,6 +61,9 @@ export const SHARED_COMPONENTS: SharedComponentEntry[] = [
   { name: 'BounceCards', category: 'components', description: '弹跳卡片堆叠组件', engine: 'Motion', installName: 'bounce-cards', files: ['bounce-cards.tsx', 'index.ts'] },
   { name: 'GlowCard', category: 'components', description: '发光卡片组件', engine: 'Motion', installName: 'glow-card', files: ['glow-card.tsx', 'index.ts'] },
   { name: 'Card3D', category: 'components', description: '3D 透视卡片', engine: 'CSS', installName: 'card-3d', files: ['card-3d.tsx', 'index.ts'] },
+  { name: 'GlassCard', category: 'components', description: '玻璃态卡片，3D倾斜+光晕效果', engine: 'CSS', installName: 'glass-card', files: ['glass-card.tsx', 'index.ts'] },
+  { name: 'GlassNavbar', category: 'components', description: '玻璃态导航栏，滚动响应式毛玻璃', engine: 'Motion', installName: 'glass-navbar', files: ['glass-navbar.tsx', 'index.ts'] },
+  { name: 'GlassModal', category: 'components', description: '玻璃态模态框，模糊背景+入场动画', engine: 'Motion', installName: 'glass-modal', files: ['glass-modal.tsx', 'index.ts'] },
   { name: 'SmoothScrollProvider', category: 'components', description: '基于 Lenis 的平滑滚动提供者', engine: 'Lenis', installName: 'smooth-scroll', files: ['smooth-scroll-provider.tsx', 'index.ts'] },
 
   // ── 背景特效 ────────────────────────────────────────────
@@ -71,6 +74,10 @@ export const SHARED_COMPONENTS: SharedComponentEntry[] = [
   { name: 'NoiseBackground', category: 'backgrounds', description: '噪点纹理背景', engine: 'CSS', installName: 'noise-background', files: ['noise-background.tsx', 'index.ts'] },
   { name: 'Hyperspeed', category: 'backgrounds', description: '超光速效果', engine: 'Motion', installName: 'hyperspeed', files: ['hyperspeed.tsx', 'index.ts'] },
   { name: 'GridMotion', category: 'backgrounds', description: '网格运动背景，方块交错呼吸', engine: 'Motion', installName: 'grid-motion', files: ['grid-motion.tsx', 'index.ts'] },
+  { name: 'ParticleOcean', category: 'backgrounds', description: '粒子海洋效果，流体动力学', engine: 'Motion', installName: 'particle-ocean', files: ['particle-ocean.tsx', 'index.ts'] },
+  { name: 'GenerativeBackground', category: 'backgrounds', description: '生成式艺术背景', engine: 'CSS', installName: 'generative-background', files: ['generative-background.tsx', 'index.ts'] },
+  { name: 'ThreeScene', category: 'backgrounds', description: 'CSS 3D 沉浸式场景，多层视差', engine: 'Motion', installName: 'three-scene', files: ['three-scene.tsx', 'index.ts'] },
+  { name: 'HighPerfParticles', category: 'backgrounds', description: '高性能 Canvas 2D 粒子系统', engine: 'CSS', installName: 'high-perf-particles', files: ['high-perf-particles.tsx', 'index.ts'] },
 
   // ── GSAP 动画 ───────────────────────────────────────────
   { name: 'ScrollReveal', category: 'gsap-animations', description: '基于 ScrollTrigger 的滚动触发动画', engine: 'GSAP', installName: 'scroll-reveal', files: ['scroll-reveal.tsx', 'index.ts'] },

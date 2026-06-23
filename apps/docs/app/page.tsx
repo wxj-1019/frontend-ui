@@ -33,16 +33,16 @@ const categories = [
   },
   {
     title: '复合组件',
-    description: 'Dock, SpotlightCard, Masonry 等',
+    description: 'Dock, SpotlightCard, GlassNavbar 等',
     href: '/components',
-    count: 10,
+    count: 13,
     icon: <Layers className="h-6 w-6" />,
   },
   {
     title: '背景特效',
-    description: 'Aurora, Particles, Hyperspeed 等',
+    description: 'Aurora, HighPerfParticles, ThreeScene 等',
     href: '/backgrounds',
-    count: 7,
+    count: 11,
     icon: <Sparkles className="h-6 w-6" />,
   },
 ];
@@ -127,7 +127,7 @@ const engines = [
 ];
 
 const stats = [
-  { value: '63', label: '动画组件' },
+  { value: '73', label: '动画组件' },
   { value: '5', label: '动画引擎' },
   { value: '6', label: '组件分类' },
   { value: '100%', label: 'TypeScript' },

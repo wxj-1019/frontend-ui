@@ -6,3 +6,5 @@ export * from './backgrounds';
 export * from './blocks';
 export * from './hooks';
 export * from './lib/utils';
+export * from './three-scene';
+export * from './high-perf-particles';

@@ -8,3 +8,5 @@ export * from './glow-card';
 export * from './bounce-cards';
 export * from './card-3d';
 export * from './glass-card';
+export * from './glass-navbar';
+export * from './glass-modal';
