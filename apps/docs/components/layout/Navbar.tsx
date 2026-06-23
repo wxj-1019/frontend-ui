@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { ThemeTransition } from "@/components/ui/ThemeTransition";
+import { SearchDialog } from "@/components/ui/SearchDialog";
 
 const navItems = [
   { label: "文档", href: "/docs" },
