@@ -20,11 +20,13 @@ jobs:
 
       - name: Build Docker image
         env:
-          NODE_OPTIONS: "--max-old-space-size=8192"
+          NODE_OPTIONS: "--max-old-space-size=6144"
         run: |
           docker buildx build \
             --platform linux/amd64 \
-            --build-arg NODE_OPTIONS="--max-old-space-size=8192" \
+            --build-arg NODE_OPTIONS="--max-old-space-size=6144" \
+            --build-arg SKIP_DTS="1" \
+            --progress=plain \
             --tag frontend-ui-docs:latest \
             --load \
             .
