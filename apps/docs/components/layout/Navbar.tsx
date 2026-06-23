@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { ThemeTransition } from "@/components/ui/ThemeTransition";
@@ -14,7 +13,6 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);

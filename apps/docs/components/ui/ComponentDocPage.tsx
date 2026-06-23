@@ -80,16 +80,13 @@ export function ComponentDocPage({
   accessibility,
 }: ComponentDocPageProps) {
   const [props, setProps] = useState<Record<string, unknown>>(defaultValues);
-  const [previewKey, setPreviewKey] = useState(0);
 
   const handlePropsChange = useCallback((propName: string, value: unknown) => {
     setProps((prev) => ({ ...prev, [propName]: value }));
-    setPreviewKey((k) => k + 1);
   }, []);
 
   const handleReset = useCallback(() => {
     setProps(defaultValues);
-    setPreviewKey((k) => k + 1);
   }, [defaultValues]);
 
   const code = codeGenerator(props);
