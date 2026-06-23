@@ -6,23 +6,11 @@ ssh = paramiko.SSHClient()
 ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 ssh.connect('49.234.190.85', username='root', password='zenjiroqQ+', timeout=10)
 
-# Check current status
-cmds = [
-    'docker ps --filter name=frontend-ui-docs --format "{{.Names}} {{.Status}}"',
-    'curl -s -o /dev/null -w "%{http_code}" http://localhost:80',
-]
-
-for cmd in cmds:
-    stdin, stdout, stderr = ssh.exec_command(cmd)
-    out = stdout.read().decode('utf-8', errors='replace').strip()
-    print(f'$ {cmd}')
-    if out: print(out)
-
 # Upload tar
 sftp = ssh.open_sftp()
 sftp.put(os.path.join(os.environ['TEMP'], 'frontend-ui-deploy.tar'), '/root/frontend-ui-deploy.tar')
 sftp.close()
-print('\nUpload complete')
+print('Upload complete')
 
 # Re-extract
 ssh.exec_command('cd /root && rm -rf frontend-ui-src && mkdir -p frontend-ui-src')
@@ -46,21 +34,23 @@ for i in range(240):
         break
     time.sleep(10)
 
-# Check final status
-stdin, stdout, stderr = ssh.exec_command('tail -5 /tmp/build.log')
-print(stdout.read().decode('utf-8', errors='replace'))
-
-# Deploy container
-ssh.exec_command('docker rm -f frontend-ui-docs 2>/dev/null')
+# Stop old container
+ssh.exec_command('docker stop frontend-ui-docs 2>/dev/null')
 time.sleep(1)
-ssh.exec_command('docker run -d --name frontend-ui-docs --restart unless-stopped -p 80:3000 frontend-ui-docs')
-time.sleep(5)
+ssh.exec_command('docker rm frontend-ui-docs 2>/dev/null')
+time.sleep(1)
 
-stdin, stdout, stderr = ssh.exec_command('docker ps --filter name=frontend-ui-docs --format "{{.Names}} {{.Status}} {{.Ports}}"')
-print('\nContainer status:')
-print(stdout.read().decode('utf-8', errors='replace').strip())
+# Start new container
+stdin, stdout, stderr = ssh.exec_command('docker run -d --name frontend-ui-docs --restart unless-stopped -p 80:3000 frontend-ui-docs')
+print(f'Container: {stdout.read().decode("utf-8", errors="replace").strip()}')
+
+time.sleep(8)
+
+# Check status
+stdin, stdout, stderr = ssh.exec_command('docker ps --filter name=frontend-ui-docs --format "{{.Names}} {{.Status}}"')
+print(f'\nStatus: {stdout.read().decode("utf-8", errors="replace").strip()}')
 
 stdin, stdout, stderr = ssh.exec_command('curl -s -o /dev/null -w "%{http_code}" http://localhost:80')
-print(f'\nHTTP status: {stdout.read().decode().strip()}')
+print(f'HTTP: {stdout.read().decode().strip()}')
 
 ssh.close()

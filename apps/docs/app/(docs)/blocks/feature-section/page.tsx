@@ -42,7 +42,6 @@ export default function FeatureSectionPage() {
           subtitle="了解我们的优势"
           layout={v.layout as 'center' | 'alternating'}
           columns={Number(v.columns) as 2 | 3 | 4}
-          prefersReducedMotion
           features={[
             { title: '高性能', description: 'GPU 加速动画，60fps 流畅运行' },
             { title: 'TypeScript', description: '完整类型安全，导出所有 Props 接口' },

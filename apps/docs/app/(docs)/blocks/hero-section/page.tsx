@@ -54,14 +54,12 @@ export default function HeroSectionPage() {
           <HeroWithParticles
             title={String(v.title)}
             subtitle={String(v.subtitle)}
-            prefersReducedMotion
             className="max-w-2xl"
           />
         ) : (
           <HeroWithGradient
             title={String(v.title)}
             subtitle={String(v.subtitle)}
-            prefersReducedMotion
             className="max-w-2xl"
           />
         )

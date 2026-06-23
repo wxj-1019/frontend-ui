@@ -50,7 +50,6 @@ export default function PricingSectionPage() {
           title="选择你的方案"
           subtitle="简单透明的定价"
           columns={Number(v.columns) as 2 | 3 | 4}
-          prefersReducedMotion
           plans={[
             {
               name: '基础版',

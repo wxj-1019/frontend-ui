@@ -38,7 +38,6 @@ export default function CTASectionPage() {
           title="准备好开始了吗？"
           description="安装 Frontend UI，开始构建令人印象深刻的动画界面"
           variant={v.variant as 'gradient' | 'minimal' | 'accent'}
-          prefersReducedMotion
           actions={[
             { label: '开始使用', href: '/docs/getting-started' },
             { label: 'GitHub', href: 'https://github.com', variant: 'secondary' },
