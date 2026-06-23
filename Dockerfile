@@ -24,7 +24,6 @@ COPY apps/docs/ apps/docs/
 COPY tsconfig.base.json ./
 
 ENV NODE_OPTIONS="--max-old-space-size=8192"
-ENV SKIP_DTS="1"
 RUN pnpm --filter @frontend-ui/ui build
 
 ENV NEXT_TELEMETRY_DISABLED=1
