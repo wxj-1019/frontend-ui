@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, type ReactNode } from 'react';
+import { useRef, useEffect, useCallback, type ReactNode } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '@/lib/utils';
 
@@ -24,14 +24,65 @@ export function GlassModal({
   maxWidth = '28rem',
 }: GlassModalProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
+  // Escape key and focus trap
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        e.preventDefault();
+        onClose();
+        return;
+      }
+      if (e.key !== 'Tab' || !isOpen || !ref.current) return;
+
+      const focusable = ref.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    },
+    [isOpen, onClose]
+  );
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) onClose();
-    };
-    document.addEventListener('keydown', onKey);
-    return () => document.removeEventListener('keydown', onKey);
-  }, [isOpen, onClose]);
+    if (isOpen) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
+      // Delay focus to after animation starts
+      const timer = setTimeout(() => {
+        const focusable = ref.current?.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusable && focusable.length > 0) {
+          focusable[0].focus();
+        } else {
+          ref.current?.focus();
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    } else {
+      previousFocusRef.current?.focus();
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   useEffect(() => {
     if (isOpen) {
@@ -66,8 +117,9 @@ export function GlassModal({
             ref={ref}
             role="dialog"
             aria-modal="true"
+            tabIndex={-1}
             className={cn(
-              'relative z-10 overflow-hidden rounded-2xl border border-white/[0.15]',
+              'relative z-10 overflow-hidden rounded-2xl border border-white/[0.15] outline-none',
               className
             )}
             style={{

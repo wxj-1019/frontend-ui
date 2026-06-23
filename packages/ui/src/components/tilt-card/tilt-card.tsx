@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useCallback, type ReactNode, type Ref } from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 export interface TiltCardProps {
@@ -43,9 +43,11 @@ export function TiltCard({
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
   const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
+      if (prefersReducedMotion) return;
       const card = internalRef.current;
       if (!card) return;
       const rect = card.getBoundingClientRect();
@@ -58,7 +60,7 @@ export function TiltCard({
       const glareY = ((e.clientY - rect.top) / rect.height) * 100;
       setGlarePos({ x: glareX, y: glareY });
     },
-    [tiltDegree]
+    [tiltDegree, prefersReducedMotion]
   );
 
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
@@ -66,6 +68,10 @@ export function TiltCard({
     setIsHovered(false);
     setTilt({ rotateX: 0, rotateY: 0 });
   }, []);
+
+  const actualTilt = prefersReducedMotion ? { rotateX: 0, rotateY: 0 } : tilt;
+  const actualFloating = prefersReducedMotion ? false : floating;
+  const actualDepthLayers = prefersReducedMotion ? 0 : depthLayers;
 
   return (
     <div
@@ -84,33 +90,33 @@ export function TiltCard({
         className="relative overflow-hidden rounded-xl"
         style={{ transformStyle: 'preserve-3d' }}
         animate={{
-          rotateX: tilt.rotateX,
-          rotateY: tilt.rotateY,
-          scale: isHovered ? scale : 1,
-          y: floating ? [0, -6, 0] : 0,
+          rotateX: actualTilt.rotateX,
+          rotateY: actualTilt.rotateY,
+          scale: isHovered && !prefersReducedMotion ? scale : 1,
+          y: actualFloating ? [0, -6, 0] : 0,
         }}
         transition={{
           rotateX: { type: 'spring', stiffness: 300, damping: 20, mass: 0.5, duration: speed },
           rotateY: { type: 'spring', stiffness: 300, damping: 20, mass: 0.5, duration: speed },
           scale: { type: 'spring', stiffness: 300, damping: 20, mass: 0.5, duration: speed },
-          y: floating ? { duration: 4, repeat: Infinity, ease: 'easeInOut' } : { duration: speed },
+          y: actualFloating ? { duration: 4, repeat: Infinity, ease: 'easeInOut' } : { duration: speed },
         }}
       >
         {/* 3D Depth Layers */}
-        {Array.from({ length: depthLayers }).map((_, i) => (
+        {Array.from({ length: actualDepthLayers }).map((_, i) => (
           <div
             key={i}
             className="pointer-events-none absolute inset-0 rounded-xl"
             aria-hidden="true"
             style={{
               transform: `translateZ(${(i + 1) * 20}px)`,
-              border: i === depthLayers - 1 && borderGlow
+              border: i === actualDepthLayers - 1 && borderGlow
                 ? '1px solid rgba(255, 255, 255, 0.15)'
                 : undefined,
               boxShadow: i === 0 && innerShadow
                 ? 'inset 0 0 40px rgba(0, 0, 0, 0.2)'
                 : undefined,
-              opacity: isHovered ? 0.5 - i * 0.1 : 0,
+              opacity: isHovered && !prefersReducedMotion ? 0.5 - i * 0.1 : 0,
               transition: `opacity ${speed}s ease`,
             }}
           />
@@ -118,7 +124,7 @@ export function TiltCard({
 
         {children}
 
-        {glare && (
+        {glare && !prefersReducedMotion && (
           <motion.div
             className="pointer-events-none absolute inset-0 rounded-xl"
             aria-hidden="true"
@@ -134,7 +140,7 @@ export function TiltCard({
         )}
 
         {/* Border glow on hover */}
-        {borderGlow && (
+        {borderGlow && !prefersReducedMotion && (
           <motion.div
             className="pointer-events-none absolute inset-0 rounded-xl"
             aria-hidden="true"

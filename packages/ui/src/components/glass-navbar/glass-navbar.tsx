@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useEffect, type ReactNode } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 
 export interface GlassNavbarProps {
@@ -20,6 +20,7 @@ export function GlassNavbar({
   opacity = 0.15,
 }: GlassNavbarProps) {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -30,6 +31,18 @@ export function GlassNavbar({
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const effectiveBlur = isMobile ? Math.min(blur, 8) : blur;
+  const effectiveOpacity = isMobile ? Math.max(opacity, 0.6) : opacity;
 
   return (
     <motion.nav
@@ -42,13 +55,13 @@ export function GlassNavbar({
       initial={false}
       animate={{
         backgroundColor: scrolled
-          ? `rgba(255, 255, 255, ${opacity})`
-          : `rgba(255, 255, 255, ${opacity * 0.3})`,
+          ? `rgba(255, 255, 255, ${effectiveOpacity})`
+          : `rgba(255, 255, 255, ${effectiveOpacity * 0.3})`,
       }}
       transition={{ duration: 0.3 }}
       style={{
-        backdropFilter: `blur(${blur}px)`,
-        WebkitBackdropFilter: `blur(${blur}px)`,
+        backdropFilter: `blur(${effectiveBlur}px)`,
+        WebkitBackdropFilter: `blur(${effectiveBlur}px)`,
       }}
     >
       {/* Glow effect */}

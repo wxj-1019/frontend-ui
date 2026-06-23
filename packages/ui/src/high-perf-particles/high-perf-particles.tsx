@@ -45,6 +45,12 @@ export function HighPerfParticles({
   const visibleRef = useRef(true);
   const poolRef = useRef<Particle[]>([]);
 
+  // Adaptive particle count based on device capability
+  const MAX_PARTICLES = typeof window !== 'undefined'
+    ? (window.devicePixelRatio > 1 || window.innerWidth > 1920 ? 3000 : 1500)
+    : 2000;
+  const actualCount = Math.min(particleCount, MAX_PARTICLES);
+
   const spawnParticle = useCallback(
     (w: number, h: number): Particle => {
       const pool = poolRef.current;
@@ -122,10 +128,10 @@ export function HighPerfParticles({
       const pool = poolRef.current;
 
       // Maintain particle count
-      while (particles.length < particleCount) {
+      while (particles.length < actualCount) {
         particles.push(spawnParticle(w, h));
       }
-      while (particles.length > particleCount) {
+      while (particles.length > actualCount) {
         returnToPool(particles.pop()!);
       }
 
