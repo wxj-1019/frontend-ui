@@ -23,7 +23,7 @@ COPY packages/ui/ packages/ui/
 COPY apps/docs/ apps/docs/
 COPY tsconfig.base.json ./
 
-ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV NODE_OPTIONS="--max-old-space-size=8192"
 RUN pnpm --filter @frontend-ui/ui build
 
 ENV NEXT_TELEMETRY_DISABLED=1
