@@ -47,7 +47,7 @@ export function BlurText({
       filter: 'blur(0px)',
       transition: {
         duration,
-        ease: [0.2, 0.65, 0.3, 0.9],
+        ease: [0.2, 0.65, 0.3, 0.9] as [number, number, number, number],
       },
     },
   };
