@@ -5,3 +5,5 @@ export * from './mesh-gradient';
 export * from './noise-background';
 export * from './hyperspeed';
 export * from './grid-motion';
+export * from './particle-ocean';
+export * from './generative-background';

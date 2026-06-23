@@ -7,3 +7,4 @@ export * from './tilt-card';
 export * from './glow-card';
 export * from './bounce-cards';
 export * from './card-3d';
+export * from './glass-card';

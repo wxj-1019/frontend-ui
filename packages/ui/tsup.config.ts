@@ -46,6 +46,8 @@ export default defineConfig({
     'animations/magnetic-button':
       'src/animations/magnetic-button/index.ts',
     'animations/hover-scale': 'src/animations/hover-scale/index.ts',
+    'animations/fluid-cursor': 'src/animations/fluid-cursor/index.ts',
+    'animations/scroll-parallax': 'src/animations/scroll-parallax/index.ts',
     'gsap-animations/scroll-reveal':
       'src/gsap-animations/scroll-reveal/index.ts',
     'gsap-animations/text-reveal': 'src/gsap-animations/text-reveal/index.ts',
@@ -65,6 +67,9 @@ export default defineConfig({
       'src/backgrounds/noise-background/index.ts',
     'backgrounds/hyperspeed': 'src/backgrounds/hyperspeed/index.ts',
     'backgrounds/grid-motion': 'src/backgrounds/grid-motion/index.ts',
+    'backgrounds/particle-ocean': 'src/backgrounds/particle-ocean/index.ts',
+    'backgrounds/generative-background':
+      'src/backgrounds/generative-background/index.ts',
     'blocks/hero-sections': 'src/blocks/hero-sections/index.ts',
     'blocks/bento-grids': 'src/blocks/bento-grids/index.ts',
     'blocks/feature-sections': 'src/blocks/feature-sections/index.ts',
@@ -79,6 +84,7 @@ export default defineConfig({
     'components/glow-card': 'src/components/glow-card/index.ts',
     'components/bounce-cards': 'src/components/bounce-cards/index.ts',
     'components/card-3d': 'src/components/card-3d/index.ts',
+    'components/glass-card': 'src/components/glass-card/index.ts',
     'hooks/use-mouse-position': 'src/hooks/use-mouse-position.ts',
     'hooks/smooth-scroll': 'src/hooks/smooth-scroll/index.ts',
   },

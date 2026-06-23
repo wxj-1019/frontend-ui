@@ -16,3 +16,5 @@ export * from './spring-morph';
 export * from './morphing-svg';
 export * from './magnetic-button';
 export * from './hover-scale';
+export * from './fluid-cursor';
+export * from './scroll-parallax';

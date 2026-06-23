@@ -52,21 +52,21 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '交互动画',
     description: '为用户交互添加流畅的动画反馈',
     href: '/animations',
-    count: 19,
+    count: 21,
   },
   {
     id: 'components',
     label: '复合组件',
     description: '可直接使用的高级交互组件',
     href: '/components',
-    count: 10,
+    count: 11,
   },
   {
     id: 'backgrounds',
     label: '背景特效',
     description: '为页面添加动态背景效果',
     href: '/backgrounds',
-    count: 7,
+    count: 9,
   },
   {
     id: 'gsap-animations',
@@ -383,6 +383,25 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     importStatement: 'import { HoverScale } from "@frontend-ui/ui";',
   },
 
+  {
+    name: 'FluidCursor',
+    description: '液态金属流体光标跟随效果，鼠标移动时产生粒子拖尾和发光轨迹',
+    href: '/animations/fluid-cursor',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'fluid-cursor',
+    importStatement: 'import { FluidCursor } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'ScrollParallax',
+    description: '滚动驱动的多层视差动画，支持位移、缩放、旋转和模糊',
+    href: '/animations/scroll-parallax',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'scroll-parallax',
+    importStatement: 'import { ScrollParallax } from "@frontend-ui/ui";',
+  },
+
   // ── 复合组件 (10) ────────────────────────────────────────
   {
     name: 'Dock',
@@ -475,6 +494,16 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     importStatement: 'import { Card3D } from "@frontend-ui/ui";',
   },
 
+  {
+    name: 'GlassCard',
+    description: '玻璃态卡片组件，支持3D倾斜、动态光晕和毛玻璃效果',
+    href: '/components/glass-card',
+    category: CATEGORIES[2],
+    engine: 'CSS',
+    installName: 'glass-card',
+    importStatement: 'import { GlassCard } from "@frontend-ui/ui";',
+  },
+
   // ── 背景特效 (7) ────────────────────────────────────────
   {
     name: 'Aurora',
@@ -538,6 +567,25 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'grid-motion',
     importStatement: 'import { GridMotion } from "@frontend-ui/ui";',
+  },
+
+  {
+    name: 'ParticleOcean',
+    description: '粒子海洋效果，正弦波流动粒子带鼠标排斥交互',
+    href: '/backgrounds/particle-ocean',
+    category: CATEGORIES[3],
+    engine: 'Motion',
+    installName: 'particle-ocean',
+    importStatement: 'import { ParticleOcean } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'GenerativeBackground',
+    description: '生成式动态背景，基于噪声算法实时生成流动的抽象艺术图案',
+    href: '/backgrounds/generative-background',
+    category: CATEGORIES[3],
+    engine: 'CSS',
+    installName: 'generative-background',
+    importStatement: 'import { GenerativeBackground } from "@frontend-ui/ui";',
   },
 
   // ── GSAP 动画 (7) ────────────────────────────────────────
