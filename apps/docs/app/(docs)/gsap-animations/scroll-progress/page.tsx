@@ -1,6 +1,5 @@
 "use client";
 
-import { ScrollProgress } from "@frontend-ui/ui";
 import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
 
 export default function ScrollProgressPage() {

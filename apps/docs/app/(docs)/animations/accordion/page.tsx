@@ -2,7 +2,7 @@
 
 import { Accordion } from "@frontend-ui/ui";
 import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
-import { ChevronDown, ChevronRight, HelpCircle, Settings, BookOpen } from "lucide-react";
+import { HelpCircle, Settings, BookOpen } from "lucide-react";
 
 export default function AccordionPage() {
   return (

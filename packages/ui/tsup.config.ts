@@ -17,6 +17,8 @@ export default defineConfig({
     'text-animations/count-up': 'src/text-animations/count-up/index.ts',
     'text-animations/decrypted-text':
       'src/text-animations/decrypted-text/index.ts',
+    'text-animations/spring-number':
+      'src/text-animations/spring-number/index.ts',
     'animations/magnet': 'src/animations/magnet/index.ts',
     'animations/fade-content': 'src/animations/fade-content/index.ts',
     'animations/draggable': 'src/animations/draggable/index.ts',
@@ -32,6 +34,9 @@ export default defineConfig({
     'animations/float-animation': 'src/animations/float-animation/index.ts',
     'animations/stagger-animation':
       'src/animations/stagger-animation/index.ts',
+    'animations/svg-path-draw': 'src/animations/svg-path-draw/index.ts',
+    'animations/spring-morph': 'src/animations/spring-morph/index.ts',
+    'animations/morphing-svg': 'src/animations/morphing-svg/index.ts',
     'gsap-animations/scroll-reveal':
       'src/gsap-animations/scroll-reveal/index.ts',
     'gsap-animations/text-reveal': 'src/gsap-animations/text-reveal/index.ts',
@@ -64,6 +69,7 @@ export default defineConfig({
     'components/glow-card': 'src/components/glow-card/index.ts',
     'components/bounce-cards': 'src/components/bounce-cards/index.ts',
     'hooks/use-mouse-position': 'src/hooks/use-mouse-position.ts',
+    'hooks/smooth-scroll': 'src/hooks/smooth-scroll/index.ts',
   },
   format: ['cjs', 'esm'],
   dts: !skipDts,

@@ -2,7 +2,7 @@
 
 import { Draggable } from "@frontend-ui/ui";
 import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
-import { GripVertical, User, Clock, Tag } from "lucide-react";
+import { GripVertical, User, Clock } from "lucide-react";
 
 export default function DraggablePage() {
   return (

@@ -99,7 +99,13 @@ const componentNavigation: NavItem[] = [
       { label: 'TiltCard', href: '/components/tilt-card' },
       { label: 'GlowCard', href: '/components/glow-card' },
       { label: 'BounceCards', href: '/components/bounce-cards' },
-      { label: 'SmoothScroll', href: '/components/smooth-scroll' },
+    ],
+  },
+  {
+    label: 'Hooks',
+    href: '/components',
+    items: [
+      { label: 'SmoothScrollProvider', href: '/components/smooth-scroll' },
     ],
   },
   {
