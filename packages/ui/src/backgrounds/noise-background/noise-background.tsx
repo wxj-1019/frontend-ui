@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
 
 export interface NoiseBackgroundProps {
   className?: string;
@@ -37,6 +38,8 @@ export function NoiseBackground({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const shouldReduce = useReducedMotion();
+  const imageDataRef = useRef<ImageData | null>(null);
 
   // IntersectionObserver: 视口外暂停动画
   useEffect(() => {
@@ -55,7 +58,7 @@ export function NoiseBackground({
   }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || shouldReduce) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -63,9 +66,16 @@ export function NoiseBackground({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let resizeTimeout: ReturnType<typeof setTimeout> | null = null;
+
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        // 清除 ImageData 缓存，下次绘制时会重新创建
+        imageDataRef.current = null;
+      }, 100);
     };
     resize();
     if (typeof window !== 'undefined') {
@@ -82,7 +92,13 @@ export function NoiseBackground({
     const drawNoise = () => {
       const w = canvas.width;
       const h = canvas.height;
-      const imageData = ctx.createImageData(w, h);
+
+      // 缓存 ImageData，避免每帧创建新对象
+      let imageData = imageDataRef.current;
+      if (!imageData || imageData.width !== w || imageData.height !== h) {
+        imageData = ctx.createImageData(w, h);
+        imageDataRef.current = imageData;
+      }
       const data = imageData.data;
 
       for (let y = 0; y < h; y += step) {
@@ -116,11 +132,14 @@ export function NoiseBackground({
       if (typeof window !== 'undefined') {
         window.removeEventListener('resize', resize);
       }
+      if (resizeTimeout) clearTimeout(resizeTimeout);
       if (animated) {
         cancelAnimationFrame(animationId);
       }
+      // 清理缓存的 ImageData
+      imageDataRef.current = null;
     };
-  }, [opacity, frequency, color, animated, isVisible]);
+  }, [opacity, frequency, color, animated, isVisible, shouldReduce]);
 
   return (
     <div ref={containerRef} className={cn('absolute inset-0', className)}>

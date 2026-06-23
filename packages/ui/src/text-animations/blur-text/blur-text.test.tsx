@@ -20,4 +20,15 @@ describe('BlurText', () => {
     );
     expect(container.firstChild).toHaveClass('custom-class');
   });
+
+  it('supports words animation mode', () => {
+    render(<BlurText text="Hello World" animateBy="words" />);
+    expect(screen.getByText('Hello')).toBeInTheDocument();
+    expect(screen.getByText('World')).toBeInTheDocument();
+  });
+
+  it('supports none animation mode', () => {
+    render(<BlurText text="Hello" animateBy="none" />);
+    expect(screen.getByText('Hello')).toBeInTheDocument();
+  });
 });

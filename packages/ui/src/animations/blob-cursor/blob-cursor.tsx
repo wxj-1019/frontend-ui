@@ -2,6 +2,7 @@
 
 import { useRef, useCallback, useEffect, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { useReducedMotion } from 'motion/react';
 
 export interface BlobCursorProps {
   /** 被包裹的元素 */
@@ -52,6 +53,7 @@ export function BlobCursor({
   const rafRef = useRef<number>(0);
   const isInsideRef = useRef(false);
   const animateRef = useRef<() => void>(() => {});
+  const shouldReduce = useReducedMotion();
 
   const animate = useCallback(() => {
     const state = stateRef.current;
@@ -73,6 +75,7 @@ export function BlobCursor({
   });
 
   useEffect(() => {
+    if (shouldReduce) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -127,33 +130,35 @@ export function BlobCursor({
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [animate, size]);
+  }, [animate, size, shouldReduce]);
 
   return (
     <div
       ref={containerRef}
       className={cn(
         'relative',
-        hideCursor ? 'cursor-none' : 'cursor-default',
+        hideCursor && !shouldReduce ? 'cursor-none' : 'cursor-default',
         className
       )}
       role="presentation"
     >
       {children}
-      <div
-        ref={blobRef}
-        className="pointer-events-none absolute left-0 top-0 will-change-transform"
-        style={{
-          width: size,
-          height: size,
-          borderRadius: '50%',
-          background: color,
-          opacity,
-          filter: `blur(${blur}px)`,
-          transform: 'translate(-100px, -100px) scale(0)',
-        }}
-        aria-hidden="true"
-      />
+      {!shouldReduce && (
+        <div
+          ref={blobRef}
+          className="pointer-events-none absolute left-0 top-0 will-change-transform"
+          style={{
+            width: size,
+            height: size,
+            borderRadius: '50%',
+            background: color,
+            opacity,
+            filter: `blur(${blur}px)`,
+            transform: 'translate(-100px, -100px) scale(0)',
+          }}
+          aria-hidden="true"
+        />
+      )}
     </div>
   );
 }

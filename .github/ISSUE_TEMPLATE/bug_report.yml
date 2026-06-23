@@ -1,0 +1,57 @@
+name: Bug 报告
+description: 报告组件库中的问题或缺陷
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 清晰简洁地描述 Bug 是什么
+      placeholder: 当我...时，发生了...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      description: 提供能够复现问题的步骤
+      placeholder: |
+        1. 进入 '...'
+        2. 点击 '...'
+        3. 出现错误
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+      description: 描述你期望发生的结果
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: 最小复现代码
+      description: 提供能够复现问题的最小代码片段
+      render: tsx
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Frontend UI 版本
+      placeholder: 例如 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: 浏览器
+      placeholder: 例如 Chrome 120
+    validations:
+      required: true
+  - type: textarea
+    id: additional
+    attributes:
+      label: 附加信息
+      description: 任何其他上下文或截图

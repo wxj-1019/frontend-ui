@@ -6,5 +6,4 @@ export * from './stack-cards';
 export * from './tilt-card';
 export * from './glow-card';
 export * from './bounce-cards';
-export * from './bounce-cards';
-export * from './glow-card';
+export * from './card-3d';

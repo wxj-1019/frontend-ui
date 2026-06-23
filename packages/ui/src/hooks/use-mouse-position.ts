@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface MousePosition {
   x: number;
@@ -7,33 +7,31 @@ interface MousePosition {
 
 export function useMousePosition(): MousePosition {
   const [position, setPosition] = useState<MousePosition>({ x: 0, y: 0 });
+  const throttleRef = useRef<number | null>(null);
+
+  const updatePosition = useCallback((clientX: number, clientY: number) => {
+    if (throttleRef.current !== null) return;
+    throttleRef.current = requestAnimationFrame(() => {
+      setPosition({ x: clientX, y: clientY });
+      throttleRef.current = null;
+    });
+  }, []);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    let rafId: number;
-    let latestEvent: MouseEvent | null = null;
-
-    const processEvent = () => {
-      if (latestEvent) {
-        setPosition({ x: latestEvent.clientX, y: latestEvent.clientY });
-        latestEvent = null;
-      }
-      rafId = requestAnimationFrame(processEvent);
-    };
-
     const handleMouseMove = (event: MouseEvent) => {
-      latestEvent = event;
+      updatePosition(event.clientX, event.clientY);
     };
 
-    rafId = requestAnimationFrame(processEvent);
     window.addEventListener('mousemove', handleMouseMove);
-
     return () => {
-      cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', handleMouseMove);
+      if (throttleRef.current !== null) {
+        cancelAnimationFrame(throttleRef.current);
+      }
     };
-  }, []);
+  }, [updatePosition]);
 
   return position;
 }

@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
 
 export interface ParticlesProps {
   className?: string;
@@ -15,6 +16,9 @@ export function Particles({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const shouldReduce = useReducedMotion();
+  const particlesRef = useRef<ReturnType<typeof createParticles> | null>(null);
+  const resizeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // IntersectionObserver: 视口外暂停动画
   useEffect(() => {
@@ -33,7 +37,7 @@ export function Particles({
   }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || shouldReduce) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -44,24 +48,40 @@ export function Particles({
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
+      // 重新初始化粒子位置到可见区域
+      particlesRef.current = null;
     };
     resize();
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', resize);
     }
 
-    const particles = Array.from({ length: count }, () => ({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
-      size: Math.random() * 2 + 1,
-    }));
+    // 创建粒子
+    function createParticles() {
+      return Array.from({ length: count }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        size: Math.random() * 2 + 1,
+      }));
+    }
+
+    if (!particlesRef.current) {
+      particlesRef.current = createParticles();
+    }
+    let particles = particlesRef.current;
 
     let animationId: number;
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 确保粒子数组引用是最新的（resize 后可能重新创建）
+      if (!particlesRef.current) {
+        particlesRef.current = createParticles();
+        particles = particlesRef.current;
+      }
 
       particles.forEach((p) => {
         p.x += p.vx;
@@ -87,7 +107,7 @@ export function Particles({
       }
       cancelAnimationFrame(animationId);
     };
-  }, [count, color, isVisible]);
+  }, [count, color, isVisible, shouldReduce]);
 
   return (
     <div ref={containerRef} className={cn('absolute inset-0', className)}>

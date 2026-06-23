@@ -45,28 +45,28 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '文字动画',
     description: '为文字添加各种动态效果，提升视觉表现力',
     href: '/text-animations',
-    count: 10,
+    count: 13,
   },
   {
     id: 'animations',
     label: '交互动画',
     description: '为用户交互添加流畅的动画反馈',
     href: '/animations',
-    count: 17,
+    count: 19,
   },
   {
     id: 'components',
     label: '复合组件',
     description: '可直接使用的高级交互组件',
     href: '/components',
-    count: 9,
+    count: 10,
   },
   {
     id: 'backgrounds',
     label: '背景特效',
     description: '为页面添加动态背景效果',
     href: '/backgrounds',
-    count: 6,
+    count: 7,
   },
   {
     id: 'gsap-animations',
@@ -88,7 +88,7 @@ export const CATEGORIES: ComponentCategory[] = [
 // ─── 组件注册表 ───────────────────────────────────────────────
 
 /**
- * 所有 56 个组件的完整注册表
+ * 所有 60 个组件的完整注册表
  */
 export const COMPONENT_REGISTRY: ComponentEntry[] = [
   // ── 文字动画 (10) ────────────────────────────────────────
@@ -182,8 +182,35 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'spring-number',
     importStatement: 'import { SpringNumber } from "@frontend-ui/ui";',
   },
+  {
+    name: 'NeonText',
+    description: '霓虹发光文字效果，多层发光叠加带 CSS 闪烁',
+    href: '/text-animations/neon-text',
+    category: CATEGORIES[0],
+    engine: 'CSS',
+    installName: 'neon-text',
+    importStatement: 'import { NeonText } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'ShinyText',
+    description: '扫光/流光效果文字，白色光束从左到右扫过',
+    href: '/text-animations/shiny-text',
+    category: CATEGORIES[0],
+    engine: 'CSS',
+    installName: 'shiny-text',
+    importStatement: 'import { ShinyText } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'RotatingText',
+    description: '旋转文字，字符依次围绕中心旋转摆动',
+    href: '/text-animations/rotating-text',
+    category: CATEGORIES[0],
+    engine: 'CSS',
+    installName: 'rotating-text',
+    importStatement: 'import { RotatingText } from "@frontend-ui/ui";',
+  },
 
-  // ── 交互动画 (17) ──────────────────────────────────────
+  // ── 交互动画 (19) ──────────────────────────────────────
   {
     name: 'Magnet',
     description: '磁吸效果组件，元素跟随鼠标产生弹簧式位移',
@@ -337,8 +364,26 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'morphing-svg',
     importStatement: 'import { MorphingSVG } from "@frontend-ui/ui";',
   },
+  {
+    name: 'MagneticButton',
+    description: '磁吸按钮，鼠标悬停时按钮跟随产生弹性位移 (Motion)',
+    href: '/animations/magnetic-button',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'magnetic-button',
+    importStatement: 'import { MagneticButton } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'HoverScale',
+    description: '悬停缩放容器，鼠标悬停时平滑放大并可选阴影 (Motion)',
+    href: '/animations/hover-scale',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'hover-scale',
+    importStatement: 'import { HoverScale } from "@frontend-ui/ui";',
+  },
 
-  // ── 复合组件 (9) ────────────────────────────────────────
+  // ── 复合组件 (10) ────────────────────────────────────────
   {
     name: 'Dock',
     description: 'macOS 风格的停靠栏',
@@ -420,8 +465,17 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'smooth-scroll',
     importStatement: 'import { SmoothScrollProvider } from "@frontend-ui/ui";',
   },
+  {
+    name: 'Card3D',
+    description: '3D 透视卡片，鼠标追踪产生透视倾斜和动态光晕',
+    href: '/components/card-3d',
+    category: CATEGORIES[2],
+    engine: 'CSS',
+    installName: 'card-3d',
+    importStatement: 'import { Card3D } from "@frontend-ui/ui";',
+  },
 
-  // ── 背景特效 (6) ────────────────────────────────────────
+  // ── 背景特效 (7) ────────────────────────────────────────
   {
     name: 'Aurora',
     description: '极光背景效果',
@@ -475,6 +529,15 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'hyperspeed',
     importStatement: 'import { Hyperspeed } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'GridMotion',
+    description: '网格运动背景，方块按行列交错呼吸闪烁',
+    href: '/backgrounds/grid-motion',
+    category: CATEGORIES[3],
+    engine: 'Motion',
+    installName: 'grid-motion',
+    importStatement: 'import { GridMotion } from "@frontend-ui/ui";',
   },
 
   // ── GSAP 动画 (7) ────────────────────────────────────────

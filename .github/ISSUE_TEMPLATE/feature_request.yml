@@ -1,0 +1,35 @@
+name: 功能请求
+description: 建议新组件或功能
+labels: [enhancement]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 功能描述
+      description: 清晰简洁地描述你想要的功能
+    validations:
+      required: true
+  - type: textarea
+    id: usecase
+    attributes:
+      label: 使用场景
+      description: 描述这个功能在什么场景下使用
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: 期望 API（可选）
+      description: 提供你期望的组件 API 设计
+      render: tsx
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: 你愿意贡献吗？
+      options:
+        - label: 是的，我愿意提交 PR
+  - type: textarea
+    id: additional
+    attributes:
+      label: 附加信息
+      description: 任何其他上下文或设计想法

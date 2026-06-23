@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useCallback } from 'react';
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import { CodeBlock } from '@/components/ui/CodeBlock';
 import { InstallTabs } from '@/components/ui/InstallTabs';
 import { PropsTable } from '@/components/ui/PropsTable';
 import { PropsPanel } from '@/components/ui/PropsPanel';
+import { ResponsivePreview } from '@/components/ui/ResponsivePreview';
 
 export interface PropConfig {
   name: string;
@@ -38,15 +39,15 @@ export interface ExampleItem {
 }
 
 export interface ComponentDocPageProps {
-  /** 面包屑路径（如 [{ label: "文字动画", href: "/text-animations" }]） */
+  /** 面包屑路径 */
   category: BreadcrumbItem;
-  /** 组件名称（如 "BlurText"） */
+  /** 组件名称 */
   name: string;
   /** 组件描述 */
   description: string;
-  /** 安装用的短名称（如 "blur-text"） */
+  /** 安装用的短名称 */
   installName: string;
-  /** 导入语句（如 'import { BlurText } from "@frontend-ui/ui"'） */
+  /** 导入语句 */
   importStatement: string;
   /** 默认属性值 */
   defaultValues: Record<string, unknown>;
@@ -54,7 +55,7 @@ export interface ComponentDocPageProps {
   propConfig: PropConfig[];
   /** Props API 文档 */
   propDocs: PropDoc[];
-  /** 动态生成使用代码（接收当前 props 值） */
+  /** 动态生成使用代码 */
   codeGenerator: (values: Record<string, unknown>) => string;
   /** 渲染实时预览内容 */
   renderPreview: (values: Record<string, unknown>) => React.ReactNode;
@@ -119,27 +120,11 @@ export function ComponentDocPage({
 
       {/* Preview + Props Panel */}
       <div className="grid gap-6 lg:grid-cols-[1fr,300px]">
-        {/* Live Preview */}
-        <div className="overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
-          <div className="flex items-center justify-between border-b border-[var(--color-border-subtle)] px-4 py-2">
-            <span className="text-xs text-[var(--color-text-subtle)]">
-              实时预览
-            </span>
-            <button
-              onClick={() => setPreviewKey((k) => k + 1)}
-              className="flex items-center gap-1 rounded-md px-2 py-1 text-xs text-[var(--color-text-subtle)] transition-colors hover:bg-[var(--color-hover)] hover:text-[var(--color-accent)]"
-              aria-label="重播动画"
-            >
-              <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-              </svg>
-              重播
-            </button>
-          </div>
-          <div className="flex min-h-[200px] items-center justify-center py-16">
-            <div key={previewKey}>{renderPreview(props)}</div>
-          </div>
-        </div>
+        {/* Live Preview with Responsive Toggle */}
+        <ResponsivePreview
+          render={() => renderPreview(props)}
+          title="实时预览"
+        />
 
         {/* Props Panel */}
         <PropsPanel

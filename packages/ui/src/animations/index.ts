@@ -14,3 +14,5 @@ export * from './stagger-animation';
 export * from './svg-path-draw';
 export * from './spring-morph';
 export * from './morphing-svg';
+export * from './magnetic-button';
+export * from './hover-scale';

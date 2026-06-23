@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import { useEffect, useRef, useState } from 'react';
+import { useReducedMotion } from 'motion/react';
 
 export interface StarfieldProps {
   className?: string;
@@ -30,6 +31,8 @@ export function Starfield({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
+  const shouldReduce = useReducedMotion();
+  const starsRef = useRef<Star[] | null>(null);
 
   // IntersectionObserver: 视口外暂停动画
   useEffect(() => {
@@ -48,7 +51,7 @@ export function Starfield({
   }, []);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || shouldReduce) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -56,21 +59,21 @@ export function Starfield({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    let resizeTimeout: ReturnType<typeof setTimeout> | null = null;
+
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      if (resizeTimeout) clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        // 重新初始化星星
+        starsRef.current = null;
+      }, 100);
     };
     resize();
     if (typeof window !== 'undefined') {
       window.addEventListener('resize', resize);
     }
-
-    const stars: Star[] = Array.from({ length: count }, () => ({
-      x: (Math.random() - 0.5) * canvas.width,
-      y: (Math.random() - 0.5) * canvas.height,
-      z: Math.random() * canvas.width,
-      pz: 0,
-    }));
 
     let animationId: number;
 
@@ -79,6 +82,17 @@ export function Starfield({
       const h = canvas.height;
       const cx = w / 2;
       const cy = h / 2;
+
+      // 重新初始化星星数组（resize 后或首次运行）
+      if (!starsRef.current) {
+        starsRef.current = Array.from({ length: count }, () => ({
+          x: (Math.random() - 0.5) * w,
+          y: (Math.random() - 0.5) * h,
+          z: Math.random() * w,
+          pz: 0,
+        }));
+      }
+      const stars = starsRef.current;
 
       // 拖尾效果：用半透明黑覆盖代替 clearRect
       ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
@@ -116,6 +130,7 @@ export function Starfield({
         ctx.lineTo(sx, sy);
         ctx.stroke();
       }
+      // 重置 globalAlpha，避免影响后续渲染
       ctx.globalAlpha = 1;
 
       animationId = requestAnimationFrame(animate);
@@ -127,9 +142,10 @@ export function Starfield({
       if (typeof window !== 'undefined') {
         window.removeEventListener('resize', resize);
       }
+      if (resizeTimeout) clearTimeout(resizeTimeout);
       cancelAnimationFrame(animationId);
     };
-  }, [count, speed, depth, starColor, isVisible]);
+  }, [count, speed, depth, starColor, isVisible, shouldReduce]);
 
   return (
     <div ref={containerRef} className={cn('absolute inset-0 bg-black', className)}>

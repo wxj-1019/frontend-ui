@@ -2,6 +2,7 @@
 
 import { useRef, useCallback, useEffect, type ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { useReducedMotion } from 'motion/react';
 
 export interface CrosshairCursorProps {
   /** 被包裹的元素 */
@@ -44,6 +45,7 @@ export function CrosshairCursor({
   const rafRef = useRef<number>(0);
   const isInsideRef = useRef(false);
   const animateRef = useRef<() => void>(() => {});
+  const shouldReduce = useReducedMotion();
 
   const animate = useCallback(() => {
     const crosshair = crosshairRef.current;
@@ -67,6 +69,7 @@ export function CrosshairCursor({
   });
 
   useEffect(() => {
+    if (shouldReduce) return;
     const container = containerRef.current;
     if (!container) return;
 
@@ -128,73 +131,77 @@ export function CrosshairCursor({
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [animate, showCoordinates]);
+  }, [animate, showCoordinates, shouldReduce]);
 
   return (
     <div
       ref={containerRef}
-      className={cn('relative cursor-none', className)}
+      className={cn('relative', shouldReduce ? 'cursor-default' : 'cursor-none', className)}
       role="presentation"
     >
       {children}
 
-      {/* Crosshair */}
-      <div
-        ref={crosshairRef}
-        className="pointer-events-none absolute left-0 top-0 opacity-0 will-change-transform"
-        style={{
-          marginLeft: -size / 2,
-          marginTop: -size / 2,
-        }}
-        aria-hidden="true"
-      >
-        {/* Horizontal line */}
-        <div
-          className="absolute"
-          style={{
-            left: 0,
-            top: size / 2 - strokeWidth / 2,
-            width: size,
-            height: strokeWidth,
-            backgroundColor: color,
-          }}
-        />
-
-        {/* Vertical line */}
-        <div
-          className="absolute"
-          style={{
-            left: size / 2 - strokeWidth / 2,
-            top: 0,
-            width: strokeWidth,
-            height: size,
-            backgroundColor: color,
-          }}
-        />
-
-        {/* Center dot */}
-        {showCenter && (
+      {!shouldReduce && (
+        <>
+          {/* Crosshair */}
           <div
-            className="absolute rounded-full"
+            ref={crosshairRef}
+            className="pointer-events-none absolute left-0 top-0 opacity-0 will-change-transform"
             style={{
-              left: size / 2 - centerSize / 2,
-              top: size / 2 - centerSize / 2,
-              width: centerSize,
-              height: centerSize,
-              backgroundColor: color,
+              marginLeft: -size / 2,
+              marginTop: -size / 2,
             }}
-          />
-        )}
-      </div>
+            aria-hidden="true"
+          >
+            {/* Horizontal line */}
+            <div
+              className="absolute"
+              style={{
+                left: 0,
+                top: size / 2 - strokeWidth / 2,
+                width: size,
+                height: strokeWidth,
+                backgroundColor: color,
+              }}
+            />
 
-      {/* Coordinates */}
-      {showCoordinates && (
-        <div
-          ref={coordsRef}
-          className="pointer-events-none absolute left-0 top-0 font-mono text-xs opacity-0 will-change-transform"
-          style={{ color }}
-          aria-hidden="true"
-        />
+            {/* Vertical line */}
+            <div
+              className="absolute"
+              style={{
+                left: size / 2 - strokeWidth / 2,
+                top: 0,
+                width: strokeWidth,
+                height: size,
+                backgroundColor: color,
+              }}
+            />
+
+            {/* Center dot */}
+            {showCenter && (
+              <div
+                className="absolute rounded-full"
+                style={{
+                  left: size / 2 - centerSize / 2,
+                  top: size / 2 - centerSize / 2,
+                  width: centerSize,
+                  height: centerSize,
+                  backgroundColor: color,
+                }}
+              />
+            )}
+          </div>
+
+          {/* Coordinates */}
+          {showCoordinates && (
+            <div
+              ref={coordsRef}
+              className="pointer-events-none absolute left-0 top-0 font-mono text-xs opacity-0 will-change-transform"
+              style={{ color }}
+              aria-hidden="true"
+            />
+          )}
+        </>
       )}
     </div>
   );

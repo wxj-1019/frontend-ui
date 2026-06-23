@@ -2,229 +2,183 @@ import fs from 'fs-extra';
 import path from 'path';
 import chalk from 'chalk';
 import prompts from 'prompts';
+import { SHARED_COMPONENTS, type SharedComponentEntry } from '../registry.js';
 
-interface ComponentInfo {
-  name: string;
-  category: string;
-  files: string[];
+/** 配置类型 */
+interface FrontendUIConfig {
+  style?: string;
+  tsx?: boolean;
+  utilsPath?: string;
+  componentsPath?: string;
 }
 
-const COMPONENTS: Record<string, ComponentInfo> = {
-  'blur-text': {
-    name: 'BlurText',
-    category: 'text-animations',
-    files: ['blur-text.tsx', 'index.ts'],
-  },
-  'gradient-text': {
-    name: 'GradientText',
-    category: 'text-animations',
-    files: ['gradient-text.tsx', 'index.ts'],
-  },
-  'split-text': {
-    name: 'SplitText',
-    category: 'text-animations',
-    files: ['split-text.tsx', 'index.ts'],
-  },
-  'typewriter': {
-    name: 'Typewriter',
-    category: 'text-animations',
-    files: ['typewriter.tsx', 'index.ts'],
-  },
-  'scramble-text': {
-    name: 'ScrambleText',
-    category: 'text-animations',
-    files: ['scramble-text.tsx', 'index.ts'],
-  },
-  'wave-text': {
-    name: 'WaveText',
-    category: 'text-animations',
-    files: ['wave-text.tsx', 'index.ts'],
-  },
-  'glitch-text': {
-    name: 'GlitchText',
-    category: 'text-animations',
-    files: ['glitch-text.tsx', 'index.ts'],
-  },
-  'count-up': {
-    name: 'CountUp',
-    category: 'text-animations',
-    files: ['count-up.tsx', 'index.ts'],
-  },
-  'decrypted-text': {
-    name: 'DecryptedText',
-    category: 'text-animations',
-    files: ['decrypted-text.tsx', 'index.ts'],
-  },
-  'magnet': {
-    name: 'Magnet',
-    category: 'animations',
-    files: ['magnet.tsx', 'index.ts'],
-  },
-  'fade-content': {
-    name: 'FadeContent',
-    category: 'animations',
-    files: ['fade-content.tsx', 'index.ts'],
-  },
-  'scroll-reveal': {
-    name: 'ScrollReveal',
-    category: 'animations',
-    files: ['scroll-reveal.tsx', 'index.ts'],
-  },
-  'draggable': {
-    name: 'Draggable',
-    category: 'animations',
-    files: ['draggable.tsx', 'index.ts'],
-  },
-  'flip-card': {
-    name: 'FlipCard',
-    category: 'animations',
-    files: ['flip-card.tsx', 'index.ts'],
-  },
-  'accordion': {
-    name: 'Accordion',
-    category: 'animations',
-    files: ['accordion.tsx', 'index.ts'],
-  },
-  'tabs': {
-    name: 'Tabs',
-    category: 'animations',
-    files: ['tabs.tsx', 'index.ts'],
-  },
-  'modal': {
-    name: 'Modal',
-    category: 'animations',
-    files: ['modal.tsx', 'index.ts'],
-  },
-  'toast': {
-    name: 'Toast',
-    category: 'animations',
-    files: ['toast.tsx', 'index.ts'],
-  },
-  'click-spark': {
-    name: 'ClickSpark',
-    category: 'animations',
-    files: ['click-spark.tsx', 'index.ts'],
-  },
-  'blob-cursor': {
-    name: 'BlobCursor',
-    category: 'animations',
-    files: ['blob-cursor.tsx', 'index.ts'],
-  },
-  'crosshair-cursor': {
-    name: 'CrosshairCursor',
-    category: 'animations',
-    files: ['crosshair-cursor.tsx', 'index.ts'],
-  },
-  'float-animation': {
-    name: 'FloatAnimation',
-    category: 'animations',
-    files: ['float-animation.tsx', 'index.ts'],
-  },
-  'stagger-animation': {
-    name: 'StaggerAnimation',
-    category: 'animations',
-    files: ['stagger-animation.tsx', 'index.ts'],
-  },
-  'dock': {
-    name: 'Dock',
-    category: 'components',
-    files: ['dock.tsx', 'index.ts'],
-  },
-  'spotlight-card': {
-    name: 'SpotlightCard',
-    category: 'components',
-    files: ['spotlight-card.tsx', 'index.ts'],
-  },
-  'masonry': {
-    name: 'Masonry',
-    category: 'components',
-    files: ['masonry.tsx', 'index.ts'],
-  },
-  'carousel': {
-    name: 'Carousel',
-    category: 'components',
-    files: ['carousel.tsx', 'index.ts'],
-  },
-  'stack-cards': {
-    name: 'StackCards',
-    category: 'components',
-    files: ['stack-cards.tsx', 'index.ts'],
-  },
-  'tilt-card': {
-    name: 'TiltCard',
-    category: 'components',
-    files: ['tilt-card.tsx', 'index.ts'],
-  },
-  'bounce-cards': {
-    name: 'BounceCards',
-    category: 'components',
-    files: ['bounce-cards.tsx', 'index.ts'],
-  },
-  'glow-card': {
-    name: 'GlowCard',
-    category: 'components',
-    files: ['glow-card.tsx', 'index.ts'],
-  },
+/** 配置文件候选 */
+const CONFIG_FILES = ['frontend-ui.config.json', '.frontend-ui.json'];
+
+/** 读取配置文件 */
+async function loadConfig(cwd: string): Promise<FrontendUIConfig> {
+  for (const file of CONFIG_FILES) {
+    const configPath = path.join(cwd, file);
+    if (await fs.pathExists(configPath)) {
+      try {
+        return await fs.readJson(configPath);
+      } catch {
+        return {};
+      }
+    }
+  }
+  return {};
+}
+
+/** 引擎 → 所需依赖映射 */
+const ENGINE_DEPS: Record<string, string[]> = {
+  Motion: ['motion'],
+  GSAP: ['gsap', '@gsap/react'],
+  'react-spring': ['@react-spring/web'],
+  'Anime.js': ['animejs'],
+  Lenis: ['lenis'],
+  CSS: [],
 };
+
+/** 查找组件元数据（支持模糊匹配） */
+function findComponent(name: string): SharedComponentEntry | undefined {
+  const normalized = name.toLowerCase().replace(/\s+/g, '-');
+  return SHARED_COMPONENTS.find(
+    (c) =>
+      c.installName === normalized ||
+      c.name.toLowerCase() === normalized.replace(/-/g, '') ||
+      c.name.toLowerCase() === normalized
+  );
+}
+
+/** 检测用户项目中的依赖 */
+async function detectMissingDeps(
+  engine: string,
+  cwd: string
+): Promise<string[]> {
+  const required = ENGINE_DEPS[engine] || [];
+  if (required.length === 0) return [];
+
+  const pkgPath = path.join(cwd, 'package.json');
+  if (!(await fs.pathExists(pkgPath))) return required;
+
+  const pkg = await fs.readJson(pkgPath);
+  const allDeps = {
+    ...pkg.dependencies,
+    ...pkg.devDependencies,
+    ...pkg.peerDependencies,
+  };
+
+  return required.filter((dep) => !(dep in allDeps));
+}
+
+/** 获取组件源文件路径 */
+function getComponentSource(
+  component: SharedComponentEntry
+): { categoryDir: string; installDir: string } {
+  const monorepoRoot = path.resolve(
+    process.cwd(),
+    'packages/ui/src',
+    component.category
+  );
+  return {
+    categoryDir: monorepoRoot,
+    installDir: path.join(monorepoRoot, component.installName),
+  };
+}
 
 export async function addComponent(
   componentName: string,
   options: { output: string; yes: boolean }
 ) {
-  const component = COMPONENTS[componentName];
+  // 加载配置文件
+  const config = await loadConfig(process.cwd());
+  const outputDir = path.resolve(
+    process.cwd(),
+    options.output || config.componentsPath || './components/ui',
+    componentName
+  );
+
+  const component = findComponent(componentName);
 
   if (!component) {
-    console.log(chalk.red(`Component "${componentName}" not found.`));
-    console.log(chalk.gray('Run "frontend-ui list" to see available components.'));
+    console.log(chalk.red(`\n✗ Component "${componentName}" not found.`));
+    console.log(chalk.gray('  Run "frontend-ui list" to see available components.\n'));
     return;
   }
 
-  const outputDir = path.resolve(process.cwd(), options.output, component.category);
+  const targetDir = path.join(outputDir, component.installName);
 
-  console.log(chalk.blue(`\nAdding ${component.name} to ${outputDir}\n`));
+  console.log(chalk.blue(`\n📦 Adding ${chalk.bold(component.name)}\n`));
+  console.log(`  ${chalk.gray('Category:')} ${component.category}`);
+  console.log(`  ${chalk.gray('Engine:')} ${component.engine}`);
+  console.log(`  ${chalk.gray('Target:')} ${targetDir}\n`);
 
+  // 确认安装
   if (!options.yes) {
     const { confirm } = await prompts({
       type: 'confirm',
       name: 'confirm',
-      message: `Install ${component.name} to ${outputDir}?`,
+      message: `Install ${component.name} to ${targetDir}?`,
       initial: true,
     });
 
     if (!confirm) {
-      console.log(chalk.yellow('Cancelled.'));
+      console.log(chalk.yellow('  Cancelled.'));
       return;
     }
   }
 
-  // Create directory
-  await fs.ensureDir(outputDir);
+  // 创建目录
+  await fs.ensureDir(targetDir);
 
-  // Copy files
+  // 复制文件
+  const { installDir } = getComponentSource(component);
+  let copiedCount = 0;
+  let missingCount = 0;
+
   for (const file of component.files) {
-    const sourcePath = path.join(
-      process.cwd(),
-      'packages/ui/src',
-      component.category,
-      componentName,
-      file
-    );
-
-    const destPath = path.join(outputDir, componentName, file);
+    const sourcePath = path.join(installDir, file);
+    const destPath = path.join(targetDir, file);
 
     try {
       if (await fs.pathExists(sourcePath)) {
         await fs.ensureDir(path.dirname(destPath));
         await fs.copy(sourcePath, destPath);
         console.log(chalk.green(`  ✓ ${file}`));
+        copiedCount++;
       } else {
         console.log(chalk.yellow(`  ⚠ ${file} not found in source`));
+        missingCount++;
       }
     } catch (error) {
       console.log(chalk.red(`  ✗ ${file}: ${error}`));
     }
   }
 
+  // 依赖检测
+  const missingDeps = await detectMissingDeps(
+    component.engine,
+    process.cwd()
+  );
+
   console.log(chalk.green(`\n✓ ${component.name} installed successfully!`));
-  console.log(chalk.gray(`\nImport with: import { ${component.name} } from "./${options.output}/${component.category}/${componentName}";\n`));
+  console.log(
+    chalk.gray(`\n  Import: import { ${component.name} } from "./${path.relative(
+      process.cwd(),
+      targetDir
+    )}";`)
+  );
+
+  if (missingDeps.length > 0) {
+    console.log(chalk.yellow(`\n⚠ Missing dependencies for ${component.engine}:`));
+    for (const dep of missingDeps) {
+      console.log(`  ${chalk.red('•')} ${dep}`);
+    }
+    console.log(
+      chalk.cyan(`\n  Install with: npm install ${missingDeps.join(' ')}`)
+    );
+  }
+
+  console.log();
 }

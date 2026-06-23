@@ -21,28 +21,28 @@ const categories = [
     title: '文字动画',
     description: 'BlurText, GradientText, SplitText 等',
     href: '/text-animations',
-    count: 10,
+    count: 13,
     icon: <Type className="h-6 w-6" />,
   },
   {
     title: '交互动画',
     description: 'Magnet, FadeContent, ScrollReveal 等',
     href: '/animations',
-    count: 17,
+    count: 19,
     icon: <Zap className="h-6 w-6" />,
   },
   {
     title: '复合组件',
     description: 'Dock, SpotlightCard, Masonry 等',
     href: '/components',
-    count: 9,
+    count: 10,
     icon: <Layers className="h-6 w-6" />,
   },
   {
     title: '背景特效',
     description: 'Aurora, Particles, Hyperspeed 等',
     href: '/backgrounds',
-    count: 6,
+    count: 7,
     icon: <Sparkles className="h-6 w-6" />,
   },
 ];
@@ -50,7 +50,7 @@ const categories = [
 const engines = [
   {
     name: 'GSAP',
-    description: '时间轴动画',
+    description: '时间轴动画 · ScrollTrigger · 高性能',
     color: '#88ce02',
     icon: (
       <svg className="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
@@ -60,7 +60,7 @@ const engines = [
   },
   {
     name: 'Motion',
-    description: '声明式动画',
+    description: '声明式动画 · 手势交互 · 布局动画',
     color: '#f0f',
     icon: (
       <svg
@@ -86,7 +86,7 @@ const engines = [
   },
   {
     name: 'react-spring',
-    description: '弹簧物理 (即将推出)',
+    description: '弹簧物理 · 自然流畅 · 数值插值',
     color: '#00ffaa',
     icon: (
       <svg
@@ -103,13 +103,32 @@ const engines = [
         />
       </svg>
     ),
-    planned: true,
+  },
+  {
+    name: 'Anime.js',
+    description: 'SVG 路径 · 描边动画 · 变形插值',
+    color: '#FF006E',
+    icon: (
+      <svg
+        className="h-8 w-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
+        />
+      </svg>
+    ),
   },
 ];
 
 const stats = [
-  { value: '56', label: '动画组件' },
-  { value: '4', label: '动画引擎' },
+  { value: '63', label: '动画组件' },
+  { value: '5', label: '动画引擎' },
   { value: '6', label: '组件分类' },
   { value: '100%', label: 'TypeScript' },
 ];
