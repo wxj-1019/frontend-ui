@@ -36,7 +36,7 @@ export function Footer() {
             <p className="mt-3 text-sm text-[var(--color-text-subtle)]">
               企业级前端动画组件库
               <br />
-              多引擎架构 · 34 动画组件
+              多引擎架构 · 73 动画组件
             </p>
           </div>
 
