@@ -1,0 +1,55 @@
+{
+  "$schema": "https://tr.designtokens.org/format/2025-10/",
+  "name": "frontend-ui",
+  "version": "0.0.1",
+  "tokens": {
+    "color": {
+      "bg": {
+        "primary": { "$type": "color", "$value": "#0A0A0F", "$description": "Primary background (dark)" },
+        "secondary": { "$type": "color", "$value": "#12121A", "$description": "Secondary background" },
+        "surface": { "$type": "color", "$value": "#1A1A2E", "$description": "Surface background" },
+        "elevated": { "$type": "color", "$value": "#222236", "$description": "Elevated background" }
+      },
+      "text": {
+        "primary": { "$type": "color", "$value": "#FFFFFF", "$description": "Primary text" },
+        "muted": { "$type": "color", "$value": "#A8A8BC", "$description": "Muted text (7.2:1 contrast)" },
+        "subtle": { "$type": "color", "$value": "#8A8A9E", "$description": "Subtle text (5.1:1 contrast)" },
+        "disabled": { "$type": "color", "$value": "#5A5A6E", "$description": "Disabled text" }
+      },
+      "accent": {
+        "cyan": { "$type": "color", "$value": "#00F5FF", "$description": "Primary accent - cyan neon" },
+        "magenta": { "$type": "color", "$value": "#FF006E", "$description": "Magenta neon accent" },
+        "violet": { "$type": "color", "$value": "#8B5CF6", "$description": "Violet accent" },
+        "success": { "$type": "color", "$value": "#00FF88", "$description": "Success green" },
+        "warning": { "$type": "color", "$value": "#FFB800", "$description": "Warning amber" }
+      },
+      "border": {
+        "default": { "$type": "color", "$value": "#2A2A3E", "$description": "Default border" },
+        "subtle": { "$type": "color", "$value": "rgba(255,255,255,0.06)", "$description": "Subtle border" },
+        "strong": { "$type": "color", "$value": "rgba(255,255,255,0.12)", "$description": "Strong border" }
+      },
+      "interaction": {
+        "hover": { "$type": "color", "$value": "rgba(0,245,255,0.1)", "$description": "Hover state" },
+        "focus_ring": { "$type": "color", "$value": "rgba(0,245,255,0.5)", "$description": "Focus ring" },
+        "active": { "$type": "color", "$value": "rgba(0,245,255,0.15)", "$description": "Active state" }
+      }
+    },
+    "font": {
+      "display": { "$type": "fontFamily", "$value": ["Space Grotesk", "ui-sans-serif", "system-ui", "sans-serif"], "$description": "Display/heading font" },
+      "sans": { "$type": "fontFamily", "$value": ["Inter", "ui-sans-serif", "system-ui", "sans-serif"], "$description": "Body font" },
+      "mono": { "$type": "fontFamily", "$value": ["JetBrains Mono", "ui-monospace", "monospace"], "$description": "Code font" }
+    },
+    "radius": {
+      "sm": { "$type": "dimension", "$value": "4px", "$description": "Small border radius" },
+      "md": { "$type": "dimension", "$value": "8px", "$description": "Medium border radius" },
+      "lg": { "$type": "dimension", "$value": "12px", "$description": "Large border radius" },
+      "xl": { "$type": "dimension", "$value": "16px", "$description": "Extra large border radius" }
+    },
+    "duration": {
+      "fast": { "$type": "dimension", "$value": "100ms", "$description": "Fast animation" },
+      "normal": { "$type": "dimension", "$value": "200ms", "$description": "Normal animation" },
+      "slow": { "$type": "dimension", "$value": "300ms", "$description": "Slow animation" },
+      "slower": { "$type": "dimension", "$value": "500ms", "$description": "Slower animation" }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+name: 问题咨询
+description: 关于使用、配置或最佳实践的问题
+labels: [question]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: 问题
+      description: 清晰简洁地描述你的问题
+    validations:
+      required: true
+  - type: textarea
+    id: tried
+    attributes:
+      label: 已尝试的方案
+      description: 描述你已经尝试过的解决方案
+  - type: input
+    id: version
+    attributes:
+      label: Frontend UI 版本
+      placeholder: 例如 0.1.0
+  - type: textarea
+    id: code
+    attributes:
+      label: 相关代码
+      description: 提供相关代码片段
+      render: tsx
+  - type: textarea
+    id: additional
+    attributes:
+      label: 附加信息
+      description: 任何其他上下文

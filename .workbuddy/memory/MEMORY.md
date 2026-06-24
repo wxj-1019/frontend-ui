@@ -45,6 +45,10 @@
 - 3 类已实现: hero-sections（双变体）, bento-grids（网格+卡片）, feature-sections（双布局）
 - Block 使用 Motion 引擎入场动画 + Canvas（粒子类）+ CSS（布局类）
 - 测试需注意 ResizeObserver polyfill（已在 test-setup.ts 中添加）
+- **jsdom 特殊行为**:
+  - `getBoundingClientRect()` 默认返回全零！涉及除以 centerX/centerY 的计算会产生 Infinity，CSS transform 值被丢弃。测试中需 mock 返回非零值。
+  - `<img alt="">` 隐式 role="presentation" 而非 "img"，查询需用 `container.querySelector('img')`。
+  - Motion (framer-motion) 的 `whileHover` 可能覆盖直接设置的 `style.transform`，测试应避免依赖其值。
 
 ## CLI 工具
 

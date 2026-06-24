@@ -45,28 +45,28 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '文字动画',
     description: '为文字添加各种动态效果，提升视觉表现力',
     href: '/text-animations',
-    count: 10,
+    count: 13,
   },
   {
     id: 'animations',
     label: '交互动画',
     description: '为用户交互添加流畅的动画反馈',
     href: '/animations',
-    count: 17,
+    count: 21,
   },
   {
     id: 'components',
     label: '复合组件',
     description: '可直接使用的高级交互组件',
     href: '/components',
-    count: 9,
+    count: 13,
   },
   {
     id: 'backgrounds',
     label: '背景特效',
     description: '为页面添加动态背景效果',
     href: '/backgrounds',
-    count: 6,
+    count: 11,
   },
   {
     id: 'gsap-animations',
@@ -88,7 +88,7 @@ export const CATEGORIES: ComponentCategory[] = [
 // ─── 组件注册表 ───────────────────────────────────────────────
 
 /**
- * 所有 56 个组件的完整注册表
+ * 所有 60 个组件的完整注册表
  */
 export const COMPONENT_REGISTRY: ComponentEntry[] = [
   // ── 文字动画 (10) ────────────────────────────────────────
@@ -182,8 +182,35 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'spring-number',
     importStatement: 'import { SpringNumber } from "@frontend-ui/ui";',
   },
+  {
+    name: 'NeonText',
+    description: '霓虹发光文字效果，多层发光叠加带 CSS 闪烁',
+    href: '/text-animations/neon-text',
+    category: CATEGORIES[0],
+    engine: 'CSS',
+    installName: 'neon-text',
+    importStatement: 'import { NeonText } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'ShinyText',
+    description: '扫光/流光效果文字，白色光束从左到右扫过',
+    href: '/text-animations/shiny-text',
+    category: CATEGORIES[0],
+    engine: 'CSS',
+    installName: 'shiny-text',
+    importStatement: 'import { ShinyText } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'RotatingText',
+    description: '旋转文字，字符依次围绕中心旋转摆动',
+    href: '/text-animations/rotating-text',
+    category: CATEGORIES[0],
+    engine: 'CSS',
+    installName: 'rotating-text',
+    importStatement: 'import { RotatingText } from "@frontend-ui/ui";',
+  },
 
-  // ── 交互动画 (17) ──────────────────────────────────────
+  // ── 交互动画 (19) ──────────────────────────────────────
   {
     name: 'Magnet',
     description: '磁吸效果组件，元素跟随鼠标产生弹簧式位移',
@@ -337,8 +364,45 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'morphing-svg',
     importStatement: 'import { MorphingSVG } from "@frontend-ui/ui";',
   },
+  {
+    name: 'MagneticButton',
+    description: '磁吸按钮，鼠标悬停时按钮跟随产生弹性位移 (Motion)',
+    href: '/animations/magnetic-button',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'magnetic-button',
+    importStatement: 'import { MagneticButton } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'HoverScale',
+    description: '悬停缩放容器，鼠标悬停时平滑放大并可选阴影 (Motion)',
+    href: '/animations/hover-scale',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'hover-scale',
+    importStatement: 'import { HoverScale } from "@frontend-ui/ui";',
+  },
 
-  // ── 复合组件 (9) ────────────────────────────────────────
+  {
+    name: 'FluidCursor',
+    description: '液态金属流体光标跟随效果，鼠标移动时产生粒子拖尾和发光轨迹',
+    href: '/animations/fluid-cursor',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'fluid-cursor',
+    importStatement: 'import { FluidCursor } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'ScrollParallax',
+    description: '滚动驱动的多层视差动画，支持位移、缩放、旋转和模糊',
+    href: '/animations/scroll-parallax',
+    category: CATEGORIES[1],
+    engine: 'Motion',
+    installName: 'scroll-parallax',
+    importStatement: 'import { ScrollParallax } from "@frontend-ui/ui";',
+  },
+
+  // ── 复合组件 (10) ────────────────────────────────────────
   {
     name: 'Dock',
     description: 'macOS 风格的停靠栏',
@@ -420,8 +484,27 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'smooth-scroll',
     importStatement: 'import { SmoothScrollProvider } from "@frontend-ui/ui";',
   },
+  {
+    name: 'Card3D',
+    description: '3D 透视卡片，鼠标追踪产生透视倾斜和动态光晕',
+    href: '/components/card-3d',
+    category: CATEGORIES[2],
+    engine: 'CSS',
+    installName: 'card-3d',
+    importStatement: 'import { Card3D } from "@frontend-ui/ui";',
+  },
 
-  // ── 背景特效 (6) ────────────────────────────────────────
+  {
+    name: 'GlassCard',
+    description: '玻璃态卡片组件，支持3D倾斜、动态光晕和毛玻璃效果',
+    href: '/components/glass-card',
+    category: CATEGORIES[2],
+    engine: 'CSS',
+    installName: 'glass-card',
+    importStatement: 'import { GlassCard } from "@frontend-ui/ui";',
+  },
+
+  // ── 背景特效 (7) ────────────────────────────────────────
   {
     name: 'Aurora',
     description: '极光背景效果',
@@ -475,6 +558,34 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     engine: 'Motion',
     installName: 'hyperspeed',
     importStatement: 'import { Hyperspeed } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'GridMotion',
+    description: '网格运动背景，方块按行列交错呼吸闪烁',
+    href: '/backgrounds/grid-motion',
+    category: CATEGORIES[3],
+    engine: 'Motion',
+    installName: 'grid-motion',
+    importStatement: 'import { GridMotion } from "@frontend-ui/ui";',
+  },
+
+  {
+    name: 'ParticleOcean',
+    description: '粒子海洋效果，正弦波流动粒子带鼠标排斥交互',
+    href: '/backgrounds/particle-ocean',
+    category: CATEGORIES[3],
+    engine: 'Motion',
+    installName: 'particle-ocean',
+    importStatement: 'import { ParticleOcean } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'GenerativeBackground',
+    description: '生成式动态背景，基于噪声算法实时生成流动的抽象艺术图案',
+    href: '/backgrounds/generative-background',
+    category: CATEGORIES[3],
+    engine: 'CSS',
+    installName: 'generative-background',
+    importStatement: 'import { GenerativeBackground } from "@frontend-ui/ui";',
   },
 
   // ── GSAP 动画 (7) ────────────────────────────────────────
@@ -606,6 +717,43 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'cta-section',
     importStatement: 'import { CTASection } from "@frontend-ui/ui";',
   },
+  // ── 新增组件 (4) ────────────────────────────────────────
+  {
+    name: 'GlassNavbar',
+    description: '玻璃态导航栏，支持滚动响应式毛玻璃效果',
+    href: '/components/glass-navbar',
+    category: CATEGORIES[2],
+    engine: 'Motion',
+    installName: 'glass-navbar',
+    importStatement: 'import { GlassNavbar } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'GlassModal',
+    description: '玻璃态模态框，支持模糊背景与入场动画',
+    href: '/components/glass-modal',
+    category: CATEGORIES[2],
+    engine: 'Motion',
+    installName: 'glass-modal',
+    importStatement: 'import { GlassModal } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'ThreeScene',
+    description: 'CSS 3D 沉浸式场景，支持多层视差滚动与透视效果',
+    href: '/backgrounds/three-scene',
+    category: CATEGORIES[3],
+    engine: 'Motion',
+    installName: 'three-scene',
+    importStatement: 'import { ThreeScene } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'HighPerfParticles',
+    description: '高性能 Canvas 2D 粒子系统，支持万级粒子与鼠标交互',
+    href: '/backgrounds/high-perf-particles',
+    category: CATEGORIES[3],
+    engine: 'CSS',
+    installName: 'high-perf-particles',
+    importStatement: 'import { HighPerfParticles } from "@frontend-ui/ui";',
+  },
 ];
 
 // ─── 辅助函数 ───────────────────────────────────────────────
@@ -652,10 +800,9 @@ export function searchComponents(query: string): ComponentEntry[] {
 }
 
 /**
- * 获取指定分类 ID 的分类信息
+ * 获取所有组件的总数
  */
-export function getCategoryById(
-  categoryId: string
-): ComponentCategory | undefined {
-  return CATEGORIES.find((cat) => cat.id === categoryId);
+export function getTotalComponentCount(): number {
+  return COMPONENT_REGISTRY.length;
 }
+

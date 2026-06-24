@@ -47,11 +47,26 @@
   --radius-xl: 16px;
   --radius-full: 9999px;
 
-  /* ── 阴影/发光 ── */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --glow-accent: 0 0 20px rgba(0, 245, 255, 0.3);
+  /* ── 引擎品牌色（多色渐变系统） ── */
+  --color-gsap: #88CE02;
+  --color-motion: #FF00FF;
+  --color-spring: #00FFAA;
+  --color-anime: #FF006E;
+  --color-lenis: #6366F1;
+  --color-css: #FFD700;
+
+  /* ── 引擎发光色 ── */
+  --glow-gsap: 0 0 20px rgba(136, 206, 2, 0.3);
+  --glow-motion: 0 0 20px rgba(255, 0, 255, 0.3);
+  --glow-spring: 0 0 20px rgba(0, 255, 170, 0.3);
+  --glow-anime: 0 0 20px rgba(255, 0, 110, 0.3);
+  --glow-lenis: 0 0 20px rgba(99, 102, 241, 0.3);
+  --glow-css: 0 0 20px rgba(255, 215, 0, 0.3);
+
+  /* ── 渐变预设 ── */
+  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 245, 255, 0.15) 0%, transparent 60%),
+                   radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255, 0, 255, 0.08) 0%, transparent 60%),
+                   radial-gradient(ellipse 50% 50% at 20% 100%, rgba(0, 255, 170, 0.08) 0%, transparent 60%);
 
   /* ── 动画时长 ── */
   --duration-fast: 100ms;
@@ -190,4 +205,140 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-focus-ring);
   outline-offset: 2px;
+}
+
+/* ── NeonText 闪烁动画 ── */
+
+@keyframes neon-flicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow:
+      0 0 4px currentColor,
+      0 0 11px currentColor,
+      0 0 19px currentColor,
+      0 0 40px currentColor,
+      0 0 80px currentColor,
+      0 0 90px currentColor;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.animate-neon-flicker {
+  animation: neon-flicker 2s infinite alternate;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   新设计系统动画
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes grid-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-grid-scroll {
+  animation: grid-scroll 20s linear infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+/* ── 玻璃态增强 ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ── 引擎色发光边框 ── */
+.border-glow-gsap { border-color: rgba(136, 206, 2, 0.3); }
+.border-glow-motion { border-color: rgba(255, 0, 255, 0.3); }
+.border-glow-spring { border-color: rgba(0, 255, 170, 0.3); }
+.border-glow-anime { border-color: rgba(255, 0, 110, 0.3); }
+.border-glow-lenis { border-color: rgba(99, 102, 241, 0.3); }
+.border-glow-css { border-color: rgba(255, 215, 0, 0.3); }
+
+/* ── 文字渐变 ── */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-hero {
+  background: linear-gradient(135deg, #FFFFFF 0%, #00F5FF 50%, #FF00FF 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ── 粒子容器 ── */
+.particle-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 245, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+  transition: background 0.3s ease;
+}
+
+/* ── 3D 透视容器 ── */
+.perspective-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* ── ShinyText 扫光动画 ── */
+
+@keyframes shine-sweep {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── RotatingText 旋转动画 ── */
+
+@keyframes rotate-char {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(15deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
 }

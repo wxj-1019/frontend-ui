@@ -26,6 +26,9 @@ export const SHARED_COMPONENTS: SharedComponentEntry[] = [
   { name: 'CountUp', category: 'text-animations', description: '数字递增动画', engine: 'Motion', installName: 'count-up', files: ['count-up.tsx', 'index.ts'] },
   { name: 'DecryptedText', category: 'text-animations', description: '文字解密动画效果', engine: 'CSS', installName: 'decrypted-text', files: ['decrypted-text.tsx', 'index.ts'] },
   { name: 'SpringNumber', category: 'text-animations', description: '弹簧物理数字动画', engine: 'react-spring', installName: 'spring-number', files: ['spring-number.tsx', 'index.ts'] },
+  { name: 'NeonText', category: 'text-animations', description: '霓虹发光文字效果，带 CSS 闪烁', engine: 'CSS', installName: 'neon-text', files: ['neon-text.tsx', 'index.ts'] },
+  { name: 'ShinyText', category: 'text-animations', description: '扫光/流光效果文字', engine: 'CSS', installName: 'shiny-text', files: ['shiny-text.tsx', 'index.ts'] },
+  { name: 'RotatingText', category: 'text-animations', description: '旋转文字，字符依次围绕中心旋转', engine: 'CSS', installName: 'rotating-text', files: ['rotating-text.tsx', 'index.ts'] },
 
   // ── 交互动画 ────────────────────────────────────────────
   { name: 'Magnet', category: 'animations', description: '磁吸效果组件', engine: 'Motion', installName: 'magnet', files: ['magnet.tsx', 'index.ts'] },
@@ -45,6 +48,8 @@ export const SHARED_COMPONENTS: SharedComponentEntry[] = [
   { name: 'SpringMorph', category: 'animations', description: '弹簧物理内容过渡动画', engine: 'react-spring', installName: 'spring-morph', files: ['spring-morph.tsx', 'index.ts'] },
   { name: 'SvgPathDraw', category: 'animations', description: 'SVG 路径描边动画', engine: 'Anime.js', installName: 'svg-path-draw', files: ['svg-path-draw.tsx', 'index.ts'] },
   { name: 'MorphingSVG', category: 'animations', description: 'SVG 路径平滑变形动画', engine: 'Anime.js', installName: 'morphing-svg', files: ['morphing-svg.tsx', 'index.ts'] },
+  { name: 'MagneticButton', category: 'animations', description: '磁吸按钮，鼠标跟随弹性位移', engine: 'Motion', installName: 'magnetic-button', files: ['magnetic-button.tsx', 'index.ts'] },
+  { name: 'HoverScale', category: 'animations', description: '悬停缩放容器', engine: 'Motion', installName: 'hover-scale', files: ['hover-scale.tsx', 'index.ts'] },
 
   // ── 复合组件 ────────────────────────────────────────────
   { name: 'Dock', category: 'components', description: 'macOS 风格的停靠栏', engine: 'Motion', installName: 'dock', files: ['dock.tsx', 'index.ts'] },
@@ -55,6 +60,10 @@ export const SHARED_COMPONENTS: SharedComponentEntry[] = [
   { name: 'TiltCard', category: 'components', description: '3D 倾斜卡片', engine: 'Motion', installName: 'tilt-card', files: ['tilt-card.tsx', 'index.ts'] },
   { name: 'BounceCards', category: 'components', description: '弹跳卡片堆叠组件', engine: 'Motion', installName: 'bounce-cards', files: ['bounce-cards.tsx', 'index.ts'] },
   { name: 'GlowCard', category: 'components', description: '发光卡片组件', engine: 'Motion', installName: 'glow-card', files: ['glow-card.tsx', 'index.ts'] },
+  { name: 'Card3D', category: 'components', description: '3D 透视卡片', engine: 'CSS', installName: 'card-3d', files: ['card-3d.tsx', 'index.ts'] },
+  { name: 'GlassCard', category: 'components', description: '玻璃态卡片，3D倾斜+光晕效果', engine: 'CSS', installName: 'glass-card', files: ['glass-card.tsx', 'index.ts'] },
+  { name: 'GlassNavbar', category: 'components', description: '玻璃态导航栏，滚动响应式毛玻璃', engine: 'Motion', installName: 'glass-navbar', files: ['glass-navbar.tsx', 'index.ts'] },
+  { name: 'GlassModal', category: 'components', description: '玻璃态模态框，模糊背景+入场动画', engine: 'Motion', installName: 'glass-modal', files: ['glass-modal.tsx', 'index.ts'] },
   { name: 'SmoothScrollProvider', category: 'components', description: '基于 Lenis 的平滑滚动提供者', engine: 'Lenis', installName: 'smooth-scroll', files: ['smooth-scroll-provider.tsx', 'index.ts'] },
 
   // ── 背景特效 ────────────────────────────────────────────
@@ -64,6 +73,11 @@ export const SHARED_COMPONENTS: SharedComponentEntry[] = [
   { name: 'MeshGradient', category: 'backgrounds', description: '动态网格渐变背景', engine: 'Motion', installName: 'mesh-gradient', files: ['mesh-gradient.tsx', 'index.ts'] },
   { name: 'NoiseBackground', category: 'backgrounds', description: '噪点纹理背景', engine: 'CSS', installName: 'noise-background', files: ['noise-background.tsx', 'index.ts'] },
   { name: 'Hyperspeed', category: 'backgrounds', description: '超光速效果', engine: 'Motion', installName: 'hyperspeed', files: ['hyperspeed.tsx', 'index.ts'] },
+  { name: 'GridMotion', category: 'backgrounds', description: '网格运动背景，方块交错呼吸', engine: 'Motion', installName: 'grid-motion', files: ['grid-motion.tsx', 'index.ts'] },
+  { name: 'ParticleOcean', category: 'backgrounds', description: '粒子海洋效果，流体动力学', engine: 'Motion', installName: 'particle-ocean', files: ['particle-ocean.tsx', 'index.ts'] },
+  { name: 'GenerativeBackground', category: 'backgrounds', description: '生成式艺术背景', engine: 'CSS', installName: 'generative-background', files: ['generative-background.tsx', 'index.ts'] },
+  { name: 'ThreeScene', category: 'backgrounds', description: 'CSS 3D 沉浸式场景，多层视差', engine: 'Motion', installName: 'three-scene', files: ['three-scene.tsx', 'index.ts'] },
+  { name: 'HighPerfParticles', category: 'backgrounds', description: '高性能 Canvas 2D 粒子系统', engine: 'CSS', installName: 'high-perf-particles', files: ['high-perf-particles.tsx', 'index.ts'] },
 
   // ── GSAP 动画 ───────────────────────────────────────────
   { name: 'ScrollReveal', category: 'gsap-animations', description: '基于 ScrollTrigger 的滚动触发动画', engine: 'GSAP', installName: 'scroll-reveal', files: ['scroll-reveal.tsx', 'index.ts'] },

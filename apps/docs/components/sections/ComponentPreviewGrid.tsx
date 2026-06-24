@@ -129,16 +129,16 @@ export function ComponentPreviewGrid() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.4}>
-            <PreviewCard title="Particles" category="背景特效" href="/backgrounds/particles">
-              <div className="relative h-12 w-24 overflow-hidden rounded-lg">
-                {[...Array(8)].map((_, i) => (
+            <PreviewCard title="HighPerfParticles" category="背景特效" href="/backgrounds/high-perf-particles">
+              <div className="relative h-12 w-24 overflow-hidden rounded-lg bg-black">
+                {[...Array(12)].map((_, i) => (
                   <span
                     key={i}
-                    className="absolute h-1 w-1 rounded-full bg-[var(--color-accent)]"
+                    className="absolute h-1 w-1 rounded-full bg-cyan-400/80"
                     style={{
-                      left: `${(i * 13 + 5) % 90}%`,
-                      top: `${(i * 17 + 10) % 80}%`,
-                      animation: `pulse 1.5s ease-in-out ${i * 0.2}s infinite`,
+                      left: `${Math.random() * 80 + 10}%`,
+                      top: `${Math.random() * 80 + 10}%`,
+                      animation: `pulse 1.5s ease-in-out ${i * 0.15}s infinite`,
                     }}
                   />
                 ))}
@@ -147,6 +147,23 @@ export function ComponentPreviewGrid() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.5}>
+            <PreviewCard title="Glass Navbar" category="复合组件" href="/components/glass-navbar">
+              <div className="h-8 w-28 rounded-lg border border-white/10 bg-white/10 backdrop-blur-md flex items-center justify-center">
+                <span className="text-[10px] text-white/70">Glass UI</span>
+              </div>
+            </PreviewCard>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.6}>
+            <PreviewCard title="3D Scene" category="背景特效" href="/backgrounds/three-scene">
+              <div className="relative h-12 w-24 perspective-[600px]">
+                <div className="absolute inset-0 rounded-lg bg-[var(--color-accent)]/20" style={{ transform: 'translateZ(20px)' }} />
+                <div className="absolute inset-0 rounded-lg border border-[var(--color-accent)]/30" style={{ transform: 'translateZ(40px)' }} />
+              </div>
+            </PreviewCard>
+          </ScrollReveal>
+
+          <ScrollReveal delay={0.7}>
             <PreviewCard title="Glow Card" category="复合组件" href="/components/spotlight-card">
               <div className="group/card relative h-12 w-24 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-surface)] shadow-[0_0_20px_color-mix(in_srgb,var(--color-accent)_15%,transparent)] transition-all hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-accent)_30%,transparent)]">
                 <div className="absolute inset-0 flex items-center justify-center text-xs font-medium text-[var(--color-text-muted)]">
@@ -164,7 +181,7 @@ export function ComponentPreviewGrid() {
               href="/text-animations"
               className="inline-flex items-center gap-2 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-6 py-3 text-sm font-medium text-[var(--color-text-primary)] transition-all hover:border-[var(--color-accent)]/50 hover:text-[var(--color-accent)]"
             >
-              浏览全部 34 组件
+              浏览全部 73 组件
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>

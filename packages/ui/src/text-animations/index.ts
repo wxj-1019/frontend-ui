@@ -8,3 +8,6 @@ export * from './glitch-text';
 export * from './count-up';
 export * from './decrypted-text';
 export * from './spring-number';
+export * from './neon-text';
+export * from './shiny-text';
+export * from './rotating-text';

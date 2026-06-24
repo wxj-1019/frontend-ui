@@ -19,6 +19,12 @@ export default defineConfig({
       'src/text-animations/decrypted-text/index.ts',
     'text-animations/spring-number':
       'src/text-animations/spring-number/index.ts',
+    'text-animations/neon-text':
+      'src/text-animations/neon-text/index.ts',
+    'text-animations/shiny-text':
+      'src/text-animations/shiny-text/index.ts',
+    'text-animations/rotating-text':
+      'src/text-animations/rotating-text/index.ts',
     'animations/magnet': 'src/animations/magnet/index.ts',
     'animations/fade-content': 'src/animations/fade-content/index.ts',
     'animations/draggable': 'src/animations/draggable/index.ts',
@@ -37,6 +43,11 @@ export default defineConfig({
     'animations/svg-path-draw': 'src/animations/svg-path-draw/index.ts',
     'animations/spring-morph': 'src/animations/spring-morph/index.ts',
     'animations/morphing-svg': 'src/animations/morphing-svg/index.ts',
+    'animations/magnetic-button':
+      'src/animations/magnetic-button/index.ts',
+    'animations/hover-scale': 'src/animations/hover-scale/index.ts',
+    'animations/fluid-cursor': 'src/animations/fluid-cursor/index.ts',
+    'animations/scroll-parallax': 'src/animations/scroll-parallax/index.ts',
     'gsap-animations/scroll-reveal':
       'src/gsap-animations/scroll-reveal/index.ts',
     'gsap-animations/text-reveal': 'src/gsap-animations/text-reveal/index.ts',
@@ -55,6 +66,10 @@ export default defineConfig({
     'backgrounds/noise-background':
       'src/backgrounds/noise-background/index.ts',
     'backgrounds/hyperspeed': 'src/backgrounds/hyperspeed/index.ts',
+    'backgrounds/grid-motion': 'src/backgrounds/grid-motion/index.ts',
+    'backgrounds/particle-ocean': 'src/backgrounds/particle-ocean/index.ts',
+    'backgrounds/generative-background':
+      'src/backgrounds/generative-background/index.ts',
     'blocks/hero-sections': 'src/blocks/hero-sections/index.ts',
     'blocks/bento-grids': 'src/blocks/bento-grids/index.ts',
     'blocks/feature-sections': 'src/blocks/feature-sections/index.ts',
@@ -68,8 +83,14 @@ export default defineConfig({
     'components/tilt-card': 'src/components/tilt-card/index.ts',
     'components/glow-card': 'src/components/glow-card/index.ts',
     'components/bounce-cards': 'src/components/bounce-cards/index.ts',
+    'components/card-3d': 'src/components/card-3d/index.ts',
+    'components/glass-card': 'src/components/glass-card/index.ts',
+    'components/glass-navbar': 'src/components/glass-navbar/index.ts',
+    'components/glass-modal': 'src/components/glass-modal/index.ts',
     'hooks/use-mouse-position': 'src/hooks/use-mouse-position.ts',
     'hooks/smooth-scroll': 'src/hooks/smooth-scroll/index.ts',
+    'three-scene': 'src/three-scene/index.ts',
+    'high-perf-particles': 'src/high-perf-particles/index.ts',
   },
   format: ['cjs', 'esm'],
   dts: !skipDts,

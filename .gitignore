@@ -36,3 +36,10 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+# workbuddy memory
+.workbuddy/
+
+# build artifacts
+*.tar.gz
+*.tar

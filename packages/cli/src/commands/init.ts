@@ -3,6 +3,15 @@ import path from 'path';
 import chalk from 'chalk';
 import prompts from 'prompts';
 
+/** 引擎 → 所需依赖映射 */
+const ENGINE_DEPS: Record<string, string[]> = {
+  Motion: ['motion'],
+  GSAP: ['gsap', '@gsap/react'],
+  'react-spring': ['@react-spring/web'],
+  'Anime.js': ['animejs'],
+  Lenis: ['lenis'],
+};
+
 export async function initProject() {
   console.log(chalk.blue('\n🚀 Initialize frontend-ui in your project\n'));
 
@@ -48,12 +57,23 @@ export async function initProject() {
     console.log(chalk.red(`\n✗ Failed to save configuration: ${error}`));
   }
 
+  // 收集所有依赖
+  const allDeps = new Set<string>();
+  allDeps.add('class-variance-authority');
+  allDeps.add('clsx');
+  allDeps.add('tailwind-merge');
+  for (const deps of Object.values(ENGINE_DEPS)) {
+    for (const dep of deps) {
+      allDeps.add(dep);
+    }
+  }
+
   console.log(chalk.blue('\n📝 Next steps:\n'));
-  console.log(chalk.white('  1. Install dependencies:'));
-  console.log(chalk.gray('     npm install gsap @gsap/react motion class-variance-authority clsx tailwind-merge'));
+  console.log(chalk.white('  1. Install all dependencies:'));
+  console.log(chalk.gray(`     npm install ${Array.from(allDeps).join(' ')}`));
   console.log(chalk.white('\n  2. Add components:'));
   console.log(chalk.gray('     frontend-ui add blur-text'));
   console.log(chalk.gray('     frontend-ui add magnet'));
-  console.log(chalk.white('\n  3. List all components:'));
-  console.log(chalk.gray('     frontend-ui list\n'));
+  console.log(chalk.white('\n  3. Or use interactive mode:'));
+  console.log(chalk.gray('     frontend-ui\n'));
 }

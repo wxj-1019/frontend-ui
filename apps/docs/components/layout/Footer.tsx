@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Sparkles } from "lucide-react";
+import { getTotalComponentCount } from "@/lib/component-registry";
 
 const footerLinks = {
   产品: [
@@ -21,6 +22,7 @@ const footerLinks = {
 };
 
 export function Footer() {
+  const totalComponents = getTotalComponentCount();
   return (
     <footer className="border-t border-[var(--color-border-subtle)] bg-[var(--color-bg-secondary)]">
       <div className="mx-auto max-w-7xl px-6 py-12">
@@ -36,7 +38,7 @@ export function Footer() {
             <p className="mt-3 text-sm text-[var(--color-text-subtle)]">
               企业级前端动画组件库
               <br />
-              多引擎架构 · 34 动画组件
+              多引擎架构 · {totalComponents} 动画组件
             </p>
           </div>
 
