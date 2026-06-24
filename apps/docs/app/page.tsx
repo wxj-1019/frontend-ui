@@ -5,6 +5,7 @@ import { EnhancedNavbar } from '@/components/layout/EnhancedNavbar';
 import { IntroAnimation } from '@/components/effects/IntroAnimation';
 import { PageTransition } from '@/components/effects/PageTransition';
 import { ImmersiveHero } from '@/components/hero/ImmersiveHero';
+import { CategoryBento } from '@/components/sections/CategoryBento';
 import { EngineBentoGrid } from '@/components/sections/EngineBentoGrid';
 import { LiveGallery } from '@/components/sections/LiveGallery';
 import { BlocksShowcase } from '@/components/sections/BlocksShowcase';
@@ -21,6 +22,9 @@ export default function HomePage() {
         <main id="main-content" tabIndex={-1}>
           {/* 沉浸式 Hero */}
           <ImmersiveHero />
+
+          {/* 分类快速入口 */}
+          <CategoryBento />
 
           {/* Bento Grid 引擎展示 */}
           <EngineBentoGrid />
