@@ -34,19 +34,17 @@ for i in range(240):
         break
     time.sleep(10)
 
-# Stop old container
+# Stop and restart container
 ssh.exec_command('docker stop frontend-ui-docs 2>/dev/null')
 time.sleep(1)
 ssh.exec_command('docker rm frontend-ui-docs 2>/dev/null')
 time.sleep(1)
 
-# Start new container
 stdin, stdout, stderr = ssh.exec_command('docker run -d --name frontend-ui-docs --restart unless-stopped -p 80:3000 frontend-ui-docs')
 print(f'Container: {stdout.read().decode("utf-8", errors="replace").strip()}')
 
 time.sleep(8)
 
-# Check status
 stdin, stdout, stderr = ssh.exec_command('docker ps --filter name=frontend-ui-docs --format "{{.Names}} {{.Status}}"')
 print(f'\nStatus: {stdout.read().decode("utf-8", errors="replace").strip()}')
 

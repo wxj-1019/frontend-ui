@@ -6,6 +6,8 @@ export * from './stack-cards';
 export * from './tilt-card';
 export * from './glow-card';
 export * from './bounce-cards';
+export * from './magnetic-grid';
+export * from './page-transition';
 export * from './card-3d';
 export * from './glass-card';
 export * from './glass-navbar';

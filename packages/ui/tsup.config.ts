@@ -48,6 +48,7 @@ export default defineConfig({
     'animations/hover-scale': 'src/animations/hover-scale/index.ts',
     'animations/fluid-cursor': 'src/animations/fluid-cursor/index.ts',
     'animations/scroll-parallax': 'src/animations/scroll-parallax/index.ts',
+    'animations/scroll-blur': 'src/animations/scroll-blur/index.ts',
     'gsap-animations/scroll-reveal':
       'src/gsap-animations/scroll-reveal/index.ts',
     'gsap-animations/text-reveal': 'src/gsap-animations/text-reveal/index.ts',
@@ -87,6 +88,8 @@ export default defineConfig({
     'components/glass-card': 'src/components/glass-card/index.ts',
     'components/glass-navbar': 'src/components/glass-navbar/index.ts',
     'components/glass-modal': 'src/components/glass-modal/index.ts',
+    'components/magnetic-grid': 'src/components/magnetic-grid/index.ts',
+    'components/page-transition': 'src/components/page-transition/index.ts',
     'hooks/use-mouse-position': 'src/hooks/use-mouse-position.ts',
     'hooks/smooth-scroll': 'src/hooks/smooth-scroll/index.ts',
     'three-scene': 'src/three-scene/index.ts',
