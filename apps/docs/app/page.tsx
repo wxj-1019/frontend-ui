@@ -9,15 +9,13 @@ import { CategoryBento } from '@/components/sections/CategoryBento';
 import { EngineBentoGrid } from '@/components/sections/EngineBentoGrid';
 import { LiveGallery } from '@/components/sections/LiveGallery';
 import { BlocksShowcase } from '@/components/sections/BlocksShowcase';
-import { motion } from 'motion/react';
-import {
-  slideUp,
-  slideUpReduced,
-  getAnimationVariants,
-} from '@/lib/animations';
+import { motion, useReducedMotion } from 'motion/react';
+import { slideUp, slideUpReduced } from '@/lib/animations';
 import Link from 'next/link';
 
 export default function HomePage() {
+  const shouldReduce = useReducedMotion();
+
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)]">
       <IntroAnimation />
@@ -51,7 +49,8 @@ export default function HomePage() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={getAnimationVariants(slideUp, slideUpReduced)}
+                variants={shouldReduce ? slideUpReduced : slideUp}
+                transition={{ duration: shouldReduce ? 0 : 0.5 }}
               >
                 <h2 className="font-display text-3xl font-bold text-[var(--color-text-primary)]">
                   准备好开始了吗？
@@ -61,8 +60,11 @@ export default function HomePage() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={getAnimationVariants(slideUp, slideUpReduced)}
-                transition={{ delay: 0.1 }}
+                variants={shouldReduce ? slideUpReduced : slideUp}
+                transition={{
+                  duration: shouldReduce ? 0 : 0.5,
+                  delay: shouldReduce ? 0 : 0.1,
+                }}
               >
                 <p className="mt-4 text-[var(--color-text-muted)]">
                   安装 Frontend UI，开始构建令人印象深刻的动画界面
@@ -72,8 +74,11 @@ export default function HomePage() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={getAnimationVariants(slideUp, slideUpReduced)}
-                transition={{ delay: 0.2 }}
+                variants={shouldReduce ? slideUpReduced : slideUp}
+                transition={{
+                  duration: shouldReduce ? 0 : 0.5,
+                  delay: shouldReduce ? 0 : 0.2,
+                }}
               >
                 <div className="mt-8 inline-flex items-center gap-3 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/80 backdrop-blur-sm px-6 py-4 transition-all hover:border-[var(--color-accent)]/50">
                   <span className="text-sm text-[var(--color-text-subtle)]">
@@ -111,8 +116,11 @@ export default function HomePage() {
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true }}
-                variants={getAnimationVariants(slideUp, slideUpReduced)}
-                transition={{ delay: 0.3 }}
+                variants={shouldReduce ? slideUpReduced : slideUp}
+                transition={{
+                  duration: shouldReduce ? 0 : 0.5,
+                  delay: shouldReduce ? 0 : 0.3,
+                }}
               >
                 <div className="mt-6">
                   <Link
