@@ -333,11 +333,7 @@ export function MultiStepForm({
   return (
     <div className={cn('mx-auto max-w-2xl', className)}>
       {/* Step Indicator */}
-      <StepIndicator
-        steps={steps}
-        currentStep={currentStep}
-        prefersReducedMotion={shouldReduce}
-      />
+      <StepIndicator steps={steps} currentStep={currentStep} />
 
       {/* Step Content */}
       {shouldReduce ? (
