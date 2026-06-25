@@ -16,13 +16,21 @@
 
 ## 组件规范
 
-- 路径: `packages/ui/src/{category}/{component-name}/`
-- 每组件 5 文件: index.ts, _.tsx, _.test.tsx, \*.stories.tsx, doc page.tsx
-- GSAP: 使用 `useGSAP` hook + `gsap.matchMedia()` 处理 prefers-reduced-motion
-- Motion: 从 `motion/react` 导入
-- 类名合并: `cn()` from `@/lib/utils`
-- 文档页: 使用 `ComponentDocPage` 组件模板
-- `"use client"` 必须在组件 .tsx 顶部
+完整规范见根目录 [FRONTEND-UI-STANDARDS.md](../FRONTEND-UI-STANDARDS.md)。核心要点：
+
+- **路径**: `packages/ui/src/{category}/{component-name}/`
+- **必需文件**: `index.ts`, `{name}.tsx`, `{name}.test.tsx`, `{name}.stories.tsx`
+- **命名**: PascalCase 组件名、kebab-case 文件名、接口 `ComponentNameProps`
+- **样式**: 8px 网格、设计系统 Token（禁止硬编码 hex）、5 状态交互（default/hover/focus/active/disabled）
+- **动画**: `'use client'` 强制、GPU 属性白名单（transform/opacity）、`prefers-reduced-motion` 必须支持
+- **类型**: 严格 TypeScript、`as const` / `satisfies`、forwardRef 必须设 `displayName`
+- **导出**: 命名导出（禁止 default export），index.ts 统一导出
+- **注册表**: 新增组件后必须同步 `apps/docs/lib/component-registry.ts`
+- **提交**: Conventional Commits + Changeset 版本管理
+- **GSAP**: 使用 `useGSAP` hook + `gsap.matchMedia()` 处理 prefers-reduced-motion
+- **Motion**: 从 `motion/react` 导入
+- **类名合并**: `cn()` from `@/lib/utils`
+- **文档页**: 使用 `ComponentDocPage` 组件模板
 
 ## 构建注意事项
 

@@ -69,6 +69,20 @@ pnpm build
 pnpm storybook
 ```
 
+## 贡献规范
+
+所有贡献者必须遵循 [FRONTEND-UI-STANDARDS.md](./FRONTEND-UI-STANDARDS.md) 中的规范，包含：
+
+- **目录结构**：`packages/ui/src/{category}/{component-name}/`（4 个必需文件）
+- **命名规范**：PascalCase 组件名、kebab-case 文件名、`ComponentNameProps` 接口
+- **样式规范**：8px 网格、设计系统 Token、5 状态交互模型
+- **动画规范**：6 大引擎选择表、GPU 属性白名单、`prefers-reduced-motion` 强制支持
+- **测试规范**：每组件必须含 `.test.tsx` + `.stories.tsx` + `index.ts`
+- **类型规范**：严格 TypeScript、`as const` / `satisfies`、forwardRef displayName
+- **提交规范**：Conventional Commits + Changeset 版本管理
+
+完整规范请查看根目录下的 [FRONTEND-UI-STANDARDS.md](./FRONTEND-UI-STANDARDS.md)。
+
 ## 项目结构
 
 ```

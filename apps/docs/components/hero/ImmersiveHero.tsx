@@ -1,160 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { getTotalComponentCount } from "@/lib/component-registry";
+import { ParticleBackground } from "@/components/effects/ParticleBackground";
 
 /**
  * 沉浸式 Hero 区域
  * 粒子背景 + 3D 透视标题 + 动态光晕
  */
 export function ImmersiveHero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const [isReady, setIsReady] = useState(false);
   const totalComponents = getTotalComponentCount();
-
-  // 粒子背景动画
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationId: number;
-    let particles: Array<{
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      alpha: number;
-      color: string;
-      pulse: number;
-    }> = [];
-
-    const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio, 2);
-      canvas.width = canvas.offsetWidth * dpr;
-      canvas.height = canvas.offsetHeight * dpr;
-      ctx.scale(dpr, dpr);
-    };
-
-    const initParticles = () => {
-      const count = Math.min(120, Math.floor((canvas.offsetWidth * canvas.offsetHeight) / 12000));
-      particles = [];
-      for (let i = 0; i < count; i++) {
-        const colors = ["#00F5FF", "#FF00FF", "#00FFAA", "#FFD700", "#FF006E"];
-        particles.push({
-          x: Math.random() * canvas.offsetWidth,
-          y: Math.random() * canvas.offsetHeight,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          size: Math.random() * 2 + 0.5,
-          alpha: Math.random() * 0.6 + 0.2,
-          color: colors[Math.floor(Math.random() * colors.length)],
-          pulse: Math.random() * Math.PI * 2,
-        });
-      }
-    };
-
-    const draw = () => {
-      const w = canvas.offsetWidth;
-      const h = canvas.offsetHeight;
-      ctx.clearRect(0, 0, w, h);
-
-      particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.pulse += 0.02;
-
-        // 鼠标排斥
-        const dx = p.x - mouseRef.current.x;
-        const dy = p.y - mouseRef.current.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150 && dist > 0) {
-          const force = (150 - dist) / 150 * 0.5;
-          p.vx += (dx / dist) * force;
-          p.vy += (dy / dist) * force;
-        }
-
-        // 阻尼
-        p.vx *= 0.99;
-        p.vy *= 0.99;
-
-        // 边界环绕
-        if (p.x < 0) p.x = w;
-        if (p.x > w) p.x = 0;
-        if (p.y < 0) p.y = h;
-        if (p.y > h) p.y = 0;
-
-        // 绘制粒子
-        const alpha = p.alpha * (0.7 + 0.3 * Math.sin(p.pulse));
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = alpha;
-        ctx.fill();
-
-        // 连接线
-        particles.slice(i + 1).forEach((p2) => {
-          const dx2 = p.x - p2.x;
-          const dy2 = p.y - p2.y;
-          const dist2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-          if (dist2 < 100) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = alpha * (1 - dist2 / 100) * 0.2;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        });
-      });
-
-      ctx.globalAlpha = 1;
-      animationId = requestAnimationFrame(draw);
-    };
-
-    resize();
-    initParticles();
-    draw();
-    setIsReady(true);
-
-    const handleResize = () => {
-      resize();
-      initParticles();
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      };
-    };
-
-    window.addEventListener("resize", handleResize);
-    canvas.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", handleResize);
-      canvas.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
   return (
     <section className="relative min-h-screen overflow-hidden flex items-center justify-center">
-      {/* 粒子背景画布 */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{ opacity: isReady ? 1 : 0, transition: "opacity 1s ease" }}
-      />
+      {/* 粒子背景 */}
+      <ParticleBackground />
 
       {/* 多层渐变光晕 */}
       <div className="absolute inset-0 pointer-events-none">
