@@ -21,9 +21,9 @@ time.sleep(2)
 # Build Docker image
 ssh.exec_command('cd /root/frontend-ui-src && docker build --no-cache -t frontend-ui-docs . > /tmp/build.log 2>&1')
 print('Build started...')
-time.sleep(15)
+time.sleep(20)
 
-for i in range(240):
+for i in range(300):
     stdin, stdout, stderr = ssh.exec_command('tail -3 /tmp/build.log')
     tail = stdout.read().decode('utf-8', errors='replace').strip()
     if 'Successfully built' in tail:
