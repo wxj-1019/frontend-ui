@@ -6,7 +6,7 @@ import { expectNoA11yViolations } from '../../test-utils/axe';
 describe('GridMotion', () => {
   it('renders the correct number of grid items', () => {
     const { container } = render(<GridMotion columns={3} rows={2} />);
-    const items = container.querySelectorAll('div > div');
+    const items = container.firstElementChild?.children ?? [];
     expect(items.length).toBe(6);
   });
 
@@ -16,9 +16,7 @@ describe('GridMotion', () => {
   });
 
   it('applies custom className', () => {
-    const { container } = render(
-      <GridMotion className="custom-class" />
-    );
+    const { container } = render(<GridMotion className="custom-class" />);
     expect(container.firstChild).toHaveClass('custom-class');
   });
 

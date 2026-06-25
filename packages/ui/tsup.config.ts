@@ -19,10 +19,8 @@ export default defineConfig({
       'src/text-animations/decrypted-text/index.ts',
     'text-animations/spring-number':
       'src/text-animations/spring-number/index.ts',
-    'text-animations/neon-text':
-      'src/text-animations/neon-text/index.ts',
-    'text-animations/shiny-text':
-      'src/text-animations/shiny-text/index.ts',
+    'text-animations/neon-text': 'src/text-animations/neon-text/index.ts',
+    'text-animations/shiny-text': 'src/text-animations/shiny-text/index.ts',
     'text-animations/rotating-text':
       'src/text-animations/rotating-text/index.ts',
     'animations/magnet': 'src/animations/magnet/index.ts',
@@ -35,16 +33,13 @@ export default defineConfig({
     'animations/modal': 'src/animations/modal/index.ts',
     'animations/toast': 'src/animations/toast/index.ts',
     'animations/blob-cursor': 'src/animations/blob-cursor/index.ts',
-    'animations/crosshair-cursor':
-      'src/animations/crosshair-cursor/index.ts',
+    'animations/crosshair-cursor': 'src/animations/crosshair-cursor/index.ts',
     'animations/float-animation': 'src/animations/float-animation/index.ts',
-    'animations/stagger-animation':
-      'src/animations/stagger-animation/index.ts',
+    'animations/stagger-animation': 'src/animations/stagger-animation/index.ts',
     'animations/svg-path-draw': 'src/animations/svg-path-draw/index.ts',
     'animations/spring-morph': 'src/animations/spring-morph/index.ts',
     'animations/morphing-svg': 'src/animations/morphing-svg/index.ts',
-    'animations/magnetic-button':
-      'src/animations/magnetic-button/index.ts',
+    'animations/magnetic-button': 'src/animations/magnetic-button/index.ts',
     'animations/hover-scale': 'src/animations/hover-scale/index.ts',
     'animations/fluid-cursor': 'src/animations/fluid-cursor/index.ts',
     'animations/scroll-parallax': 'src/animations/scroll-parallax/index.ts',
@@ -64,8 +59,7 @@ export default defineConfig({
     'backgrounds/particles': 'src/backgrounds/particles/index.ts',
     'backgrounds/starfield': 'src/backgrounds/starfield/index.ts',
     'backgrounds/mesh-gradient': 'src/backgrounds/mesh-gradient/index.ts',
-    'backgrounds/noise-background':
-      'src/backgrounds/noise-background/index.ts',
+    'backgrounds/noise-background': 'src/backgrounds/noise-background/index.ts',
     'backgrounds/hyperspeed': 'src/backgrounds/hyperspeed/index.ts',
     'backgrounds/grid-motion': 'src/backgrounds/grid-motion/index.ts',
     'backgrounds/particle-ocean': 'src/backgrounds/particle-ocean/index.ts',
@@ -76,6 +70,9 @@ export default defineConfig({
     'blocks/feature-sections': 'src/blocks/feature-sections/index.ts',
     'blocks/pricing-sections': 'src/blocks/pricing-sections/index.ts',
     'blocks/cta-sections': 'src/blocks/cta-sections/index.ts',
+    'blocks/fullscreen-nav': 'src/blocks/fullscreen-nav/index.ts',
+    'blocks/dashboard': 'src/blocks/dashboard/index.ts',
+    'blocks/multi-step-form': 'src/blocks/multi-step-form/index.ts',
     'components/spotlight-card': 'src/components/spotlight-card/index.ts',
     'components/dock': 'src/components/dock/index.ts',
     'components/masonry': 'src/components/masonry/index.ts',

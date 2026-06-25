@@ -1,33 +1,79 @@
-"use client";
+'use client';
 
-import { CrosshairCursor } from "@frontend-ui/ui";
-import { ComponentDocPage } from "@/components/ui/ComponentDocPage";
+import { CrosshairCursor } from '@frontend-ui/ui';
+import { ComponentDocPage } from '@/components/ui/ComponentDocPage';
 
 export default function CrosshairCursorPage() {
   return (
     <ComponentDocPage
-      category={{ label: "交互动画", href: "/animations" }}
+      category={{ label: '交互动画', href: '/animations' }}
       name="CrosshairCursor"
       description="基于 requestAnimationFrame 的十字准星光标效果，通过逐帧计算平滑跟随鼠标并显示坐标信息。"
       installName="crosshair-cursor"
       importStatement={'import { CrosshairCursor } from "@frontend-ui/ui";'}
-      defaultValues={{ size: 40, strokeWidth: 1.5, showCenter: true, centerSize: 4, showCoordinates: false }}
+      defaultValues={{
+        size: 40,
+        strokeWidth: 1.5,
+        showCenter: true,
+        centerSize: 4,
+        showCoordinates: false,
+      }}
       propConfig={[
-        { name: "size", type: "number", min: 20, max: 100, step: 5 },
-        { name: "strokeWidth", type: "number", min: 0.5, max: 3, step: 0.5 },
-        { name: "showCenter", type: "boolean" },
-        { name: "centerSize", type: "number", min: 2, max: 10, step: 1 },
-        { name: "showCoordinates", type: "boolean" },
+        { name: 'size', type: 'number', min: 20, max: 100, step: 5 },
+        { name: 'strokeWidth', type: 'number', min: 0.5, max: 3, step: 0.5 },
+        { name: 'showCenter', type: 'boolean' },
+        { name: 'centerSize', type: 'number', min: 2, max: 10, step: 1 },
+        { name: 'showCoordinates', type: 'boolean' },
       ]}
       propDocs={[
-        { name: "children", type: "ReactNode", required: true, description: "被包裹的元素" },
-        { name: "className", type: "string", default: "-", description: "自定义类名" },
-        { name: "size", type: "number", default: "40", description: "十字线大小（px）" },
-        { name: "color", type: "string", default: "'var(--color-accent)'", description: "线条颜色，支持 CSS 变量" },
-        { name: "strokeWidth", type: "number", default: "1.5", description: "线条宽度（px）" },
-        { name: "showCenter", type: "boolean", default: "true", description: "是否显示中心点" },
-        { name: "centerSize", type: "number", default: "4", description: "中心点大小（px）" },
-        { name: "showCoordinates", type: "boolean", default: "false", description: "是否在光标旁显示坐标" },
+        {
+          name: 'children',
+          type: 'ReactNode',
+          required: true,
+          description: '被包裹的元素',
+        },
+        {
+          name: 'className',
+          type: 'string',
+          default: '-',
+          description: '自定义类名',
+        },
+        {
+          name: 'size',
+          type: 'number',
+          default: '40',
+          description: '十字线大小（px）',
+        },
+        {
+          name: 'color',
+          type: 'string',
+          default: "'var(--color-accent)'",
+          description: '线条颜色，支持 CSS 变量',
+        },
+        {
+          name: 'strokeWidth',
+          type: 'number',
+          default: '1.5',
+          description: '线条宽度（px）',
+        },
+        {
+          name: 'showCenter',
+          type: 'boolean',
+          default: 'true',
+          description: '是否显示中心点',
+        },
+        {
+          name: 'centerSize',
+          type: 'number',
+          default: '4',
+          description: '中心点大小（px）',
+        },
+        {
+          name: 'showCoordinates',
+          type: 'boolean',
+          default: 'false',
+          description: '是否在光标旁显示坐标',
+        },
       ]}
       codeGenerator={(v) => `<CrosshairCursor
   size={${v.size}}
@@ -52,24 +98,28 @@ export default function CrosshairCursorPage() {
       )}
       examples={[
         {
-          title: "基础十字准星",
-          description: "带中心点的十字准星光标",
-          code: `<CrosshairCursor size={40} showCenter={true}>
-  <div className="h-96 w-full rounded-lg bg-gray-900 flex items-center justify-center">
-    <p className="text-gray-400">移动鼠标查看效果</p>
+          title: '基础十字准星',
+          description: '带中心点的十字准星光标',
+          code: `<CrosshairCursor size={40} showCenter={true} className="flex h-[250px] w-full items-center justify-center rounded-lg bg-gray-900">
+  <div>
+    <p>移动鼠标查看效果</p>
   </div>
 </CrosshairCursor>`,
           render: () => (
-            <CrosshairCursor size={40} showCenter={true}>
-              <div className="flex h-[250px] w-full items-center justify-center rounded-lg bg-gray-900">
+            <CrosshairCursor
+              size={40}
+              showCenter={true}
+              className="flex h-[250px] w-full items-center justify-center rounded-lg bg-gray-900"
+            >
+              <div className="flex h-[250px] w-full items-center justify-center rounded-lg">
                 <p className="text-gray-400">移动鼠标查看效果</p>
               </div>
             </CrosshairCursor>
           ),
         },
         {
-          title: "显示坐标",
-          description: "十字准星旁实时显示鼠标坐标",
+          title: '显示坐标',
+          description: '十字准星旁实时显示鼠标坐标',
           code: `<CrosshairCursor
   size={60}
   strokeWidth={1}
@@ -77,9 +127,10 @@ export default function CrosshairCursorPage() {
   centerSize={6}
   showCoordinates={true}
   color="#22d3ee"
+  className="flex h-[250px] w-full items-center justify-center rounded-lg bg-gray-900"
 >
-  <div className="h-96 w-full rounded-lg bg-gray-900 flex items-center justify-center">
-    <p className="text-gray-400">坐标显示模式</p>
+  <div>
+    <p>坐标显示模式</p>
   </div>
 </CrosshairCursor>`,
           render: () => (
@@ -90,8 +141,9 @@ export default function CrosshairCursorPage() {
               centerSize={6}
               showCoordinates={true}
               color="#22d3ee"
+              className="flex h-[250px] w-full items-center justify-center rounded-lg bg-gray-900"
             >
-              <div className="flex h-[250px] w-full items-center justify-center rounded-lg bg-gray-900">
+              <div className="flex h-[250px] w-full items-center justify-center rounded-lg">
                 <p className="text-gray-400">坐标显示模式</p>
               </div>
             </CrosshairCursor>

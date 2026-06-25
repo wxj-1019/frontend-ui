@@ -6,7 +6,8 @@ import { expectNoA11yViolations } from '../../test-utils/axe';
 describe('BlurText', () => {
   it('renders text content', () => {
     render(<BlurText text="Hello" />);
-    expect(screen.getByText('Hello')).toBeInTheDocument();
+    // 默认 animateBy="characters" 时文本按字符拆分，使用 aria-label 查询
+    expect(screen.getByLabelText('Hello')).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {

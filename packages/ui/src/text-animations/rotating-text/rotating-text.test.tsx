@@ -6,7 +6,8 @@ import { expectNoA11yViolations } from '../../test-utils/axe';
 describe('RotatingText', () => {
   it('renders text content', () => {
     render(<RotatingText text="Rotate" />);
-    expect(screen.getByText('Rotate')).toBeInTheDocument();
+    // 组件按字符拆分文本，使用 aria-label 查询
+    expect(screen.getByLabelText('Rotate')).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {
@@ -23,7 +24,7 @@ describe('RotatingText', () => {
 
   it('supports counter-clockwise direction', () => {
     render(<RotatingText text="CCW" direction="counter-clockwise" />);
-    expect(screen.getByText('CCW')).toBeInTheDocument();
+    expect(screen.getByLabelText('CCW')).toBeInTheDocument();
   });
 
   it('has aria-label for screen readers', () => {

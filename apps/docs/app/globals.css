@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* ═══════════════════════════════════════════════════════════════
    Design Tokens — Frontend UI
@@ -12,26 +12,26 @@
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* ── 背景色（深空系列） ── */
-  --color-bg-primary: #0A0A0F;
-  --color-bg-secondary: #12121A;
-  --color-bg-surface: #1A1A2E;
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-bg-surface: #1a1a2e;
   --color-bg-elevated: #222236;
 
   /* ── 文字色 ── */
-  --color-text-primary: #FFFFFF;
-  --color-text-muted: #A8A8BC;
-  --color-text-subtle: #8A8A9E;
-  --color-text-disabled: #5A5A6E;
+  --color-text-primary: #ffffff;
+  --color-text-muted: #a8a8bc;
+  --color-text-subtle: #8a8a9e;
+  --color-text-disabled: #5a5a6e;
 
   /* ── 品牌强调色（单一 accent） ── */
-  --color-accent: #00F5FF;
+  --color-accent: #00f5ff;
 
   /* ── 语义状态色 ── */
-  --color-success: #00FF88;
-  --color-warning: #FFB800;
+  --color-success: #00ff88;
+  --color-warning: #ffb800;
 
   /* ── 边框/分割 ── */
-  --color-border-default: #2A2A3E;
+  --color-border-default: #2a2a3e;
   --color-border-subtle: rgba(255, 255, 255, 0.06);
   --color-border-strong: rgba(255, 255, 255, 0.12);
 
@@ -48,12 +48,12 @@
   --radius-full: 9999px;
 
   /* ── 引擎品牌色（多色渐变系统） ── */
-  --color-gsap: #88CE02;
-  --color-motion: #FF00FF;
-  --color-spring: #00FFAA;
-  --color-anime: #FF006E;
-  --color-lenis: #6366F1;
-  --color-css: #FFD700;
+  --color-gsap: #88ce02;
+  --color-motion: #ff00ff;
+  --color-spring: #00ffaa;
+  --color-anime: #ff006e;
+  --color-lenis: #6366f1;
+  --color-css: #ffd700;
 
   /* ── 引擎发光色 ── */
   --glow-gsap: 0 0 20px rgba(136, 206, 2, 0.3);
@@ -64,9 +64,22 @@
   --glow-css: 0 0 20px rgba(255, 215, 0, 0.3);
 
   /* ── 渐变预设 ── */
-  --gradient-hero: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0, 245, 255, 0.15) 0%, transparent 60%),
-                   radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255, 0, 255, 0.08) 0%, transparent 60%),
-                   radial-gradient(ellipse 50% 50% at 20% 100%, rgba(0, 255, 170, 0.08) 0%, transparent 60%);
+  --gradient-hero:
+    radial-gradient(
+      ellipse 80% 50% at 50% 0%,
+      rgba(0, 245, 255, 0.15) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 80% 80%,
+      rgba(255, 0, 255, 0.08) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 20% 100%,
+      rgba(0, 255, 170, 0.08) 0%,
+      transparent 60%
+    );
 
   /* ── 动画时长 ── */
   --duration-fast: 100ms;
@@ -95,27 +108,27 @@
    亮色主题
    ═══════════════════════════════════════════════════════════════ */
 
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   color-scheme: light;
-  background-color: #FAFAFA;
-  color: #0A0A0F;
+  background-color: #fafafa;
+  color: #0a0a0f;
 
-  --color-bg-primary: #FAFAFA;
-  --color-bg-secondary: #FFFFFF;
-  --color-bg-surface: #F0F0F5;
-  --color-bg-elevated: #FFFFFF;
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #ffffff;
+  --color-bg-surface: #f0f0f5;
+  --color-bg-elevated: #ffffff;
 
-  --color-text-primary: #0A0A0F;
-  --color-text-muted: #4A4A5E;
-  --color-text-subtle: #6A6A7E;
-  --color-text-disabled: #9A9AAE;
+  --color-text-primary: #0a0a0f;
+  --color-text-muted: #4a4a5e;
+  --color-text-subtle: #6a6a7e;
+  --color-text-disabled: #9a9aae;
 
-  --color-accent: #0891B2;
+  --color-accent: #0891b2;
 
   --color-success: #059669;
-  --color-warning: #D97706;
+  --color-warning: #d97706;
 
-  --color-border-default: #E5E5EA;
+  --color-border-default: #e5e5ea;
   --color-border-subtle: rgba(0, 0, 0, 0.06);
   --color-border-strong: rgba(0, 0, 0, 0.12);
 
@@ -154,10 +167,10 @@ body {
    ═══════════════════════════════════════════════════════════════ */
 
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
+  :root:not([data-theme='dark']) {
     color-scheme: light;
-    background-color: #FAFAFA;
-    color: #0A0A0F;
+    background-color: #fafafa;
+    color: #0a0a0f;
   }
 }
 
@@ -166,10 +179,19 @@ body {
    ═══════════════════════════════════════════════════════════════ */
 
 @keyframes aurora {
-  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-  25% { transform: translate(10%, -10%) rotate(5deg) scale(1.05); }
-  50% { transform: translate(-5%, 15%) rotate(-3deg) scale(0.95); }
-  75% { transform: translate(-10%, -5%) rotate(2deg) scale(1.02); }
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(10%, -10%) rotate(5deg) scale(1.05);
+  }
+  50% {
+    transform: translate(-5%, 15%) rotate(-3deg) scale(0.95);
+  }
+  75% {
+    transform: translate(-10%, -5%) rotate(2deg) scale(1.02);
+  }
 }
 
 .animate-aurora {
@@ -181,21 +203,57 @@ body {
    ═══════════════════════════════════════════════════════════════ */
 
 @keyframes glitch-1 {
-  0% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(-2px, 2px); }
-  20% { clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%); transform: translate(2px, -2px); }
-  40% { clip-path: polygon(0 5%, 100% 5%, 100% 50%, 0 50%); transform: translate(-1px, 1px); }
-  60% { clip-path: polygon(0 25%, 100% 25%, 100% 40%, 0 40%); transform: translate(1px, -1px); }
-  80% { clip-path: polygon(0 10%, 100% 10%, 100% 45%, 0 45%); transform: translate(-2px, 2px); }
-  100% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(2px, -2px); }
+  0% {
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(-2px, 2px);
+  }
+  20% {
+    clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%);
+    transform: translate(2px, -2px);
+  }
+  40% {
+    clip-path: polygon(0 5%, 100% 5%, 100% 50%, 0 50%);
+    transform: translate(-1px, 1px);
+  }
+  60% {
+    clip-path: polygon(0 25%, 100% 25%, 100% 40%, 0 40%);
+    transform: translate(1px, -1px);
+  }
+  80% {
+    clip-path: polygon(0 10%, 100% 10%, 100% 45%, 0 45%);
+    transform: translate(-2px, 2px);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+    transform: translate(2px, -2px);
+  }
 }
 
 @keyframes glitch-2 {
-  0% { clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); transform: translate(2px, -2px); }
-  20% { clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%); transform: translate(-2px, 2px); }
-  40% { clip-path: polygon(0 50%, 100% 50%, 100% 95%, 0 95%); transform: translate(1px, -1px); }
-  60% { clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%); transform: translate(-1px, 1px); }
-  80% { clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%); transform: translate(2px, -2px); }
-  100% { clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%); transform: translate(-2px, 2px); }
+  0% {
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(2px, -2px);
+  }
+  20% {
+    clip-path: polygon(0 65%, 100% 65%, 100% 85%, 0 85%);
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    clip-path: polygon(0 50%, 100% 50%, 100% 95%, 0 95%);
+    transform: translate(1px, -1px);
+  }
+  60% {
+    clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+    transform: translate(-1px, 1px);
+  }
+  80% {
+    clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+    transform: translate(2px, -2px);
+  }
+  100% {
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(-2px, 2px);
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -210,7 +268,13 @@ body {
 /* ── NeonText 闪烁动画 ── */
 
 @keyframes neon-flicker {
-  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+  0%,
+  18%,
+  22%,
+  25%,
+  53%,
+  57%,
+  100% {
     text-shadow:
       0 0 4px currentColor,
       0 0 11px currentColor,
@@ -219,7 +283,9 @@ body {
       0 0 80px currentColor,
       0 0 90px currentColor;
   }
-  20%, 24%, 55% {
+  20%,
+  24%,
+  55% {
     text-shadow: none;
   }
 }
@@ -233,24 +299,46 @@ body {
    ═══════════════════════════════════════════════════════════════ */
 
 @keyframes float-y {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.1); }
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
 @keyframes grid-scroll {
-  0% { background-position: 0 0; }
-  100% { background-position: 40px 40px; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .animate-float {
@@ -280,16 +368,30 @@ body {
 .glass-card-hover:hover {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 40px rgba(0, 245, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 0 40px rgba(0, 245, 255, 0.1),
+    0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* ── 引擎色发光边框 ── */
-.border-glow-gsap { border-color: rgba(136, 206, 2, 0.3); }
-.border-glow-motion { border-color: rgba(255, 0, 255, 0.3); }
-.border-glow-spring { border-color: rgba(0, 255, 170, 0.3); }
-.border-glow-anime { border-color: rgba(255, 0, 110, 0.3); }
-.border-glow-lenis { border-color: rgba(99, 102, 241, 0.3); }
-.border-glow-css { border-color: rgba(255, 215, 0, 0.3); }
+.border-glow-gsap {
+  border-color: rgba(136, 206, 2, 0.3);
+}
+.border-glow-motion {
+  border-color: rgba(255, 0, 255, 0.3);
+}
+.border-glow-spring {
+  border-color: rgba(0, 255, 170, 0.3);
+}
+.border-glow-anime {
+  border-color: rgba(255, 0, 110, 0.3);
+}
+.border-glow-lenis {
+  border-color: rgba(99, 102, 241, 0.3);
+}
+.border-glow-css {
+  border-color: rgba(255, 215, 0, 0.3);
+}
 
 /* ── 文字渐变 ── */
 .text-gradient {
@@ -299,7 +401,7 @@ body {
 }
 
 .text-gradient-hero {
-  background: linear-gradient(135deg, #FFFFFF 0%, #00F5FF 50%, #FF00FF 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #00f5ff 50%, #ff00ff 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -315,7 +417,11 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 245, 255, 0.08) 0%, transparent 50%);
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(0, 245, 255, 0.08) 0%,
+    transparent 50%
+  );
   pointer-events: none;
   transition: background 0.3s ease;
 }
@@ -329,16 +435,301 @@ body {
 /* ── ShinyText 扫光动画 ── */
 
 @keyframes shine-sweep {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 /* ── RotatingText 旋转动画 ── */
 
 @keyframes rotate-char {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(15deg); }
-  50% { transform: rotate(0deg); }
-  75% { transform: rotate(-15deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(15deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UI/UX v2 增强样式
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Section 交替背景 ── */
+.section-gradient-1 {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 0% 50%,
+      rgba(0, 245, 255, 0.04) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 100% 50%,
+      rgba(255, 0, 255, 0.03) 0%,
+      transparent 60%
+    );
+}
+
+.section-gradient-2 {
+  background:
+    radial-gradient(
+      ellipse 70% 50% at 50% 0%,
+      rgba(0, 255, 170, 0.035) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 80% 100%,
+      rgba(255, 215, 0, 0.025) 0%,
+      transparent 60%
+    );
+}
+
+.section-gradient-3 {
+  background:
+    radial-gradient(
+      ellipse 60% 80% at 20% 100%,
+      rgba(136, 206, 2, 0.025) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 70% at 80% 20%,
+      rgba(255, 0, 110, 0.025) 0%,
+      transparent 60%
+    );
+}
+
+/* ── 浮动几何体 ── */
+.float-shape {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.float-shape-1 {
+  animation: float-drift-1 20s ease-in-out infinite;
+}
+
+.float-shape-2 {
+  animation: float-drift-2 25s ease-in-out infinite;
+}
+
+.float-shape-3 {
+  animation: float-drift-1 18s ease-in-out infinite reverse;
+}
+
+@keyframes float-drift-1 {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(30px, -20px) rotate(90deg);
+  }
+  50% {
+    transform: translate(-15px, -40px) rotate(180deg);
+  }
+  75% {
+    transform: translate(-30px, 10px) rotate(270deg);
+  }
+}
+
+@keyframes float-drift-2 {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-25px, 30px) scale(1.1);
+  }
+  66% {
+    transform: translate(20px, -15px) scale(0.9);
+  }
+}
+
+/* ── 扫描线装饰 ── */
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 245, 255, 0.15) 20%,
+    rgba(0, 245, 255, 0.25) 50%,
+    rgba(0, 245, 255, 0.15) 80%,
+    transparent 100%
+  );
+  animation: scan-line 8s linear infinite;
+}
+
+@keyframes scan-line {
+  0% {
+    top: -1px;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+/* ── 引擎色脉冲边框 ── */
+@keyframes border-pulse-gsap {
+  0%,
+  100% {
+    border-color: rgba(136, 206, 2, 0.2);
+    box-shadow: 0 0 0px rgba(136, 206, 2, 0);
+  }
+  50% {
+    border-color: rgba(136, 206, 2, 0.5);
+    box-shadow: 0 0 20px rgba(136, 206, 2, 0.15);
+  }
+}
+
+@keyframes border-pulse-motion {
+  0%,
+  100% {
+    border-color: rgba(255, 0, 255, 0.2);
+    box-shadow: 0 0 0px rgba(255, 0, 255, 0);
+  }
+  50% {
+    border-color: rgba(255, 0, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 0, 255, 0.15);
+  }
+}
+
+@keyframes border-pulse-spring {
+  0%,
+  100% {
+    border-color: rgba(0, 255, 170, 0.2);
+    box-shadow: 0 0 0px rgba(0, 255, 170, 0);
+  }
+  50% {
+    border-color: rgba(0, 255, 170, 0.5);
+    box-shadow: 0 0 20px rgba(0, 255, 170, 0.15);
+  }
+}
+
+@keyframes border-pulse-anime {
+  0%,
+  100% {
+    border-color: rgba(255, 0, 110, 0.2);
+    box-shadow: 0 0 0px rgba(255, 0, 110, 0);
+  }
+  50% {
+    border-color: rgba(255, 0, 110, 0.5);
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.15);
+  }
+}
+
+/* ── Hero 装饰性几何体 ── */
+.hero-geo-ring {
+  border: 1px solid rgba(0, 245, 255, 0.08);
+  animation: hero-ring-rotate 30s linear infinite;
+}
+
+.hero-geo-ring-inner {
+  border: 1px solid rgba(0, 245, 255, 0.05);
+  animation: hero-ring-rotate 20s linear infinite reverse;
+}
+
+@keyframes hero-ring-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── 光弧扫描 ── */
+@keyframes arc-sweep {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+    opacity: 0;
+  }
+}
+
+.animate-arc-sweep {
+  animation: arc-sweep 4s ease-in-out infinite;
+}
+
+/* ── 卡片深度层级 ── */
+.card-depth-1 {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.card-depth-2 {
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.card-depth-3 {
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.3),
+    0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.card-depth-hover {
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.card-depth-hover:hover {
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(0, 245, 255, 0.08);
+  transform: translateY(-4px);
+}
+
+/* ── CTA 区域动态渐变 ── */
+@keyframes cta-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.cta-gradient-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 245, 255, 0.05) 0%,
+    rgba(136, 206, 2, 0.03) 25%,
+    rgba(255, 0, 255, 0.03) 50%,
+    rgba(0, 255, 170, 0.03) 75%,
+    rgba(0, 245, 255, 0.05) 100%
+  );
+  background-size: 400% 400%;
+  animation: cta-gradient 15s ease infinite;
 }

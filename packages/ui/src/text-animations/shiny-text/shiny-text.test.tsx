@@ -6,7 +6,8 @@ import { expectNoA11yViolations } from '../../test-utils/axe';
 describe('ShinyText', () => {
   it('renders text content', () => {
     render(<ShinyText text="Hello Shiny" />);
-    expect(screen.getByText('Hello Shiny')).toBeInTheDocument();
+    // 组件含两个文本层（前景 + 扫光层），使用 aria-label 查询
+    expect(screen.getByLabelText('Hello Shiny')).toBeInTheDocument();
   });
 
   it('has no accessibility violations', async () => {

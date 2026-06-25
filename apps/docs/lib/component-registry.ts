@@ -15,9 +15,9 @@ export interface ComponentEntry {
   /** 文档路径（相对于 /docs） */
   href: string;
   /** 组件分类 */
-  category: Omit<ComponentCategory, "count">;
+  category: Omit<ComponentCategory, 'count'>;
   /** 动画引擎标识 */
-  engine?: "GSAP" | "Motion" | "CSS" | "react-spring" | "Anime.js" | "Lenis";
+  engine?: 'GSAP' | 'Motion' | 'CSS' | 'react-spring' | 'Anime.js' | 'Lenis';
   /** npm 安装包子路径（用于 CLI 安装） */
   installName: string;
   /** 组件导入语句 */
@@ -81,7 +81,7 @@ export const CATEGORIES: ComponentCategory[] = [
     label: '页面区块',
     description: '开箱即用的完整页面组件，复制粘贴即可使用',
     href: '/blocks',
-    count: 7,
+    count: 10,
   },
 ];
 
@@ -339,7 +339,8 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
   },
   {
     name: 'SpringMorph',
-    description: '弹簧物理内容过渡动画，切换视图时的流畅形变效果 (react-spring)',
+    description:
+      '弹簧物理内容过渡动画，切换视图时的流畅形变效果 (react-spring)',
     href: '/animations/spring-morph',
     category: CATEGORIES[1],
     engine: 'react-spring',
@@ -717,6 +718,33 @@ export const COMPONENT_REGISTRY: ComponentEntry[] = [
     installName: 'cta-section',
     importStatement: 'import { CTASection } from "@frontend-ui/ui";',
   },
+  {
+    name: 'FullscreenNav',
+    description: '全屏导航菜单，支持二级菜单、键盘导航和焦点陷阱',
+    href: '/blocks/fullscreen-nav',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'fullscreen-nav',
+    importStatement: 'import { FullscreenNav } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'Dashboard',
+    description: '数据仪表盘，支持 KPI 卡片和图表容器布局',
+    href: '/blocks/dashboard',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'dashboard',
+    importStatement: 'import { Dashboard } from "@frontend-ui/ui";',
+  },
+  {
+    name: 'MultiStepForm',
+    description: '多步骤表单，含步骤指示器、字段验证和提交动画',
+    href: '/blocks/multi-step-form',
+    category: CATEGORIES[5],
+    engine: 'Motion',
+    installName: 'multi-step-form',
+    importStatement: 'import { MultiStepForm } from "@frontend-ui/ui";',
+  },
   // ── 新增组件 (4) ────────────────────────────────────────
   {
     name: 'GlassNavbar',
@@ -805,4 +833,3 @@ export function searchComponents(query: string): ComponentEntry[] {
 export function getTotalComponentCount(): number {
   return COMPONENT_REGISTRY.length;
 }
-

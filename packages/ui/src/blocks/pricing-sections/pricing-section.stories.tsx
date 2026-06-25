@@ -64,3 +64,21 @@ export const TwoColumns: StoryObj<typeof PricingSection> = {
     columns: 2,
   },
 };
+
+export const ComparisonTable: StoryObj<typeof PricingSection> = {
+  args: {
+    title: '功能对比',
+    subtitle: '详细比较各方案的功能差异',
+    plans,
+    variant: 'comparison',
+  },
+};
+
+export const FeatureGrid: StoryObj<typeof PricingSection> = {
+  args: {
+    title: '特性概览',
+    subtitle: '按方案查看所属功能',
+    plans,
+    variant: 'grid',
+  },
+};

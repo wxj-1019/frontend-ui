@@ -22,13 +22,48 @@ export default function ClickSparkPage() {
         { name: 'duration', type: 'number', min: 200, max: 1500, step: 100 },
       ]}
       propDocs={[
-        { name: 'children', type: 'ReactNode', required: true, description: '被包裹的元素' },
-        { name: 'className', type: 'string', default: '-', description: '自定义类名' },
-        { name: 'particleCount', type: 'number', default: '30', description: '粒子数量' },
-        { name: 'colors', type: 'string[]', default: 'accent 色系', description: '粒子颜色数组，支持 CSS 变量' },
-        { name: 'radius', type: 'number', default: '120', description: '粒子扩散半径（px）' },
-        { name: 'duration', type: 'number', default: '600', description: '动画持续时间（ms）' },
-        { name: 'particleSize', type: '[number, number]', default: '[2, 6]', description: '粒子大小范围 [min, max]（px）' },
+        {
+          name: 'children',
+          type: 'ReactNode',
+          required: true,
+          description: '被包裹的元素',
+        },
+        {
+          name: 'className',
+          type: 'string',
+          default: '-',
+          description: '自定义类名',
+        },
+        {
+          name: 'particleCount',
+          type: 'number',
+          default: '30',
+          description: '粒子数量',
+        },
+        {
+          name: 'colors',
+          type: 'string[]',
+          default: 'accent 色系',
+          description: '粒子颜色数组，支持 CSS 变量',
+        },
+        {
+          name: 'radius',
+          type: 'number',
+          default: '120',
+          description: '粒子扩散半径（px）',
+        },
+        {
+          name: 'duration',
+          type: 'number',
+          default: '600',
+          description: '动画持续时间（ms）',
+        },
+        {
+          name: 'particleSize',
+          type: '[number, number]',
+          default: '[2, 6]',
+          description: '粒子大小范围 [min, max]（px）',
+        },
       ]}
       codeGenerator={(v) => `<ClickSpark
   particleCount={${v.particleCount}}
@@ -54,24 +89,32 @@ export default function ClickSparkPage() {
       )}
       examples={[
         {
-          title: "基础点击粒子",
-          description: "默认配色的粒子爆炸效果",
+          title: '基础点击粒子',
+          description: '默认配色的粒子爆炸效果',
           code: `<ClickSpark particleCount={30} radius={120} duration={600}>
   <div className="flex h-40 w-64 items-center justify-center rounded-xl border bg-gray-100">
     <span>点击触发粒子</span>
   </div>
 </ClickSpark>`,
           render: () => (
-            <ClickSpark particleCount={30} radius={120} duration={600}>
+            <ClickSpark
+              particleCount={30}
+              radius={120}
+              duration={600}
+              className="rounded-xl"
+              colors={['#00F5FF', '#FF00FF', '#00FFAA']}
+            >
               <div className="flex h-40 w-64 items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
-                <span className="text-sm font-medium text-[var(--color-text-primary)]">点击触发粒子</span>
+                <span className="text-sm font-medium text-[var(--color-text-primary)]">
+                  点击触发粒子
+                </span>
               </div>
             </ClickSpark>
           ),
         },
         {
-          title: "自定义颜色粒子",
-          description: "指定粒子颜色为红色系",
+          title: '自定义颜色粒子',
+          description: '指定粒子颜色为红色系',
           code: `<ClickSpark
   particleCount={50}
   colors={['#ef4444', '#f97316', '#eab308']}
@@ -90,6 +133,7 @@ export default function ClickSparkPage() {
               radius={150}
               duration={800}
               particleSize={[3, 8]}
+              className="rounded-xl"
             >
               <div className="flex h-40 w-64 items-center justify-center rounded-xl bg-gradient-to-br from-red-500 to-orange-500 shadow-lg">
                 <span className="text-sm font-bold text-white">点击爆炸</span>

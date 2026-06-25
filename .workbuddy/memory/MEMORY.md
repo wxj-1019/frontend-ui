@@ -35,7 +35,15 @@
 ## 构建注意事项
 
 - `NODE_OPTIONS` 含 `--use-system-ca` 会导致 tsup 失败，需 `unset NODE_OPTIONS` 后执行
-- 构建命令: `cd packages/ui && unset NODE_OPTIONS && npx tsup`
+- **packages/ui 完整构建命令**（两步 + DTS 重定向）:
+  ```bash
+  cd packages/ui && rm -rf dist && unset NODE_OPTIONS
+  SKIP_DTS=1 npx tsup                              # JS 产物（跳过 DTS 避免 OOM）
+  npx tsc --declaration --emitDeclarationOnly --outDir dist  # DTS 声明
+  python scripts/generate-dts-redirects.py          # 修复 DTS 文件遮蔽
+  ```
+- **关键**: tsup 代码分割生成的 `.js` 文件会遮蔽同名的 DTS 子目录。TypeScript bundler resolution 优先匹配 `.js`，导致类型坍塌为 `any`。必须运行 `generate-dts-redirects.py` 创建同层 `.d.ts` 重定向文件
+- **Next.js standalone 模式**: Windows 上因 symlink 权限（EPERM）失败，已禁用 `output: 'standalone'`
 
 ## 组件分类 (46 组件，截至 2026-06-22)
 
