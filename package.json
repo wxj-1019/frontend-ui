@@ -26,6 +26,7 @@
     "@storybook/react": "8",
     "acorn": "^8.17.0",
     "babel-plugin-react-compiler": "^1.0.0",
+    "headroom-ai": "^0.2.0",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "prettier": "^3.2.5",
