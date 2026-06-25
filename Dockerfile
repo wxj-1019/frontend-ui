@@ -26,7 +26,8 @@ COPY tsconfig.base.json ./
 ENV NODE_OPTIONS="--max-old-space-size=8192"
 RUN pnpm --filter @frontend-ui/ui build
 
-ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_OUTPUT_STANDALONE=1
 RUN pnpm --filter docs build
 
 # ── Stage 3: 生产运行 ──
